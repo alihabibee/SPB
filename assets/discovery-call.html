@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discovery Call Script</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Inter:wght@400;500;600&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --sky: #4a7c9c; }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.6; }
+        .page { max-width: 800px; margin: 0 auto; padding: 60px 48px; background: var(--white); }
+        .header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 48px; padding-bottom: 24px; border-bottom: 1px solid var(--light-gray); }
+        .header h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 400; color: var(--black); }
+        .header span { font-size: 12px; color: var(--mid-gray); }
+        .mindset { background: var(--off-white); padding: 24px 28px; margin-bottom: 48px; text-align: center; border-left: 3px solid var(--sage); }
+        .mindset p { font-size: 18px; color: var(--charcoal); }
+        .mindset strong { color: var(--sage); }
+        .pre-call { background: var(--off-white); padding: 24px; margin-bottom: 48px; }
+        .pre-call h3 { font-size: 13px; font-weight: 600; margin-bottom: 16px; }
+        .checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .checklist-item { display: flex; gap: 10px; font-size: 13px; color: var(--warm-gray); }
+        .section { margin-bottom: 40px; }
+        .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+        .section-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 300; color: var(--sky); }
+        .section-title h2 { font-size: 16px; font-weight: 600; color: var(--black); }
+        .section-title span { font-size: 12px; color: var(--mid-gray); }
+        .script-quote { background: #f0f7ff; border-left: 3px solid var(--sky); padding: 20px 24px; font-size: 14px; line-height: 1.8; margin-bottom: 16px; }
+        .script-quote em { color: var(--mid-gray); font-style: italic; }
+        .instruction { font-size: 13px; color: var(--sage); font-weight: 500; padding-left: 16px; border-left: 2px solid var(--sage); margin-bottom: 16px; }
+        .decoder { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        .decoder th, .decoder td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--light-gray); font-size: 13px; }
+        .decoder th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); background: var(--off-white); }
+        .decoder td:last-child { color: var(--sage); }
+        .listen-box { background: var(--off-white); padding: 20px; margin: 16px 0; }
+        .listen-box h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--sage); margin-bottom: 12px; }
+        .listen-box li { font-size: 13px; color: var(--warm-gray); margin-bottom: 6px; margin-left: 16px; }
+        .post-call { background: var(--off-white); padding: 24px; margin-top: 48px; }
+        .post-call h3 { font-size: 13px; font-weight: 600; margin-bottom: 16px; }
+        .post-call-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+        .post-call-item { font-size: 13px; color: var(--warm-gray); }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <h1>Discovery Call Script</h1>
+            <span>8-12 minutes</span>
+        </header>
+        <section class="mindset">
+            <p>You are <strong>not pitching</strong>. You are <strong>diagnosing</strong>.</p>
+        </section>
+        <section class="pre-call">
+            <h3>Pre-Call Prep (30 seconds)</h3>
+            <div class="checklist">
+                <div class="checklist-item">☐ Review clinic website</div>
+                <div class="checklist-item">☐ Check booking form answers</div>
+                <div class="checklist-item">☐ Did they open previous emails?</div>
+                <div class="checklist-item">☐ Notes from prior touchpoints</div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                <div class="section-num">1</div>
+                <div class="section-title"><h2>Opener</h2><span>30 seconds</span></div>
+            </div>
+            <div class="script-quote">"Dr. [Name], thanks for making time. I want to keep this focused — my goal is to understand your practice and see if there's a fit, not to pitch you. If it makes sense, I'll suggest a next step. If not, I'll tell you that too. Sound good?"<br><br><em>Wait for confirmation.</em></div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                <div class="section-num">2</div>
+                <div class="section-title"><h2>The Golden Question</h2><span>60 seconds</span></div>
+            </div>
+            <div class="script-quote">"Let me start with the most important question: <strong>If you were going to add a new at-home therapy to your dry eye protocol, what's the one thing that would stop you?</strong>"</div>
+            <p class="instruction">Shut up and listen.</p>
+            <table class="decoder">
+                <thead><tr><th>They Say</th><th>They Mean</th><th>Your Move</th></tr></thead>
+                <tbody>
+                    <tr><td>"Cost" / "Budget"</td><td>Money concern</td><td>→ Business Case + ROI Calculator</td></tr>
+                    <tr><td>"Does it work?"</td><td>Science concern</td><td>→ Science/MOA One-Pager</td></tr>
+                    <tr><td>"How does it fit?"</td><td>Workflow concern</td><td>→ Practice Fit Guide</td></tr>
+                    <tr><td>"My staff won't..."</td><td>Ops concern</td><td>→ Practice Fit Guide</td></tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                <div class="section-num">3</div>
+                <div class="section-title"><h2>Validate Their World</h2><span>2 minutes</span></div>
+            </div>
+            <div class="script-quote">"Can you walk me through what your current dry eye workflow looks like — from when the patient walks in to what you send them home with?"</div>
+            <div class="listen-box">
+                <h4>Listen for:</h4>
+                <ul>
+                    <li>What treatments do they offer?</li>
+                    <li>What's their home care recommendation?</li>
+                    <li>How do they handle compliance?</li>
+                </ul>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                <div class="section-num">4</div>
+                <div class="section-title"><h2>The Gap</h2><span>1 minute</span></div>
+            </div>
+            <div class="script-quote">"It sounds like you're doing [X] really well. The challenge most clinics face is the gap between what they prescribe and what patients actually do at home. Is that something you see?"</div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                <div class="section-num">5</div>
+                <div class="section-title"><h2>The Pivot</h2><span>30 seconds</span></div>
+            </div>
+            <div class="script-quote"><strong>If Money:</strong> "I can send you the math on what similar practices are seeing. Would that help?"<br><br><strong>If Science:</strong> "I can send you the mechanism breakdown — we're the first non-pharmaceutical TRPM8 agonist. Worth a look?"<br><br><strong>If Workflow:</strong> "I can show you exactly how this fits around your existing flow — zero chair time, no disruption to your optical conversion. Want me to send the fit guide?"</div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                <div class="section-num">6</div>
+                <div class="section-title"><h2>Close</h2><span>30 seconds</span></div>
+            </div>
+            <div class="script-quote">"Based on what you've shared, I think [material] would be most helpful. I'll send that over today. When would be a good time to reconnect — maybe Thursday or Friday?"</div>
+        </section>
+        <section class="post-call">
+            <h3>Post-Call Checklist</h3>
+            <div class="post-call-grid">
+                <div class="post-call-item">☐ Send promised material within 2 hours</div>
+                <div class="post-call-item">☐ Log blocker type in CRM</div>
+                <div class="post-call-item">☐ Set follow-up reminder</div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

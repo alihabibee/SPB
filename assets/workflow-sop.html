@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinic Workflow SOP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Inter:wght@400;500;600&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --sky: #4a7c9c; --terracotta: #c45d35; }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.6; }
+        .page { max-width: 800px; margin: 0 auto; padding: 60px 48px; background: var(--white); }
+        .header { margin-bottom: 48px; padding-bottom: 24px; border-bottom: 1px solid var(--light-gray); }
+        .header h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 400; color: var(--black); margin-bottom: 8px; }
+        .header p { font-size: 14px; color: var(--mid-gray); }
+        .flow-visual { display: flex; justify-content: center; align-items: center; gap: 24px; margin-bottom: 48px; padding: 32px; background: var(--off-white); }
+        .flow-step { text-align: center; flex: 1; }
+        .flow-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 300; margin-bottom: 8px; }
+        .flow-step:nth-child(1) .flow-num { color: var(--sky); }
+        .flow-step:nth-child(3) .flow-num { color: var(--sage); }
+        .flow-step:nth-child(5) .flow-num { color: var(--terracotta); }
+        .flow-label { font-size: 12px; font-weight: 600; color: var(--black); }
+        .flow-arrow { color: var(--light-gray); font-size: 20px; }
+        .step-section { margin-bottom: 40px; padding: 28px; border: 1px solid var(--light-gray); }
+        .step-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .step-number { font-family: 'Source Serif 4', Georgia, serif; font-size: 40px; font-weight: 300; }
+        .step-section:nth-child(1) .step-number { color: var(--sky); }
+        .step-section:nth-child(2) .step-number { color: var(--sage); }
+        .step-section:nth-child(3) .step-number { color: var(--terracotta); }
+        .step-title h2 { font-size: 18px; font-weight: 600; color: var(--black); }
+        .step-title span { font-size: 12px; color: var(--mid-gray); }
+        .step-content h4 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--warm-gray); margin: 20px 0 10px; }
+        .step-content h4:first-child { margin-top: 0; }
+        .step-content p { font-size: 14px; color: var(--charcoal); margin-bottom: 12px; }
+        .script-box { background: var(--off-white); border-left: 3px solid var(--sage); padding: 16px 20px; font-size: 14px; font-style: italic; margin: 12px 0; }
+        .warning-box { background: #fdf8f5; border-left: 3px solid var(--terracotta); padding: 12px 16px; font-size: 13px; margin: 12px 0; }
+        .warning-box strong { color: var(--terracotta); }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <h1>Clinic Workflow SOP</h1>
+            <p>The three-step process from patient arrival to device activation</p>
+        </header>
+        
+        <div class="flow-visual">
+            <div class="flow-step"><div class="flow-num">1</div><div class="flow-label">Intake</div></div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step"><div class="flow-num">2</div><div class="flow-label">Consult</div></div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step"><div class="flow-num">3</div><div class="flow-label">Handoff</div></div>
+        </div>
+        
+        <section class="step-section">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <div class="step-title"><h2>Intake</h2><span>Front Desk / Tech · 30 seconds</span></div>
+            </div>
+            <div class="step-content">
+                <h4>Trigger Question</h4>
+                <p>During pre-exam intake, tech or front desk asks:</p>
+                <div class="script-box">"Do your eyes ever feel tired, dry, or strained — especially after screen time?"</div>
+                <h4>If Yes</h4>
+                <p>Note on patient chart: "Candidate for Rest demo." No further action needed at this stage.</p>
+                <h4>If No</h4>
+                <p>Continue standard intake. No flag needed.</p>
+            </div>
+        </section>
+        
+        <section class="step-section">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <div class="step-title"><h2>Doctor Consult</h2><span>OD · 60 seconds</span></div>
+            </div>
+            <div class="step-content">
+                <h4>Review Flag</h4>
+                <p>If patient was flagged at intake, acknowledge during exam:</p>
+                <div class="script-box">"I see you mentioned eye fatigue. After your exam, I'm going to have my team show you something that helps with that — it's what I recommend to patients like you."</div>
+                <h4>Prescription Language</h4>
+                <p>If recommending Rest, use clinical framing:</p>
+                <div class="script-box">"I'm prescribing a thermal therapy device for at-home use. It's clinically validated and most patients use it daily because it actually feels good. My team will set you up."</div>
+                <p>This positions Rest as a clinical recommendation, not a product upsell.</p>
+            </div>
+        </section>
+        
+        <section class="step-section">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <div class="step-title"><h2>Handoff</h2><span>Tech / Front Desk · 3-5 minutes</span></div>
+            </div>
+            <div class="step-content">
+                <h4>Demo (Optional but Recommended)</h4>
+                <p>If time permits, offer a 3-minute in-office demo. Most conversions happen after the patient experiences it.</p>
+                <h4>Checkout Script</h4>
+                <div class="script-box">"Dr. [Name] prescribed Umay Rest for your eye fatigue. It's [your clinic's price] and HSA/FSA eligible. Would you like to take one home today?"</div>
+                <h4>QR Scan — Critical Step</h4>
+                <div class="warning-box"><strong>Do not skip this.</strong> Have patient scan the QR code on the Start Here card before they leave. This links their device to their account and unlocks the guided sessions. Patients who skip setup have 3x lower adherence.</div>
+                <h4>If They Decline</h4>
+                <p>Hand them a Clinic Offer Card: "No problem. Here's a card with a special offer if you change your mind. The offer is good for 14 days."</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

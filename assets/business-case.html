@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Case — Umay Rest</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --sage-light: #eef3f1; --terracotta: #c45d35; --terracotta-light: #fdf5f2; }
+
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--cream); padding: 40px; font-size: 14px; color: var(--charcoal); line-height: 1.55; }
+
+        .memo { max-width: 780px; margin: 0 auto; background: var(--white); border: 1px solid var(--light-gray); }
+
+        /* === HEADER === */
+        .memo-header { padding: 28px 40px 20px; border-bottom: 1px solid var(--light-gray); display: flex; justify-content: space-between; align-items: flex-start; }
+        .header-left .brand { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; color: var(--black); }
+        .header-left .doc-type { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); margin-top: 2px; }
+        .header-right { text-align: right; font-size: 11px; color: var(--mid-gray); line-height: 1.6; }
+
+        /* === RECOMMENDATION BAR === */
+        .recommendation { background: var(--sage-light); border-left: 4px solid var(--sage); padding: 14px 20px; margin: 0; }
+        .rec-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sage); font-weight: 600; margin-bottom: 4px; }
+        .rec-text { font-size: 14px; color: var(--black); font-weight: 500; line-height: 1.5; }
+
+        /* === CONTENT === */
+        .page { padding: 28px 40px; }
+        .page + .page { border-top: 2px dashed var(--light-gray); }
+
+        h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 500; color: var(--black); margin-bottom: 12px; }
+        h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); font-weight: 600; margin-bottom: 10px; margin-top: 20px; }
+        h3:first-child { margin-top: 0; }
+
+        p { margin-bottom: 10px; color: var(--warm-gray); font-size: 13px; line-height: 1.65; }
+        p strong { color: var(--charcoal); }
+
+        /* === TABLES === */
+        table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 13px; }
+        th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600; padding: 8px 12px; border-bottom: 2px solid var(--light-gray); }
+        td { padding: 9px 12px; border-bottom: 1px solid var(--light-gray); color: var(--charcoal); vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        .num { text-align: right; font-variant-numeric: tabular-nums; }
+        .num-head { text-align: right; }
+        .highlight-row td { background: var(--sage-light); font-weight: 600; color: var(--black); }
+        .dim { color: var(--mid-gray); font-size: 12px; }
+
+        /* === SCENARIO BLOCK === */
+        .scenarios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 12px 0 16px; border: 1px solid var(--light-gray); }
+        .scenario { padding: 16px; text-align: center; }
+        .scenario:not(:last-child) { border-right: 1px solid var(--light-gray); }
+        .scenario-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mid-gray); font-weight: 600; margin-bottom: 6px; }
+        .scenario-big { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--black); }
+        .scenario-unit { font-size: 11px; color: var(--warm-gray); margin-top: 2px; }
+        .scenario-detail { font-size: 11px; color: var(--mid-gray); margin-top: 6px; line-height: 1.5; }
+        .scenario.base { background: var(--sage-light); }
+        .scenario.base .scenario-big { color: var(--sage); }
+
+        /* === DEMO PATH === */
+        .path-flow { display: flex; align-items: center; gap: 0; margin: 12px 0 16px; }
+        .path-step { flex: 1; padding: 14px; text-align: center; background: var(--off-white); position: relative; }
+        .path-step:not(:last-child)::after { content: '→'; position: absolute; right: -10px; top: 50%; transform: translateY(-50%); color: var(--mid-gray); font-size: 16px; z-index: 1; }
+        .path-step-num { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--sage); font-weight: 600; }
+        .path-step-title { font-size: 13px; font-weight: 600; color: var(--black); margin: 4px 0 2px; }
+        .path-step-detail { font-size: 11px; color: var(--warm-gray); }
+
+        /* === RISK GRID === */
+        .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0 16px; }
+        .risk-card { padding: 14px; border: 1px solid var(--light-gray); }
+        .risk-title { font-size: 12px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+        .risk-body { font-size: 12px; color: var(--warm-gray); line-height: 1.5; }
+        .risk-mitigation { font-size: 11px; color: var(--sage); margin-top: 6px; font-weight: 500; }
+
+        /* === PROOF LIST === */
+        .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+        .proof-item { display: flex; gap: 8px; font-size: 12px; color: var(--charcoal); line-height: 1.5; }
+        .proof-check { color: var(--sage); font-weight: 700; flex-shrink: 0; }
+
+        /* === ASSUMPTIONS === */
+        .assumptions { background: var(--off-white); padding: 16px; margin: 12px 0 0; }
+        .assumptions h3 { margin-top: 0; margin-bottom: 8px; }
+        .assumption-list { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+        .assumption-item { font-size: 11px; color: var(--warm-gray); line-height: 1.6; }
+        .assumption-item strong { color: var(--charcoal); font-weight: 500; }
+
+        /* === COMPARE BAR === */
+        .compare { margin: 16px 0; }
+        .compare-row { display: grid; grid-template-columns: 140px 1fr 80px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 12px; }
+        .compare-row:last-child { border-bottom: none; }
+        .compare-label { color: var(--charcoal); font-weight: 500; }
+        .compare-bar-wrap { height: 8px; background: var(--off-white); border-radius: 4px; overflow: hidden; position: relative; }
+        .compare-bar { height: 100%; border-radius: 4px; }
+        .compare-bar.umay { background: var(--sage); }
+        .compare-bar.competitor { background: var(--light-gray); }
+        .compare-value { text-align: right; color: var(--mid-gray); font-variant-numeric: tabular-nums; }
+
+        /* === FOOTER === */
+        .memo-footer { padding: 16px 40px; border-top: 1px solid var(--light-gray); display: flex; justify-content: space-between; font-size: 10px; color: var(--mid-gray); }
+
+        /* === PRINT === */
+        @media print {
+            body { background: white; padding: 0; }
+            .memo { border: none; max-width: none; }
+            .page + .page { page-break-before: always; border-top: none; }
+            .memo-footer { position: fixed; bottom: 0; left: 0; right: 0; }
+            #calc-section { page-break-before: always; }
+        }
+
+        /* === CALCULATOR === */
+        .calc-label { display: block; font-size: 12px; color: var(--warm-gray); margin-bottom: 6px; }
+        .calc-slider-row { display: flex; align-items: center; gap: 8px; }
+        .calc-slider-row input[type="range"] { flex: 1; accent-color: var(--sage); height: 6px; }
+        .calc-val { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 16px; color: var(--black); min-width: 52px; text-align: right; }
+        .calc-qty { flex: 1; padding: 10px 0; border: 1px solid var(--light-gray); background: var(--white); cursor: pointer; font-size: 13px; font-family: inherit; color: var(--warm-gray); transition: all 0.15s; text-align: center; }
+        .calc-qty:hover { border-color: var(--mid-gray); }
+        .calc-qty.active { border-color: var(--sage); background: var(--sage-light); color: var(--sage); font-weight: 600; }
+        .calc-metric { padding: 16px; text-align: center; background: var(--white); }
+        .calc-metric-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); font-weight: 600; margin-bottom: 4px; }
+        .calc-metric-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; font-weight: 300; color: var(--sage); }
+        .calc-metric-sub { font-size: 10px; color: var(--mid-gray); margin-top: 2px; }
+        .calc-scenario { padding: 12px; border: 1px solid var(--light-gray); text-align: center; background: var(--white); }
+        .calc-scenario.base { background: var(--sage-light); border-color: var(--sage); }
+        .calc-scenario-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; color: var(--mid-gray); margin-bottom: 6px; }
+        .calc-scenario.base .calc-scenario-label { color: var(--sage); }
+        .calc-scenario-units { font-size: 11px; color: var(--warm-gray); margin-bottom: 3px; }
+        .calc-scenario-num { font-size: 17px; font-family: 'Source Serif 4', Georgia, serif; color: var(--black); }
+        .calc-scenario-num span { font-size: 11px; color: var(--mid-gray); }
+        .calc-scenario-pb { font-size: 10px; color: var(--mid-gray); margin-top: 3px; }
+        .calc-tier { display: grid; grid-template-columns: 80px 1fr 90px; align-items: center; padding: 7px 0; }
+        .calc-tier:not(:last-child) { border-bottom: 1px solid var(--off-white); }
+        .calc-tier-label { font-size: 12px; color: var(--warm-gray); }
+        .calc-tier-label.active { font-weight: 600; color: var(--sage); }
+        .calc-tier-price { font-size: 10px; color: var(--mid-gray); }
+        .calc-tier-bar { height: 8px; background: var(--off-white); border-radius: 4px; overflow: hidden; }
+        .calc-tier-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+        .calc-tier-fill.active { background: var(--sage); }
+        .calc-tier-fill.inactive { background: #d0d0d0; }
+        .calc-tier-annual { text-align: right; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--charcoal); }
+        .calc-tier-annual.active { font-weight: 600; color: var(--sage); }
+        .calc-tier-annual span { font-size: 10px; color: var(--mid-gray); }
+        .zero-row { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 7px; font-size: 12px; color: var(--mid-gray); }
+        .zero-val { color: var(--sage); font-weight: 600; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="memo">
+        <!-- HEADER -->
+        <div class="memo-header">
+            <div class="header-left">
+                <div class="brand">Umay Rest</div>
+                <div class="doc-type">Clinic Business Case · Internal Use</div>
+            </div>
+            <div class="header-right">
+                Prepared for: [Clinic Name]<br>
+                Date: [Month Year]<br>
+                Contact: ali@umay.care
+            </div>
+        </div>
+
+        <!-- RECOMMENDATION -->
+        <div class="recommendation">
+            <div class="rec-label">Recommendation</div>
+            <div class="rec-text">Begin with a $1,000 in-office demo to validate patient demand, then transition to retail inventory (12 units at $350) with projected payback in 4–12 weeks and $10K–$26K annual margin — with zero chair time, zero consumables, and a 90-day buyback guarantee on unsold sealed units.</div>
+        </div>
+
+        <!-- PAGE 1: ECONOMICS -->
+        <div class="page">
+            <h2>The Partnership Path</h2>
+            <p>Umay uses a demo-first model. You test in-office before committing to inventory. The demo investment credits toward your first retail order — making it economically neutral if you proceed.</p>
+
+            <div class="path-flow">
+                <div class="path-step">
+                    <div class="path-step-num">Step 1</div>
+                    <div class="path-step-title">Demo Unit</div>
+                    <div class="path-step-detail">$1,000 · Use in-office<br>See patient response</div>
+                </div>
+                <div class="path-step">
+                    <div class="path-step-num">Step 2</div>
+                    <div class="path-step-title">First Order</div>
+                    <div class="path-step-detail">12 units @ $350<br>$1,000 demo credited</div>
+                </div>
+                <div class="path-step">
+                    <div class="path-step-num">Step 3</div>
+                    <div class="path-step-title">Scale</div>
+                    <div class="path-step-detail">Volume pricing unlocks<br>24+ @ $300 · 48+ @ $250</div>
+                </div>
+            </div>
+
+            <h3>Economic Impact Per Unit Sold</h3>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th class="num-head">Conservative</th>
+                    <th class="num-head">Midpoint</th>
+                </tr>
+                <tr>
+                    <td>Your retail price to patient</td>
+                    <td class="num">$500</td>
+                    <td class="num">$550</td>
+                </tr>
+                <tr>
+                    <td>Your wholesale cost</td>
+                    <td class="num">($350)</td>
+                    <td class="num">($350)</td>
+                </tr>
+                <tr>
+                    <td>Consumable cost per unit</td>
+                    <td class="num">$0</td>
+                    <td class="num">$0</td>
+                </tr>
+                <tr>
+                    <td>Incremental staff time</td>
+                    <td class="num">$0 <span class="dim">· 0 min chair</span></td>
+                    <td class="num">$0 <span class="dim">· 0 min chair</span></td>
+                </tr>
+                <tr class="highlight-row">
+                    <td>Margin per unit</td>
+                    <td class="num">$150</td>
+                    <td class="num">$200</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td>Margin %</td>
+                    <td class="num">30%</td>
+                    <td class="num">36%</td>
+                </tr>
+            </table>
+
+            <h3>Payback Analysis — Three Scenarios</h3>
+            <p>Net cash outlay after demo credit: <strong>$3,200</strong> (12 units × $350 − $1,000 credit). Payback = time to sell enough units to recover this investment.</p>
+
+            <div class="scenarios">
+                <div class="scenario">
+                    <div class="scenario-label">Conservative</div>
+                    <div class="scenario-big">12</div>
+                    <div class="scenario-unit">weeks to payback</div>
+                    <div class="scenario-detail">1 unit/week<br>$150 margin/unit<br>$650/mo contribution</div>
+                </div>
+                <div class="scenario base">
+                    <div class="scenario-label">Base Case</div>
+                    <div class="scenario-big">7</div>
+                    <div class="scenario-unit">weeks to payback</div>
+                    <div class="scenario-detail">2 units/week<br>$200 margin/unit<br>$1,733/mo contribution</div>
+                </div>
+                <div class="scenario">
+                    <div class="scenario-label">High Performer</div>
+                    <div class="scenario-big">4</div>
+                    <div class="scenario-unit">weeks to payback</div>
+                    <div class="scenario-detail">4 units/week<br>$200 margin/unit<br>$3,467/mo contribution</div>
+                </div>
+            </div>
+
+            <h3>Annual Projection (Base Case · 2 units/week · $200 margin)</h3>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th class="num-head">Year 1</th>
+                    <th class="num-head">Year 2</th>
+                </tr>
+                <tr>
+                    <td>Units sold</td>
+                    <td class="num">104</td>
+                    <td class="num">104</td>
+                </tr>
+                <tr>
+                    <td>Gross revenue (@ $550)</td>
+                    <td class="num">$57,200</td>
+                    <td class="num">$57,200</td>
+                </tr>
+                <tr>
+                    <td>Wholesale cost (@ $350)</td>
+                    <td class="num">($36,400)</td>
+                    <td class="num">($36,400)</td>
+                </tr>
+                <tr>
+                    <td>Operating costs <span class="dim">(consumables, chair time, training)</span></td>
+                    <td class="num">$0</td>
+                    <td class="num">$0</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td>Net margin</td>
+                    <td class="num">$20,800</td>
+                    <td class="num">$20,800</td>
+                </tr>
+            </table>
+
+            <h3>How Umay Compares</h3>
+            <table>
+                <tr>
+                    <th></th>
+                    <th class="num-head">Umay Rest</th>
+                    <th class="num-head">LipiFlow</th>
+                    <th class="num-head">IPL</th>
+                    <th class="num-head">Bruder</th>
+                </tr>
+                <tr>
+                    <td>Upfront investment</td>
+                    <td class="num" style="color: var(--sage); font-weight: 600;">$1,000</td>
+                    <td class="num">$80K–$150K</td>
+                    <td class="num">$40K–$120K</td>
+                    <td class="num">$0</td>
+                </tr>
+                <tr>
+                    <td>Per-treatment consumable</td>
+                    <td class="num" style="color: var(--sage); font-weight: 600;">$0</td>
+                    <td class="num">$340–$700</td>
+                    <td class="num">$8–$50</td>
+                    <td class="num">$0</td>
+                </tr>
+                <tr>
+                    <td>Chair time</td>
+                    <td class="num" style="color: var(--sage); font-weight: 600;">0 min</td>
+                    <td class="num">12–30 min</td>
+                    <td class="num">15–30 min</td>
+                    <td class="num">0 min</td>
+                </tr>
+                <tr>
+                    <td>Payback period</td>
+                    <td class="num" style="color: var(--sage); font-weight: 600;">4–12 weeks</td>
+                    <td class="num">12–18 months</td>
+                    <td class="num">6–12 months</td>
+                    <td class="num">Immediate</td>
+                </tr>
+                <tr>
+                    <td>Patient compliance</td>
+                    <td class="num" style="color: var(--sage); font-weight: 600;">84% daily</td>
+                    <td class="num">N/A (in-office)</td>
+                    <td class="num">N/A (in-office)</td>
+                    <td class="num">&lt;50%</td>
+                </tr>
+                <tr>
+                    <td>Recurring revenue</td>
+                    <td class="num">60% reorder</td>
+                    <td class="num">Per procedure</td>
+                    <td class="num">Per procedure</td>
+                    <td class="num">Low margin</td>
+                </tr>
+            </table>
+            <p class="dim" style="font-size: 11px; margin-top: -8px;">Note: LipiFlow, IPL, and Umay Rest are complementary, not interchangeable. Rest addresses at-home maintenance; LipiFlow and IPL address in-office intervention. Clinics offering in-office procedures report that Rest extends treatment outcomes between visits.</p>
+        </div>
+
+        <!-- INTERACTIVE ROI CALCULATOR -->
+        <div class="page" id="calc-section">
+            <h2>Model Your Own Numbers</h2>
+            <p>Adjust the inputs below to see how Umay performs for your practice specifically.</p>
+
+            <div class="calc-inputs" style="background: var(--off-white); padding: 20px; margin: 16px 0;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <label class="calc-label">Patient price per unit</label>
+                        <div class="calc-slider-row">
+                            <input type="range" id="calcRetail" min="400" max="700" step="25" value="550">
+                            <span class="calc-val" id="calcRetailVal">$550</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="calc-label">Units sold per week</label>
+                        <div class="calc-slider-row">
+                            <input type="range" id="calcUnits" min="0.5" max="8" step="0.5" value="2">
+                            <span class="calc-val" id="calcUnitsVal">2</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 14px;">
+                    <label class="calc-label">First order quantity <span id="calcTierNote" style="color: var(--mid-gray); font-weight: 400;">· Wholesale: $350/unit</span></label>
+                    <div style="display: flex; gap: 8px; margin-top: 6px;">
+                        <button class="calc-qty active" data-qty="12" onclick="setQty(this)">12 units<div style="font-size:10px;color:var(--mid-gray);margin-top:2px">$350/unit</div></button>
+                        <button class="calc-qty" data-qty="24" onclick="setQty(this)">24 units<div style="font-size:10px;color:var(--mid-gray);margin-top:2px">$300/unit</div></button>
+                        <button class="calc-qty" data-qty="48" onclick="setQty(this)">48 units<div style="font-size:10px;color:var(--mid-gray);margin-top:2px">$250/unit</div></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero payback -->
+            <div style="text-align: center; padding: 24px 0 20px;">
+                <div style="font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mid-gray); font-weight: 600; margin-bottom: 6px;">Payback Period</div>
+                <div id="calcHero" style="font-family: 'Source Serif 4', Georgia, serif; font-size: 52px; font-weight: 300; color: var(--sage); line-height: 1;">7</div>
+                <div style="font-size: 13px; color: var(--warm-gray); margin-top: 4px;">weeks</div>
+                <div id="calcHeroSub" style="font-size: 11px; color: var(--mid-gray); margin-top: 8px;">on $3,200 net investment ($4,200 order − $1,000 demo credit)</div>
+            </div>
+
+            <!-- Key metrics -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--light-gray); margin-bottom: 16px;">
+                <div class="calc-metric">
+                    <div class="calc-metric-label">Margin / Unit</div>
+                    <div class="calc-metric-num" id="cmMargin">$200</div>
+                    <div class="calc-metric-sub" id="cmMarginPct">36% margin</div>
+                </div>
+                <div class="calc-metric" style="border-left: 1px solid var(--light-gray); border-right: 1px solid var(--light-gray);">
+                    <div class="calc-metric-label">Monthly</div>
+                    <div class="calc-metric-num" id="cmMonthly">$1,733</div>
+                    <div class="calc-metric-sub" id="cmMonthlySub">2/wk × $200</div>
+                </div>
+                <div class="calc-metric">
+                    <div class="calc-metric-label">Annual</div>
+                    <div class="calc-metric-num" id="cmAnnual">$20,800</div>
+                    <div class="calc-metric-sub" id="cmAnnualSub">104 units/year</div>
+                </div>
+            </div>
+
+            <!-- Scenarios -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;">
+                <div class="calc-scenario">
+                    <div class="calc-scenario-label">Conservative</div>
+                    <div class="calc-scenario-units" id="csWUnits">1 units/wk</div>
+                    <div class="calc-scenario-num" id="csWAmt">$867<span>/mo</span></div>
+                    <div class="calc-scenario-pb" id="csWPb">Payback: 15 wks</div>
+                </div>
+                <div class="calc-scenario base">
+                    <div class="calc-scenario-label">Your Estimate</div>
+                    <div class="calc-scenario-units" id="csBUnits">2 units/wk</div>
+                    <div class="calc-scenario-num" id="csBAmt">$1,733<span>/mo</span></div>
+                    <div class="calc-scenario-pb" id="csBPb">Payback: 7 wks</div>
+                </div>
+                <div class="calc-scenario">
+                    <div class="calc-scenario-label">High Performer</div>
+                    <div class="calc-scenario-units" id="csHUnits">4 units/wk</div>
+                    <div class="calc-scenario-num" id="csHAmt">$3,467<span>/mo</span></div>
+                    <div class="calc-scenario-pb" id="csHPb">Payback: 4 wks</div>
+                </div>
+            </div>
+
+            <!-- Volume tiers -->
+            <h3 style="margin-top: 20px;">Volume Scaling — Annual Impact</h3>
+            <div id="calcTiers" style="margin: 12px 0;"></div>
+
+            <!-- Zero cost callout -->
+            <div style="background: var(--black); color: var(--white); padding: 20px; margin-top: 16px;">
+                <div style="font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); font-weight: 600; margin-bottom: 12px;">Why The Math Is Simple</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div class="zero-row"><span>Consumables per unit</span><span class="zero-val">$0</span></div>
+                    <div class="zero-row"><span>Chair time required</span><span class="zero-val">0 min</span></div>
+                    <div class="zero-row"><span>Staff training</span><span class="zero-val">5 min video</span></div>
+                    <div class="zero-row"><span>EHR integration</span><span class="zero-val">None</span></div>
+                    <div class="zero-row"><span>Patient return rate</span><span class="zero-val">&lt;2%</span></div>
+                    <div class="zero-row"><span>Break-even fixed costs</span><span class="zero-val">$0/month</span></div>
+                </div>
+                <div style="font-size: 11px; color: #666; margin-top: 12px; line-height: 1.6;">With no ongoing costs, every unit sold above zero is pure margin. The first unit is profitable.</div>
+            </div>
+        </div>
+
+        <!-- PAGE 2: RISK, PROOF, ASSUMPTIONS -->
+        <div class="page">
+            <h2>Risks & What We've Done About Them</h2>
+
+            <div class="risk-grid">
+                <div class="risk-card">
+                    <div class="risk-title">Inventory doesn't move</div>
+                    <div class="risk-body">You order 12 units and patient uptake is slower than expected.</div>
+                    <div class="risk-mitigation">→ 90-day buyback on sealed units. Demo-first path means you've already validated demand before ordering.</div>
+                </div>
+                <div class="risk-card">
+                    <div class="risk-title">Patients return devices</div>
+                    <div class="risk-body">Patients purchase but don't stick with it.</div>
+                    <div class="risk-mitigation">→ Verified &lt;2% return rate across 3,000+ units shipped. 84% daily adherence reduces buyer's remorse.</div>
+                </div>
+                <div class="risk-card">
+                    <div class="risk-title">Staff can't execute</div>
+                    <div class="risk-body">Workflow disruption, training overhead, resistance to change.</div>
+                    <div class="risk-mitigation">→ 5-min training video. Zero chair time. Three-step workflow: flag at intake → doctor recommends → staff hands over. No EHR integration required.</div>
+                </div>
+                <div class="risk-card">
+                    <div class="risk-title">Doesn't fit our practice</div>
+                    <div class="risk-body">Patient demographics, treatment philosophy, or practice model mismatch.</div>
+                    <div class="risk-mitigation">→ $1,000 demo validates fit before any inventory commitment. Credit applies in full if you proceed; exit is clean if you don't.</div>
+                </div>
+            </div>
+
+            <h3>Clinical Evidence</h3>
+            <div class="proof-grid">
+                <div class="proof-item"><span class="proof-check">✓</span><span><strong>Government of Canada pilot (n=500):</strong> 87% eye comfort improvement, 70% sleep outcomes, 84% daily adherence</span></div>
+                <div class="proof-item"><span class="proof-check">✓</span><span><strong>Telemetry verified (n=2,864):</strong> 0.64 DAU/MAU ratio — patients use it without being reminded</span></div>
+                <div class="proof-item"><span class="proof-check">✓</span><span><strong>TFOS DEWS II alignment:</strong> Non-moist eyelid warming improves tear film and meibomian gland function</span></div>
+                <div class="proof-item"><span class="proof-check">✓</span><span><strong>Dual mechanism:</strong> TRPM8 cold therapy (tear production) + controlled thermal therapy (gland expression, sleep onset)</span></div>
+                <div class="proof-item"><span class="proof-check">✓</span><span><strong>Health Canada approved.</strong> 510(k) exempt (US). HSA/FSA eligible for patient purchase.</span></div>
+                <div class="proof-item"><span class="proof-check">✓</span><span><strong>107+ clinic partners.</strong> 3,000+ units shipped. 42 active clinics reordering.</span></div>
+            </div>
+
+            <h3>Clinic Partner Results</h3>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th class="num-head">Across Network</th>
+                    <th class="num-head">Top Clinics</th>
+                </tr>
+                <tr>
+                    <td>Units per week (steady state)</td>
+                    <td class="num">1–2</td>
+                    <td class="num">3–5</td>
+                </tr>
+                <tr>
+                    <td>Reorder rate</td>
+                    <td class="num" colspan="2" style="text-align: center;">~60% within first reorder cycle</td>
+                </tr>
+                <tr>
+                    <td>Patient return rate</td>
+                    <td class="num" colspan="2" style="text-align: center;">&lt;2%</td>
+                </tr>
+                <tr>
+                    <td>Staff training time</td>
+                    <td class="num" colspan="2" style="text-align: center;">5-minute video</td>
+                </tr>
+                <tr>
+                    <td>Clinic activation rate</td>
+                    <td class="num" colspan="2" style="text-align: center;">53% of partners actively selling</td>
+                </tr>
+            </table>
+
+            <h3>Implementation: 30-Day Path to Revenue</h3>
+            <table>
+                <tr>
+                    <th>Week</th>
+                    <th>Focus</th>
+                    <th>Success Criteria</th>
+                </tr>
+                <tr>
+                    <td><strong>1</strong></td>
+                    <td>Setup + staff briefing. Doctor uses device personally. Test one end-to-end workflow.</td>
+                    <td>Ready to recommend to patients</td>
+                </tr>
+                <tr>
+                    <td><strong>2</strong></td>
+                    <td>Recommend to 5–10 flagged patients. Track conversion. Note objections.</td>
+                    <td>5 units sold, 80%+ QR setup</td>
+                </tr>
+                <tr>
+                    <td><strong>3</strong></td>
+                    <td>Team debrief. Address top objection. Check patient feedback. Reorder if needed.</td>
+                    <td>Refined workflow, 10+ total units</td>
+                </tr>
+                <tr>
+                    <td><strong>4</strong></td>
+                    <td>Expand to all eligible patients. Set reorder triggers. 30-day review call with Umay.</td>
+                    <td>Sustainable rhythm, 1–3 units/week</td>
+                </tr>
+            </table>
+
+            <div class="assumptions">
+                <h3>"What Would Need to Be True" for These Numbers to Hold</h3>
+                <div class="assumption-list">
+                    <div class="assumption-item"><strong>1.</strong> Your practice sees 10+ dry eye or screen fatigue patients per week. <span class="dim">(DED prevalence: 40–80% of adult patients.)</span></div>
+                    <div class="assumption-item"><strong>2.</strong> Staff consistently asks the trigger question at intake: "Do your eyes feel tired or strained after screen time?"</div>
+                    <div class="assumption-item"><strong>3.</strong> 10–20% of flagged patients convert at $500–$600. <span class="dim">(Industry benchmark: 30–60% for cash-pay.)</span></div>
+                    <div class="assumption-item"><strong>4.</strong> Patients scan QR code at checkout — those who skip setup have 3× lower adherence, increasing return risk.</div>
+                    <div class="assumption-item"><strong>5.</strong> Reorder inventory at 3 units remaining. Lead time: 5–7 business days.</div>
+                    <div class="assumption-item"><strong>6.</strong> No competing at-home thermal therapy enters the market at comparable compliance rates in the next 12 months.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="memo-footer">
+            <span>Umay Care Holdings Inc. · umay.care</span>
+            <span>Confidential · For internal clinic use only</span>
+        </div>
+    </div>
+</body>
+<script>
+(function() {
+    const TIERS = [
+        { min: 12, max: 23, price: 350, label: "12+" },
+        { min: 24, max: 47, price: 300, label: "24+" },
+        { min: 48, max: 999, price: 250, label: "48+" },
+    ];
+    function getTier(qty) {
+        for (let i = TIERS.length - 1; i >= 0; i--) {
+            if (qty >= TIERS[i].min) return TIERS[i];
+        }
+        return TIERS[0];
+    }
+    function fmt(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
+
+    let st = { retail: 550, units: 2, qty: 12, demo: 1000 };
+
+    const el = id => document.getElementById(id);
+
+    // Slider listeners
+    el("calcRetail").addEventListener("input", e => { st.retail = +e.target.value; calc(); });
+    el("calcUnits").addEventListener("input", e => { st.units = +e.target.value; calc(); });
+
+    // Qty button handler (exposed globally for onclick)
+    window.setQty = function(btn) {
+        st.qty = parseInt(btn.dataset.qty);
+        document.querySelectorAll(".calc-qty").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        calc();
+    };
+
+    function calc() {
+        const { retail, units, qty, demo } = st;
+        const tier = getTier(qty);
+        const ws = tier.price;
+        const mpu = retail - ws;
+        const pct = Math.round((mpu / retail) * 100);
+        const cost = qty * ws;
+        const net = Math.max(0, cost - demo);
+        const wkM = units * mpu;
+        const moM = wkM * 4.33;
+        const yrM = moM * 12;
+        const pb = net > 0 && wkM > 0 ? net / wkM : 0;
+        const yrU = Math.round(units * 52);
+
+        // Scenarios
+        const wU = Math.max(0.5, units * 0.5);
+        const bU = units * 2;
+        const wMo = wU * mpu * 4.33;
+        const bMo = bU * mpu * 4.33;
+        const wPb = net > 0 && wU * mpu > 0 ? net / (wU * mpu) : 0;
+        const bPb = net > 0 && bU * mpu > 0 ? net / (bU * mpu) : 0;
+
+        // Display
+        el("calcRetailVal").textContent = fmt(retail);
+        el("calcUnitsVal").textContent = units;
+        el("calcTierNote").textContent = "· Wholesale: " + fmt(ws) + "/unit";
+
+        // Hero
+        const pbW = pb < 1 ? "<1" : Math.ceil(pb);
+        el("calcHero").textContent = pbW;
+        el("calcHero").style.color = pb <= 8 ? "var(--sage)" : pb <= 16 ? "#b8860b" : "var(--terracotta)";
+        el("calcHeroSub").textContent = "on " + fmt(net) + " net investment (" + fmt(cost) + " order − " + fmt(demo) + " demo credit)";
+
+        // Key metrics
+        el("cmMargin").textContent = fmt(mpu);
+        el("cmMarginPct").textContent = pct + "% margin";
+        el("cmMonthly").textContent = fmt(moM);
+        el("cmMonthlySub").textContent = units + "/wk × " + fmt(mpu);
+        el("cmAnnual").textContent = fmt(yrM);
+        el("cmAnnualSub").textContent = yrU + " units/year";
+
+        // Scenarios
+        el("csWUnits").textContent = wU + " units/wk";
+        el("csWAmt").innerHTML = fmt(wMo) + "<span>/mo</span>";
+        el("csWPb").textContent = "Payback: " + Math.ceil(wPb) + " wks";
+        el("csBUnits").textContent = units + " units/wk";
+        el("csBAmt").innerHTML = fmt(moM) + "<span>/mo</span>";
+        el("csBPb").textContent = "Payback: " + Math.ceil(pb) + " wks";
+        el("csHUnits").textContent = bU + " units/wk";
+        el("csHAmt").innerHTML = fmt(bMo) + "<span>/mo</span>";
+        el("csHPb").textContent = "Payback: " + Math.ceil(bPb) + " wks";
+
+        // Volume tiers
+        const maxYr = (retail - 250) * 8 * 52;
+        let html = "";
+        TIERS.forEach(t => {
+            const m = retail - t.price;
+            const ann = m * units * 52;
+            const bw = Math.min(100, (ann / maxYr) * 100);
+            const act = tier.label === t.label;
+            html += '<div class="calc-tier">' +
+                '<div class="calc-tier-label ' + (act ? 'active' : '') + '">' + t.label + ' units<div class="calc-tier-price">' + fmt(t.price) + '/unit</div></div>' +
+                '<div class="calc-tier-bar"><div class="calc-tier-fill ' + (act ? 'active' : 'inactive') + '" style="width:' + bw + '%"></div></div>' +
+                '<div class="calc-tier-annual ' + (act ? 'active' : '') + '">' + fmt(ann) + '<span>/yr</span></div>' +
+                '</div>';
+        });
+        el("calcTiers").innerHTML = html;
+    }
+
+    calc();
+})();
+</script>
+</html>

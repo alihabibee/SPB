@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Overview — Umay Rest</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Inter:wght@400;500;600&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --terracotta: #c45d35; }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); padding: 40px; }
+        .email { max-width: 600px; margin: 0 auto; background: var(--white); border: 1px solid var(--light-gray); }
+        .email-header { padding: 40px; text-align: center; border-bottom: 1px solid var(--light-gray); }
+        .brand { font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; color: var(--black); margin-bottom: 4px; }
+        .tagline { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); }
+        .content { padding: 40px; }
+        .content h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; font-weight: 400; color: var(--black); margin-bottom: 16px; }
+        .content p { font-size: 15px; color: var(--warm-gray); line-height: 1.7; margin-bottom: 20px; }
+        .problem-list { margin: 20px 0; }
+        .problem-item { font-size: 14px; color: var(--charcoal); padding: 8px 0; padding-left: 20px; position: relative; }
+        .problem-item::before { content: '—'; position: absolute; left: 0; color: var(--terracotta); }
+        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+        .stat { text-align: center; padding: 20px; background: var(--off-white); }
+        .stat-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 300; color: var(--sage); }
+        .stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--warm-gray); margin-top: 4px; }
+        .testimonial { background: var(--off-white); padding: 24px; margin: 24px 0; border-left: 3px solid var(--sage); }
+        .testimonial p { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-style: italic; color: var(--charcoal); margin-bottom: 8px; }
+        .testimonial cite { font-size: 12px; color: var(--mid-gray); font-style: normal; }
+        .business-case { background: var(--black); color: var(--white); padding: 24px; margin: 24px 0; }
+        .business-case h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); margin-bottom: 16px; }
+        .business-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #333; font-size: 14px; }
+        .business-row:last-child { border-bottom: none; }
+        .business-row span:last-child { color: var(--sage); font-weight: 500; }
+        .terms { margin: 24px 0; }
+        .term { display: flex; gap: 12px; margin-bottom: 14px; font-size: 14px; }
+        .term-check { color: var(--sage); }
+        .term strong { display: block; color: var(--black); margin-bottom: 2px; }
+        .term span { color: var(--warm-gray); font-size: 13px; }
+        .cta { text-align: center; padding-top: 20px; }
+        .cta-btn { display: inline-block; padding: 14px 28px; background: var(--black); color: var(--white); font-size: 14px; font-weight: 500; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="email">
+        <div class="email-header">
+            <div class="brand">Umay Rest</div>
+            <div class="tagline">Executive Overview · Spring 2026</div>
+        </div>
+        <div class="content">
+            <h2>The "Hidden Tax" on Care</h2>
+            <p>You provide excellent in-clinic care, but patient adherence breaks down at home. The result:</p>
+            <div class="problem-list">
+                <div class="problem-item">Unclean outcome signals</div>
+                <div class="problem-item">"This didn't work" escalations</div>
+                <div class="problem-item">Lost revenue to generic retailers</div>
+            </div>
+            
+            <h2 style="margin-top: 32px;">The Solution: Passive Rest</h2>
+            <p>The first passive mechanism for dry eye and digital strain. Requires no willpower.</p>
+            
+            <div class="stats-row">
+                <div class="stat"><div class="stat-num">84%</div><div class="stat-label">Daily Retention</div></div>
+                <div class="stat"><div class="stat-num">87%</div><div class="stat-label">Eye Comfort</div></div>
+                <div class="stat"><div class="stat-num">60%</div><div class="stat-label">Reorder Rate</div></div>
+            </div>
+            
+            <div class="testimonial">
+                <p>"Rest is not just a heating device... it opens the dialogue with patients about the importance of taking breaks."</p>
+                <cite>— Dr. Mila, South Waterfront Eyecare</cite>
+            </div>
+            
+            <div class="business-case">
+                <h3>The Business Case</h3>
+                <div class="business-row"><span>30-50 patients/week</span><span>$500 – $1,500</span></div>
+                <div class="business-row"><span>50-100 patients/week</span><span>$1,500 – $3,000</span></div>
+                <div class="business-row"><span>150+ patients/week</span><span>$4,500+</span></div>
+            </div>
+            
+            <div class="terms">
+                <div class="term"><span class="term-check">✓</span><div><strong>Exclusive Access</strong><span>Not sold on Amazon or Mass Retail</span></div></div>
+                <div class="term"><span class="term-check">✓</span><div><strong>Risk-Free Guarantee</strong><span>90-day buy-back on unsold sealed units</span></div></div>
+                <div class="term"><span class="term-check">✓</span><div><strong>White Glove Launch</strong><span>Staff training + $1,000 demo unit credited to first retail order</span></div></div>
+            </div>
+            
+            <div class="cta">
+                <a href="#" class="cta-btn">Schedule Fit Assessment →</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

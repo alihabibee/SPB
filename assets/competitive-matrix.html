@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Umay Compares</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --sage-light: #eef3f1; --terracotta: #c45d35; --terracotta-light: #fdf5f2; }
+
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--cream); padding: 40px; font-size: 14px; color: var(--charcoal); line-height: 1.55; }
+
+        .compare-page { max-width: 780px; margin: 0 auto; }
+
+        /* Header */
+        .header { margin-bottom: 12px; }
+        .header .brand { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; color: var(--black); }
+        .header .doc-type { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); margin-top: 2px; }
+
+        h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; font-weight: 400; color: var(--black); margin-bottom: 8px; }
+        .lead { font-size: 15px; color: var(--warm-gray); line-height: 1.7; margin-bottom: 28px; max-width: 600px; }
+
+        /* Positioning statement */
+        .positioning { background: var(--sage-light); border-left: 4px solid var(--sage); padding: 16px 20px; margin-bottom: 28px; }
+        .positioning p { font-size: 13px; color: var(--charcoal); line-height: 1.65; margin: 0; }
+        .positioning strong { color: var(--black); }
+
+        /* Main comparison table */
+        .matrix { width: 100%; border-collapse: collapse; margin-bottom: 28px; background: var(--white); border: 1px solid var(--light-gray); font-size: 12px; }
+        .matrix th { padding: 12px 14px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600; border-bottom: 2px solid var(--light-gray); background: var(--white); vertical-align: bottom; }
+        .matrix th.umay-col { background: var(--sage-light); color: var(--sage); border-bottom-color: var(--sage); }
+        .matrix td { padding: 10px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: top; color: var(--charcoal); }
+        .matrix tr:last-child td { border-bottom: none; }
+        .matrix td.umay-col { background: var(--sage-light); font-weight: 500; }
+        .matrix .row-label { font-weight: 600; color: var(--black); white-space: nowrap; }
+        .matrix .win { color: var(--sage); font-weight: 600; }
+        .matrix .neutral { color: var(--charcoal); }
+        .matrix .weak { color: var(--mid-gray); }
+        .dim { color: var(--mid-gray); font-size: 11px; }
+
+        /* Sections */
+        h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 500; color: var(--black); margin-bottom: 12px; margin-top: 32px; }
+        h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); font-weight: 600; margin-bottom: 10px; margin-top: 20px; }
+
+        /* Practice type cards */
+        .practice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+        .practice-card { background: var(--white); border: 1px solid var(--light-gray); padding: 20px; }
+        .practice-card-title { font-size: 13px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+        .practice-card-sub { font-size: 11px; color: var(--terracotta); font-weight: 500; margin-bottom: 10px; }
+        .practice-card p { font-size: 12px; color: var(--warm-gray); line-height: 1.6; margin-bottom: 8px; }
+        .practice-card .combo { font-size: 11px; color: var(--sage); font-weight: 500; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--light-gray); }
+
+        /* Honest tradeoffs */
+        .tradeoffs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--light-gray); margin-bottom: 28px; }
+        .tradeoff-col { padding: 20px; background: var(--white); }
+        .tradeoff-col:first-child { border-right: 1px solid var(--light-gray); }
+        .tradeoff-header { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 12px; }
+        .tradeoff-col:first-child .tradeoff-header { color: var(--sage); }
+        .tradeoff-col:last-child .tradeoff-header { color: var(--mid-gray); }
+        .tradeoff-item { font-size: 12px; color: var(--charcoal); line-height: 1.6; padding: 6px 0; border-bottom: 1px solid var(--off-white); }
+        .tradeoff-item:last-child { border-bottom: none; }
+
+        /* Bottom line */
+        .bottom-line { background: var(--black); color: var(--white); padding: 24px; }
+        .bottom-line h3 { color: var(--mid-gray); margin-top: 0; margin-bottom: 10px; }
+        .bottom-line p { font-size: 14px; color: #ccc; line-height: 1.7; margin: 0; }
+        .bottom-line strong { color: var(--white); }
+
+        @media print {
+            body { background: white; padding: 20px; }
+            .compare-page { max-width: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="compare-page">
+
+        <div class="header">
+            <div class="brand">Umay Rest</div>
+            <div class="doc-type">Competitive Landscape · For Clinic Partners</div>
+        </div>
+
+        <h1>Where Rest Fits in the Dry Eye Toolkit</h1>
+        <p class="lead">Rest isn't a replacement for in-office procedures. It's the at-home maintenance layer that makes everything else work better — and the only option in the market that patients actually use daily.</p>
+
+        <div class="positioning">
+            <p><strong>The core problem:</strong> In-office treatments deliver results. But outcomes decay between visits because patients don't comply with home care. Warm compresses drop below 50% adherence within weeks. Drops are even worse. Rest maintains at 84% daily adherence because it feels like relief, not homework. That's the gap it fills.</p>
+        </div>
+
+        <!-- Main Matrix -->
+        <table class="matrix">
+            <thead>
+                <tr>
+                    <th style="width: 130px;"></th>
+                    <th class="umay-col" style="width: 140px;">Umay Rest</th>
+                    <th>LipiFlow</th>
+                    <th>IPL / RF</th>
+                    <th>Bruder / Warm Compress</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-label">Category</td>
+                    <td class="umay-col">At-home therapy device</td>
+                    <td>In-office thermal pulsation</td>
+                    <td>In-office light / radiofrequency</td>
+                    <td>At-home OTC mask</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Upfront Investment</td>
+                    <td class="umay-col win">$1,000 demo<br><span class="dim">credited to first order</span></td>
+                    <td>$80K–$150K</td>
+                    <td>$40K–$120K</td>
+                    <td>$0</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Per-Treatment Cost</td>
+                    <td class="umay-col win">$0 consumables</td>
+                    <td>$340–$700<br><span class="dim">disposable activator</span></td>
+                    <td>$8–$50<br><span class="dim">gel, tips, shields</span></td>
+                    <td>$0</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Chair Time</td>
+                    <td class="umay-col win">0 minutes</td>
+                    <td>12–30 min</td>
+                    <td>15–30 min</td>
+                    <td>0 minutes</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Staff Training</td>
+                    <td class="umay-col win">5-min video</td>
+                    <td>Full-day certification</td>
+                    <td>Full-day + ongoing CE</td>
+                    <td>None</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Patient Price</td>
+                    <td class="umay-col">$500–$600<br><span class="dim">one-time purchase</span></td>
+                    <td>$750–$1,500<br><span class="dim">per session</span></td>
+                    <td>$400 × 3–4<br><span class="dim">series pricing</span></td>
+                    <td>$22–$75<br><span class="dim">OTC retail</span></td>
+                </tr>
+                <tr>
+                    <td class="row-label">Payback Period</td>
+                    <td class="umay-col win">4–12 weeks</td>
+                    <td>12–18 months</td>
+                    <td>6–12 months</td>
+                    <td>Immediate</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Clinic Margin</td>
+                    <td class="umay-col">$150–$350/unit<br><span class="dim">30–58% depending on volume</span></td>
+                    <td>$400–$800/session<br><span class="dim">after consumable</span></td>
+                    <td>$300–$600/session<br><span class="dim">varies by device</span></td>
+                    <td>$5–$25/unit<br><span class="dim">low margin</span></td>
+                </tr>
+                <tr>
+                    <td class="row-label">Patient Compliance</td>
+                    <td class="umay-col win">84% daily use<br><span class="dim">telemetry verified</span></td>
+                    <td>N/A<br><span class="dim">in-office only</span></td>
+                    <td>N/A<br><span class="dim">in-office only</span></td>
+                    <td>&lt;50%<br><span class="dim">drops within weeks</span></td>
+                </tr>
+                <tr>
+                    <td class="row-label">Revenue Model</td>
+                    <td class="umay-col">Product sale + 60% reorder<br><span class="dim">family, gifting, replacement</span></td>
+                    <td>Per-procedure recurring<br><span class="dim">every 12–18 months</span></td>
+                    <td>Series + maintenance<br><span class="dim">every 6–12 months</span></td>
+                    <td>Low-margin consumable<br><span class="dim">easily substituted</span></td>
+                </tr>
+                <tr>
+                    <td class="row-label">Insurance Coverage</td>
+                    <td class="umay-col">HSA/FSA eligible<br><span class="dim">no insurance billing</span></td>
+                    <td>Some coverage<br><span class="dim">varies by plan</span></td>
+                    <td>Typically cash-pay<br><span class="dim">emerging coverage</span></td>
+                    <td>OTC<br><span class="dim">HSA/FSA eligible</span></td>
+                </tr>
+                <tr>
+                    <td class="row-label">Risk if Underperforms</td>
+                    <td class="umay-col win">90-day buyback<br><span class="dim">sealed units, full refund</span></td>
+                    <td>Major capital at risk<br><span class="dim">secondary market exists</span></td>
+                    <td>Major capital at risk<br><span class="dim">lease may mitigate</span></td>
+                    <td>Minimal<br><span class="dim">low cost to try</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Practice Type Recommendations -->
+        <h2>How It Combines by Practice Type</h2>
+
+        <div class="practice-grid">
+            <div class="practice-card">
+                <div class="practice-card-title">Primary Care OD</div>
+                <div class="practice-card-sub">No in-office dry eye device yet</div>
+                <p>You diagnose dry eye and MGD but prescribe warm compresses and drops — knowing compliance will fail. Rest gives you a clinical-grade home therapy to prescribe with confidence, without the capital risk of in-office equipment.</p>
+                <div class="combo">→ Rest is your dry eye service line with zero capital barrier</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-card-title">IPL / LipiFlow Clinic</div>
+                <div class="practice-card-sub">Already invested in in-office procedures</div>
+                <p>Your in-office results are strong on Day 1. But outcomes decay at home between sessions. Rest extends procedural results by maintaining gland function and tear film daily — protecting your clinical reputation and treatment outcomes.</p>
+                <div class="combo">→ Rest is your between-visit maintenance protocol</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-card-title">Multi-Provider Group</div>
+                <div class="practice-card-sub">Mixed clinical interests across doctors</div>
+                <p>Not every OD in the practice wants to do procedures. Rest lets any provider recommend a validated at-home therapy — regardless of their specialty interest — without adding chair time or training burden to the practice.</p>
+                <div class="combo">→ Rest is the universal recommendation any provider can make</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-card-title">Dry Eye Center of Excellence</div>
+                <div class="practice-card-sub">Full treatment suite, seeking differentiation</div>
+                <p>You already offer LipiFlow, IPL, and scleral lenses. Rest completes the continuum: in-office treatment for acute intervention, Rest for daily maintenance, telemetry data for compliance tracking. Your patients get a closed loop.</p>
+                <div class="combo">→ Rest completes the treatment continuum from clinic to home</div>
+            </div>
+        </div>
+
+        <!-- Honest Tradeoffs -->
+        <h2>An Honest Comparison</h2>
+
+        <div class="tradeoffs">
+            <div class="tradeoff-col">
+                <div class="tradeoff-header">Where Rest Wins</div>
+                <div class="tradeoff-item"><strong>Capital risk.</strong> $1,000 demo vs. $80K+ device. Validated before you commit to inventory.</div>
+                <div class="tradeoff-item"><strong>Operational simplicity.</strong> Zero chair time, 5-min training, no EHR integration. Doesn't compete for schedule slots.</div>
+                <div class="tradeoff-item"><strong>Patient compliance.</strong> 84% daily adherence is unmatched. Patients use it because it feels good, not because they were told to.</div>
+                <div class="tradeoff-item"><strong>Speed to margin.</strong> 4–12 week payback. Revenue from Day 1 of first patient sale.</div>
+                <div class="tradeoff-item"><strong>Downside protection.</strong> Buyback guarantee. &lt;2% returns. No consumable cost exposure.</div>
+            </div>
+            <div class="tradeoff-col">
+                <div class="tradeoff-header">Where In-Office Procedures Win</div>
+                <div class="tradeoff-item"><strong>Per-visit revenue.</strong> $750–$1,500 per LipiFlow session vs. $500–$600 one-time Rest sale. Higher ticket per encounter.</div>
+                <div class="tradeoff-item"><strong>Insurance billing.</strong> Some in-office procedures have emerging insurance coverage. Rest is cash-pay / HSA/FSA only.</div>
+                <div class="tradeoff-item"><strong>Clinical immediacy.</strong> In-office thermal pulsation delivers measurable gland expression in a single visit. Rest works over time through daily use.</div>
+                <div class="tradeoff-item"><strong>Established evidence base.</strong> LipiFlow has 10+ years of published clinical data. Rest's government-backed pilot is strong but the published literature is still building.</div>
+                <div class="tradeoff-item"><strong>Perceived clinical authority.</strong> In-office procedures signal "serious treatment." Some patients want the doctor to do something, not prescribe something for home.</div>
+            </div>
+        </div>
+
+        <!-- Bottom Line -->
+        <div class="bottom-line">
+            <h3>The Bottom Line</h3>
+            <p>In-office procedures treat. Rest maintains. <strong>The question isn't which one — it's whether your patients have a home maintenance protocol that actually works.</strong> Right now, most don't. Warm compresses fail. Drops get forgotten. Rest is the first at-home option with verified daily adherence — and it costs your practice nothing to find out, because the demo-first path and buyback guarantee eliminate your risk.</p>
+        </div>
+
+    </div>
+</body>
+</html>

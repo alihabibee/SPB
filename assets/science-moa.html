@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Science — Umay Rest</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Inter:wght@400;500;600&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --black: #1a1a1a;
+            --charcoal: #333333;
+            --warm-gray: #666666;
+            --mid-gray: #999999;
+            --light-gray: #e8e8e8;
+            --off-white: #f5f5f3;
+            --white: #ffffff;
+            --cream: #faf9f7;
+            --terracotta: #c45d35;
+            --sage: #5a7c6f;
+            --sky: #4a7c9c;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+        
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 48px;
+            background: var(--white);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 64px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .brand {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--black);
+        }
+        
+        .doc-type {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--mid-gray);
+        }
+        
+        /* Hero */
+        .hero {
+            margin-bottom: 64px;
+        }
+        
+        .hero h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 42px;
+            font-weight: 300;
+            color: var(--black);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero p {
+            font-size: 17px;
+            color: var(--warm-gray);
+            max-width: 560px;
+            line-height: 1.7;
+        }
+        
+        /* Core Claim */
+        .core-claim {
+            background: var(--off-white);
+            padding: 32px;
+            margin-bottom: 64px;
+            border-left: 3px solid var(--sage);
+        }
+        
+        .core-claim p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--charcoal);
+        }
+        
+        .core-claim strong {
+            color: var(--black);
+        }
+        
+        /* Section Label */
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--mid-gray);
+            margin-bottom: 24px;
+        }
+        
+        /* Mechanisms */
+        .mechanisms {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 64px;
+        }
+        
+        .mechanism {
+            padding: 32px;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .mechanism-header {
+            margin-bottom: 20px;
+        }
+        
+        .mechanism-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+        
+        .mechanism h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+        
+        .mechanism.cool h3 { color: var(--sky); }
+        .mechanism.warm h3 { color: var(--terracotta); }
+        
+        .mechanism-subtitle {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--mid-gray);
+        }
+        
+        .mechanism h4 {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--warm-gray);
+            margin: 20px 0 8px;
+        }
+        
+        .mechanism p {
+            font-size: 14px;
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+        
+        .protocol-list {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .protocol-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            padding: 6px 0;
+        }
+        
+        .protocol-item span:first-child {
+            font-weight: 500;
+            color: var(--black);
+        }
+        
+        .protocol-item span:last-child {
+            color: var(--warm-gray);
+        }
+        
+        /* Differentiation */
+        .differentiation {
+            background: #fdf8f5;
+            border: 1px solid #f0e0d6;
+            padding: 32px;
+            margin-bottom: 64px;
+        }
+        
+        .differentiation h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--terracotta);
+            margin-bottom: 24px;
+        }
+        
+        .diff-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .diff-item h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 6px;
+        }
+        
+        .diff-item p {
+            font-size: 13px;
+            color: var(--warm-gray);
+            line-height: 1.6;
+        }
+        
+        .citation {
+            padding-top: 20px;
+            border-top: 1px solid #f0e0d6;
+            font-size: 12px;
+            color: var(--mid-gray);
+            font-style: italic;
+            line-height: 1.6;
+        }
+        
+        /* Evidence */
+        .evidence {
+            margin-bottom: 64px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 24px 16px;
+            background: var(--off-white);
+        }
+        
+        .stat-number {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 40px;
+            font-weight: 300;
+            color: var(--sage);
+            line-height: 1;
+        }
+        
+        .stat-number span {
+            font-size: 20px;
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--warm-gray);
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+        
+        .evidence-source {
+            font-size: 12px;
+            color: var(--mid-gray);
+            text-align: center;
+        }
+        
+        /* Safety */
+        .safety-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 64px;
+        }
+        
+        .safety-box h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .safety-box ul {
+            list-style: none;
+        }
+        
+        .safety-box li {
+            font-size: 13px;
+            color: var(--warm-gray);
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        
+        .safety-box li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--mid-gray);
+        }
+        
+        /* Protocol Summary */
+        .protocol-summary {
+            background: linear-gradient(90deg, #f0f7ff 0%, var(--off-white) 50%, #fdf5f0 100%);
+            padding: 32px;
+            margin-bottom: 64px;
+            text-align: center;
+        }
+        
+        .protocol-summary h3 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--mid-gray);
+            margin-bottom: 24px;
+        }
+        
+        .protocol-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .protocol-step {
+            text-align: center;
+        }
+        
+        .protocol-step-name {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+        
+        .protocol-step:first-child .protocol-step-name { color: var(--sky); }
+        .protocol-step:last-child .protocol-step-name { color: var(--terracotta); }
+        
+        .protocol-step-time {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--mid-gray);
+        }
+        
+        .protocol-arrow {
+            color: var(--light-gray);
+            font-size: 20px;
+        }
+        
+        /* CTA */
+        .cta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px;
+            background: var(--black);
+            color: var(--white);
+        }
+        
+        .cta h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+        
+        .cta p {
+            font-size: 13px;
+            color: var(--mid-gray);
+        }
+        
+        .cta-btn {
+            padding: 14px 28px;
+            background: var(--white);
+            color: var(--black);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .cta-btn:hover {
+            background: var(--off-white);
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <div class="brand">Umay Rest</div>
+            <div class="doc-type">The Science</div>
+        </header>
+        
+        <section class="hero">
+            <h1>The first non-pharmaceutical TRPM8 agonist</h1>
+            <p>Controlled thermal therapy that works with your patients' neurobiology—not against their compliance.</p>
+        </section>
+        
+        <section class="core-claim">
+            <p>Rest delivers <strong>pulsing cold-to-warm therapy</strong> at clinically validated temperatures (~39–41°C), activating both <strong>TRPM8-mediated tear production</strong> and <strong>meibomian gland expression</strong>—without the evaporative cooling loss of moist heat compresses.</p>
+        </section>
+        
+        <div class="section-label">Dual Mechanism</div>
+        <section class="mechanisms">
+            <div class="mechanism cool">
+                <div class="mechanism-header">
+                    <div class="mechanism-icon">❄</div>
+                    <h3>Cold Therapy</h3>
+                    <div class="mechanism-subtitle">TRPM8 Receptor Activation</div>
+                </div>
+                <h4>Physiological Effects</h4>
+                <p>Activates TRPM8 cold-sensing receptors in corneal nerves, triggering lacrimal nerve signaling and increasing natural tear secretion. Promotes peri-ocular depuffing and mental alertness.</p>
+                <div class="protocol-list">
+                    <div class="protocol-item">
+                        <span>Rise (AM)</span>
+                        <span>90 sec cold</span>
+                    </div>
+                    <div class="protocol-item">
+                        <span>Recharge</span>
+                        <span>5-7 min cold-warm</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mechanism warm">
+                <div class="mechanism-header">
+                    <div class="mechanism-icon">☀</div>
+                    <h3>Thermal Therapy</h3>
+                    <div class="mechanism-subtitle">Gland Function & Sleep Onset</div>
+                </div>
+                <h4>Physiological Effects</h4>
+                <p>Controlled warming at ~39-41°C liquefies meibum for healthy gland expression. Periocular warming triggers heat dissipation pathway, promoting serotonin and melatonin release.</p>
+                <div class="protocol-list">
+                    <div class="protocol-item">
+                        <span>Rest (PM)</span>
+                        <span>9-12 min warm</span>
+                    </div>
+                    <div class="protocol-item">
+                        <span>Post-procedure</span>
+                        <span>Heat after expression</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="differentiation">
+            <h3>Why Warm Compresses Underperform</h3>
+            <div class="diff-grid">
+                <div class="diff-item">
+                    <h4>Moist heat = evaporative cooling</h4>
+                    <p>Wet compresses lose therapeutic temperature within 60 seconds. The evaporation actively counteracts lid warming benefits.</p>
+                </div>
+                <div class="diff-item">
+                    <h4>Microwaveables overshoot</h4>
+                    <p>Variable heating creates temps above 43°C (injury risk) or below therapeutic threshold. No sustained delivery.</p>
+                </div>
+                <div class="diff-item">
+                    <h4>Rest: dry heat, precise control</h4>
+                    <p>Non-moist device delivers consistent 39-41°C—within therapeutic range, below injury threshold. No reheating.</p>
+                </div>
+                <div class="diff-item">
+                    <h4>84% daily adherence</h4>
+                    <p>When it feels like relief instead of homework, patients actually use it. Telemetry-verified across 2,864 users.</p>
+                </div>
+            </div>
+            <p class="citation">"Repeated eyelid warming with a non-moist device improved tear film function in normal individuals and may have beneficial effects on both tear film and meibomian gland function in MGD patients." — TFOS DEWS II</p>
+        </section>
+        
+        <div class="section-label">Clinical Outcomes · Government of Canada Pilot</div>
+        <section class="evidence">
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number">87<span>%</span></div>
+                    <div class="stat-label">Eye comfort improvement</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">70<span>%</span></div>
+                    <div class="stat-label">Sleep outcome improvement</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">84<span>%</span></div>
+                    <div class="stat-label">Daily adherence (DAU/MAU)</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">+1<span>hr</span></div>
+                    <div class="stat-label">Additional sleep per night</div>
+                </div>
+            </div>
+            <p class="evidence-source">Telemetry data (n=2,864) · Contact lens pilot (n=500): 85% screen comfort · Publication in preparation</p>
+        </section>
+        
+        <div class="section-label">Safety & Regulatory</div>
+        <section class="safety-grid">
+            <div class="safety-box">
+                <h4>🛡 Safety Profile</h4>
+                <ul>
+                    <li>Controlled temperature: 39-41°C</li>
+                    <li>Below tissue injury threshold (43-45°C+)</li>
+                    <li>App-customizable for patient comfort</li>
+                    <li>No contraindications for standard patients</li>
+                    <li>Non-invasive, external application only</li>
+                </ul>
+            </div>
+            <div class="safety-box">
+                <h4>📋 Regulatory Status</h4>
+                <ul>
+                    <li>Wellness device classification (Canada)</li>
+                    <li>510(k) exempt physical medicine (USA)</li>
+                    <li>Full regulatory compliance completed</li>
+                    <li>HSA/FSA eligible for patient purchase</li>
+                    <li>Validated: dry eye, DES, sleep, stress</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="protocol-summary">
+            <h3>The Daily Protocol</h3>
+            <div class="protocol-flow">
+                <div class="protocol-step">
+                    <div class="protocol-step-name">Rise</div>
+                    <div class="protocol-step-time">Morning · 90 sec</div>
+                </div>
+                <span class="protocol-arrow">→</span>
+                <div class="protocol-step">
+                    <div class="protocol-step-name">Recharge</div>
+                    <div class="protocol-step-time">Midday · 5-7 min</div>
+                </div>
+                <span class="protocol-arrow">→</span>
+                <div class="protocol-step">
+                    <div class="protocol-step-name">Rest</div>
+                    <div class="protocol-step-time">Evening · 9-12 min</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="cta">
+            <div>
+                <h3>Ready to see how it fits your practice?</h3>
+                <p>Request a clinical demo or review partnership options.</p>
+            </div>
+            <a href="#" class="cta-btn">Request Demo →</a>
+        </section>
+    </div>
+</body>
+</html>

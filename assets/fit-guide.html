@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Fit Guide — Umay Rest</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --sage-light: #eef3f1; --terracotta: #c45d35; --terracotta-light: #fdf5f2; }
+
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--cream); padding: 40px; font-size: 14px; color: var(--charcoal); line-height: 1.6; }
+
+        .guide { max-width: 720px; margin: 0 auto; }
+
+        /* Header */
+        .header { margin-bottom: 8px; }
+        .header .brand { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; color: var(--black); }
+        .header .doc-type { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); margin-top: 2px; }
+
+        h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; font-weight: 400; color: var(--black); margin-bottom: 6px; }
+        h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; font-weight: 500; color: var(--black); margin-bottom: 12px; }
+        .lead { font-size: 15px; color: var(--warm-gray); line-height: 1.7; margin-bottom: 28px; max-width: 620px; }
+
+        /* Section dividers */
+        .act-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; margin-bottom: 6px; }
+        .act-label.protect { color: var(--sage); }
+        .act-label.build { color: var(--terracotta); }
+
+        /* Core principle */
+        .core-principle { background: var(--black); color: var(--white); padding: 24px; margin-bottom: 28px; text-align: center; }
+        .core-principle-text { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 400; line-height: 1.6; color: #ccc; }
+        .core-principle-text strong { color: var(--white); font-weight: 600; }
+        .core-principle-divider { width: 40px; height: 1px; background: #555; margin: 14px auto; }
+        .core-principle-sub { font-size: 12px; color: var(--mid-gray); }
+
+        /* Protection grid */
+        .protection-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 24px; }
+        .prot-card { background: var(--white); border: 1px solid var(--light-gray); padding: 18px; }
+        .prot-icon { font-size: 11px; font-weight: 700; color: var(--sage); margin-bottom: 6px; }
+        .prot-title { font-size: 13px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+        .prot-detail { font-size: 12px; color: var(--warm-gray); line-height: 1.55; }
+
+        /* Patient journey diagram */
+        .journey { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin: 16px 0; border: 1px solid var(--light-gray); }
+        .journey-step { padding: 14px 10px; text-align: center; background: var(--white); border-right: 1px solid var(--light-gray); position: relative; }
+        .journey-step:last-child { border-right: none; }
+        .journey-step.highlight { background: var(--sage-light); }
+        .journey-step.protected { background: var(--off-white); }
+        .journey-phase { font-size: 8px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; margin-bottom: 4px; }
+        .journey-step.highlight .journey-phase { color: var(--sage); }
+        .journey-step.protected .journey-phase { color: var(--mid-gray); }
+        .journey-name { font-size: 11px; font-weight: 600; color: var(--black); margin-bottom: 2px; }
+        .journey-detail { font-size: 10px; color: var(--mid-gray); line-height: 1.4; }
+        .journey-tag { display: inline-block; font-size: 8px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; padding: 2px 6px; margin-top: 6px; border-radius: 2px; }
+        .tag-umay { background: var(--sage); color: var(--white); }
+        .tag-protected { background: var(--light-gray); color: var(--warm-gray); }
+
+        /* Transition */
+        .transition { border-top: 2px solid var(--light-gray); border-bottom: 2px solid var(--light-gray); padding: 24px 0; margin: 36px 0; text-align: center; }
+        .transition p { font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; color: var(--charcoal); line-height: 1.6; max-width: 540px; margin: 0 auto; }
+        .transition strong { color: var(--black); }
+
+        /* 5D Steps */
+        .step-5d { margin-bottom: 28px; }
+        .step-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
+        .step-num { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+        .step-num.d1 { background: var(--terracotta); color: var(--white); }
+        .step-num.d2 { background: #b8860b; color: var(--white); }
+        .step-num.d3 { background: var(--sage); color: var(--white); }
+        .step-num.d4 { background: #4a7c9c; color: var(--white); }
+        .step-num.d5 { background: var(--black); color: var(--white); }
+        .step-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; color: var(--black); font-weight: 500; }
+        .step-owner { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); font-weight: 600; }
+        .step-body { padding-left: 50px; }
+        .step-body p { font-size: 13px; color: var(--warm-gray); margin-bottom: 10px; line-height: 1.65; }
+        .step-body p strong { color: var(--charcoal); }
+
+        /* Script block */
+        .script-block { background: var(--off-white); border-left: 3px solid var(--sage); padding: 14px 18px; margin: 12px 0; }
+        .script-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--sage); font-weight: 600; margin-bottom: 6px; }
+        .script-text { font-size: 13px; color: var(--charcoal); line-height: 1.7; font-style: italic; }
+        .script-text strong { font-style: normal; }
+
+        /* Branch options */
+        .branch { background: var(--white); border: 1px solid var(--light-gray); padding: 12px 16px; margin-bottom: 8px; font-size: 12px; color: var(--charcoal); line-height: 1.6; }
+        .branch strong { color: var(--black); }
+        .branch-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600; margin-bottom: 4px; margin-top: 10px; }
+
+        /* Engagement tiers */
+        .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 14px 0; }
+        .tier-card { background: var(--white); border: 1px solid var(--light-gray); padding: 16px; text-align: center; }
+        .tier-card.recommended { border-color: var(--sage); background: var(--sage-light); }
+        .tier-card-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; color: var(--mid-gray); margin-bottom: 6px; }
+        .tier-card.recommended .tier-card-label { color: var(--sage); }
+        .tier-card-name { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; color: var(--black); margin-bottom: 4px; }
+        .tier-card-detail { font-size: 11px; color: var(--warm-gray); line-height: 1.5; }
+        .tier-card-time { font-size: 10px; color: var(--mid-gray); margin-top: 6px; font-weight: 500; }
+
+        /* Decision paths */
+        .decide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+        .decide-card { background: var(--white); border: 1px solid var(--light-gray); padding: 18px; }
+        .decide-card-title { font-size: 13px; font-weight: 600; color: var(--black); margin-bottom: 6px; }
+        .decide-card-body { font-size: 12px; color: var(--warm-gray); line-height: 1.6; }
+        .decide-connector { background: var(--sage-light); border: 1px solid var(--sage); padding: 12px 16px; margin-top: 10px; font-size: 12px; color: var(--charcoal); text-align: center; line-height: 1.5; }
+        .decide-connector strong { color: var(--black); }
+
+        /* Follow-up protocol */
+        .followup { background: var(--white); border: 1px solid var(--light-gray); margin: 14px 0; }
+        .followup-header { background: var(--black); color: var(--white); padding: 12px 18px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; }
+        .followup-row { display: grid; grid-template-columns: 100px 1fr 1fr; border-bottom: 1px solid var(--light-gray); font-size: 12px; }
+        .followup-row:last-child { border-bottom: none; }
+        .followup-row div { padding: 10px 14px; }
+        .followup-row div:first-child { font-weight: 600; color: var(--black); background: var(--off-white); border-right: 1px solid var(--light-gray); }
+        .followup-row div:nth-child(2) { color: var(--charcoal); border-right: 1px solid var(--light-gray); }
+        .followup-row div:last-child { color: var(--sage); font-weight: 500; }
+
+        /* Role matrix */
+        .role-matrix { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 12px; background: var(--white); border: 1px solid var(--light-gray); }
+        .role-matrix th { padding: 10px 14px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600; border-bottom: 2px solid var(--light-gray); background: var(--off-white); }
+        .role-matrix td { padding: 10px 14px; border-bottom: 1px solid var(--light-gray); color: var(--charcoal); vertical-align: top; }
+        .role-matrix tr:last-child td { border-bottom: none; }
+        .role-matrix .role-name { font-weight: 600; color: var(--black); white-space: nowrap; }
+
+        /* Talking points card */
+        .talk-card { background: var(--white); border: 1px solid var(--light-gray); margin: 28px 0; }
+        .talk-header { background: var(--black); color: var(--white); padding: 12px 18px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; }
+        .talk-body { padding: 0; }
+        .talk-item { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--light-gray); }
+        .talk-item:last-child { border-bottom: none; }
+        .talk-q { padding: 12px 18px; font-size: 12px; color: var(--warm-gray); background: var(--off-white); border-right: 1px solid var(--light-gray); }
+        .talk-q strong { color: var(--charcoal); display: block; margin-bottom: 2px; font-size: 12px; }
+        .talk-a { padding: 12px 18px; font-size: 12px; color: var(--charcoal); line-height: 1.6; }
+
+        /* Results bar */
+        .results-bar { background: var(--black); color: var(--white); padding: 24px; margin: 32px 0; }
+        .results-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mid-gray); font-weight: 600; margin-bottom: 16px; }
+        .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .result-item { text-align: center; }
+        .result-check { color: var(--sage); font-size: 18px; margin-bottom: 4px; }
+        .result-text { font-size: 12px; color: #ccc; line-height: 1.5; }
+
+        /* Bottom line */
+        .bottom { border-top: 2px solid var(--light-gray); padding-top: 20px; margin-top: 8px; }
+        .bottom p { font-size: 14px; color: var(--warm-gray); line-height: 1.7; }
+        .bottom strong { color: var(--black); }
+
+        @media print { body { background: white; padding: 20px; } }
+        @media (max-width: 600px) {
+            body { padding: 16px; }
+            .journey { grid-template-columns: 1fr; }
+            .journey-step { border-right: none; border-bottom: 1px solid var(--light-gray); }
+            .protection-grid, .decide-grid { grid-template-columns: 1fr; }
+            .tier-grid { grid-template-columns: 1fr; }
+            .talk-item { grid-template-columns: 1fr; }
+            .talk-q { border-right: none; border-bottom: 1px solid var(--light-gray); }
+            .results-grid { grid-template-columns: 1fr; }
+            .followup-row { grid-template-columns: 1fr; }
+            .followup-row div:first-child { border-right: none; }
+            .followup-row div:nth-child(2) { border-right: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="guide">
+
+        <div class="header">
+            <div class="brand">Umay Rest</div>
+            <div class="doc-type">Practice Fit Guide</div>
+        </div>
+
+        <h1>Protect Optical. Expand Medical. No Workflow Disruption.</h1>
+        <p class="lead">You've built a practice that converts. Here's how Rest adds a medical pathway without touching your optical flow.</p>
+
+        <!-- CORE PRINCIPLE -->
+        <div class="core-principle">
+            <div class="core-principle-text"><strong>Dry Eye = Medical Pathway</strong></div>
+            <div class="core-principle-divider"></div>
+            <div class="core-principle-text"><strong>Optical = Retail Pathway</strong></div>
+            <div class="core-principle-divider"></div>
+            <div class="core-principle-sub">They do not compete.</div>
+        </div>
+
+        <!-- ==================== ACT 1: PROTECTION ==================== -->
+        <div class="act-label protect">Part 1 — What We Protect</div>
+        <h2>Rest Was Designed Around Your Existing Flow</h2>
+
+        <p style="font-size: 13px; color: var(--warm-gray); margin-bottom: 16px; line-height: 1.65;">Rest lives in two moments that don't compete with the eyeglass conversation: intake and post-checkout. Your exam, refraction, and optical handoff stay completely untouched.</p>
+
+        <div class="journey">
+            <div class="journey-step highlight">
+                <div class="journey-phase">Before exam</div>
+                <div class="journey-name">Intake</div>
+                <div class="journey-detail">Trigger question on screen time / dry eye</div>
+                <div class="journey-tag tag-umay">Medical</div>
+            </div>
+            <div class="journey-step protected">
+                <div class="journey-phase">Your flow</div>
+                <div class="journey-name">Exam</div>
+                <div class="journey-detail">Refraction, health assessment, diagnosis</div>
+                <div class="journey-tag tag-protected">Protected</div>
+            </div>
+            <div class="journey-step protected">
+                <div class="journey-phase">Your flow</div>
+                <div class="journey-name">Optical</div>
+                <div class="journey-detail">Frame selection, lens Rx, eyeglass sale</div>
+                <div class="journey-tag tag-protected">Protected</div>
+            </div>
+            <div class="journey-step highlight">
+                <div class="journey-phase">After optical</div>
+                <div class="journey-name">Diagnosis</div>
+                <div class="journey-detail">Doctor notes gland findings during wrap-up</div>
+                <div class="journey-tag tag-umay">Medical</div>
+            </div>
+            <div class="journey-step highlight">
+                <div class="journey-phase">Checkout</div>
+                <div class="journey-name">Delegate</div>
+                <div class="journey-detail">Staff demos or hands info card</div>
+                <div class="journey-tag tag-umay">Medical</div>
+            </div>
+        </div>
+
+        <div class="protection-grid">
+            <div class="prot-card">
+                <div class="prot-icon">✓</div>
+                <div class="prot-title">Your schedule</div>
+                <div class="prot-detail">0 minutes chair time. No appointments needed. No schedule compression.</div>
+            </div>
+            <div class="prot-card">
+                <div class="prot-icon">✓</div>
+                <div class="prot-title">Your optical revenue</div>
+                <div class="prot-detail">Rest conversation happens before and after the eyeglass sale — never during. Different budget line (HSA/FSA), different mental account.</div>
+            </div>
+            <div class="prot-card">
+                <div class="prot-icon">✓</div>
+                <div class="prot-title">Your staff's bandwidth</div>
+                <div class="prot-detail">5-minute training video. One trigger question. One handoff script. Nothing else changes.</div>
+            </div>
+            <div class="prot-card">
+                <div class="prot-icon">✓</div>
+                <div class="prot-title">Your financial risk</div>
+                <div class="prot-detail">$1,000 demo to validate demand. 90-day buyback on sealed units. &lt;2% patient return rate.</div>
+            </div>
+        </div>
+
+        <!-- ==================== TRANSITION ==================== -->
+        <div class="transition">
+            <p>Now that you see it won't disrupt anything — <strong>here's what it actually builds.</strong></p>
+        </div>
+
+        <!-- ==================== ACT 2: 5D INTEGRATION MODEL ==================== -->
+        <div class="act-label build">Part 2 — The 5D Dry Eye Integration Model</div>
+        <h2>A Parallel Medical Pathway in 5 Steps</h2>
+
+        <p style="font-size: 13px; color: var(--warm-gray); margin-bottom: 24px; line-height: 1.65;">Rest isn't just a product you stock — it's the entry point to a dry eye service line. Five steps, each owned by the right person, each building on the last.</p>
+
+        <!-- D1: DIAGNOSE -->
+        <div class="step-5d">
+            <div class="step-header">
+                <div class="step-num d1">D1</div>
+                <div>
+                    <div class="step-title">Diagnose</div>
+                    <div class="step-owner">Doctor · 20 seconds</div>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Identify early gland dysfunction. Name it clinically. This is the moment that transforms Rest from a product into a treatment — and the recommendation from retail into medicine.</p>
+
+                <div class="script-block">
+                    <div class="script-label">Doctor script</div>
+                    <div class="script-text">"I'm seeing early signs of gland dysfunction<strong>, likely contributing to your symptoms</strong>. Your tear system has two important parts — the lacrimal gland that produces tears and the meibomian glands that protect them with oil. Heat helps unblock oil glands, and controlled cooling can stimulate natural tear production and calm inflammation. We use both approaches depending on what we're seeing."</div>
+                </div>
+
+                <div class="script-block">
+                    <div class="script-label">Then — the handoff</div>
+                    <div class="script-text">"We offer in-office treatments as well as a newer at-home therapeutic option called Rest that uses targeted temperature therapy. My team can show you a demo today…"</div>
+                </div>
+
+                <div class="branch-label">Branch by presentation</div>
+                <div class="branch"><strong>Symptomatic / workup warranted:</strong> "…and we'll book you back for a dry eye workup in a couple weeks."</div>
+                <div class="branch"><strong>Acute in-office (e.g., stye):</strong> "I'm going to have the staff set you up with a quick in-office treatment with Rest."</div>
+                <div class="branch"><strong>Mild / asymptomatic / not ready:</strong> Demo + offer card with QR code + book 2-week follow-up to reassess and discuss in-office treatments.</div>
+
+                <p style="margin-top: 12px;"><strong>What this is not:</strong> No pricing. No long explanation. No added exam time. The doctor names the condition and hands off.</p>
+            </div>
+        </div>
+
+        <!-- D2: DELEGATE -->
+        <div class="step-5d">
+            <div class="step-header">
+                <div class="step-num d2">D2</div>
+                <div>
+                    <div class="step-title">Delegate</div>
+                    <div class="step-owner">Staff · After frame selection or before checkout</div>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>The doctor's clinical authority does the heavy lifting. Staff don't "sell" — they fulfill a medical recommendation. Patients don't push back on "the doctor noted gland blockage" the way they push back on "would you like to add this?"</p>
+
+                <div class="script-block">
+                    <div class="script-label">Staff script</div>
+                    <div class="script-text">"Dr. ___ noted early gland blockage. <strong>[show device]</strong> We can set you up with a quick 5-minute demo, or I can give you an info card to review at home."</div>
+                </div>
+
+                <table class="role-matrix">
+                    <thead>
+                        <tr>
+                            <th>Role</th>
+                            <th>Action</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="role-name">Front desk / Tech</td>
+                            <td>Asks trigger question at intake; flags chart</td>
+                            <td>10 sec</td>
+                        </tr>
+                        <tr>
+                            <td class="role-name">Doctor</td>
+                            <td>Names gland finding; prescribes pathway (D1 script)</td>
+                            <td>20 sec</td>
+                        </tr>
+                        <tr>
+                            <td class="role-name">Optician / Staff</td>
+                            <td>Offers demo or info card after optical handoff</td>
+                            <td>30 sec – 5 min</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Doctor protected.</strong> Clinical authority established in 20 seconds. Everything downstream is staff-driven. <strong>Optical untouched.</strong> This happens after frame selection.</p>
+            </div>
+        </div>
+
+        <!-- D3: DEMO -->
+        <div class="step-5d">
+            <div class="step-header">
+                <div class="step-num d3">D3</div>
+                <div>
+                    <div class="step-title">Demo (or Defer)</div>
+                    <div class="step-owner">Patient chooses engagement level</div>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Three engagement levels. Patient picks their comfort. Staff offer the menu — zero pressure.</p>
+
+                <div class="tier-grid">
+                    <div class="tier-card recommended">
+                        <div class="tier-card-label">Recommended</div>
+                        <div class="tier-card-name">5-Min Demo</div>
+                        <div class="tier-card-detail">In-office experience. Patient feels the therapy. Differentiates practice.</div>
+                        <div class="tier-card-time">5 minutes · High conversion</div>
+                    </div>
+                    <div class="tier-card">
+                        <div class="tier-card-label">Low touch</div>
+                        <div class="tier-card-name">QR Card</div>
+                        <div class="tier-card-detail">Hand them the offer card. Zero time. Keeps funnel open for follow-up.</div>
+                        <div class="tier-card-time">10 seconds · Funnel open</div>
+                    </div>
+                    <div class="tier-card">
+                        <div class="tier-card-label">Clinical</div>
+                        <div class="tier-card-name">In-Office Tx</div>
+                        <div class="tier-card-detail">Rest as part of treatment protocol. Bill per session ($150–$250).</div>
+                        <div class="tier-card-time">10–15 min · Service revenue</div>
+                    </div>
+                </div>
+
+                <p><strong>This removes the "we don't have time" objection.</strong> Nothing is mandatory in the moment. The demo converts highest, but even the QR card keeps patients in the funnel.</p>
+            </div>
+        </div>
+
+        <!-- D4: DECIDE -->
+        <div class="step-5d">
+            <div class="step-header">
+                <div class="step-num d4">D4</div>
+                <div>
+                    <div class="step-title">Decide</div>
+                    <div class="step-owner">Patient · At checkout or follow-up</div>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Two paths, not mutually exclusive. Rest is the entry point — not the end point.</p>
+
+                <div class="decide-grid">
+                    <div class="decide-card">
+                        <div class="decide-card-title">Take-Home Start</div>
+                        <div class="decide-card-body">Patient purchases Rest at checkout. Staff introduces HSA/FSA eligibility. Schedule 2-week follow-up to check progress and discuss next steps.</div>
+                    </div>
+                    <div class="decide-card">
+                        <div class="decide-card-title">Dry Eye Workup</div>
+                        <div class="decide-card-body">Book for full testing: meibography, TBUT, osmolarity. Build treatment plan. Rest as at-home management layer. IPL/iLux discussed as future escalation.</div>
+                    </div>
+                </div>
+                <div class="decide-connector"><strong>Rest = Entry Point, Not Replacement.</strong> Patients who invest in early therapy are more likely to accept advanced in-office treatment because they understand the condition better.</div>
+            </div>
+        </div>
+
+        <!-- D5: DEVELOP -->
+        <div class="step-5d">
+            <div class="step-header">
+                <div class="step-num d5">D5</div>
+                <div>
+                    <div class="step-title">Develop</div>
+                    <div class="step-owner">Doctor + Staff · 2-week follow-up</div>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>The follow-up closes the loop. This is where Rest stops being a product sale and becomes a clinical relationship — and where your dry eye service line grows.</p>
+
+                <div class="followup">
+                    <div class="followup-header">2-Week Follow-Up Protocol</div>
+                    <div class="followup-row">
+                        <div>Evaluate</div>
+                        <div>How often are they using it? Symptom improvement? Check compliance via app data if available.</div>
+                        <div>→ Reinforces value of therapy</div>
+                    </div>
+                    <div class="followup-row">
+                        <div>Reinforce</div>
+                        <div>Share that 84% of patients use Rest daily. Normalize daily use as part of eye health maintenance.</div>
+                        <div>→ Increases long-term adherence</div>
+                    </div>
+                    <div class="followup-row">
+                        <div>Escalate</div>
+                        <div>If symptoms persist or gland findings warrant it, introduce IPL / iLux / advanced testing. Rest prepared them to say yes.</div>
+                        <div>→ Grows in-office procedure revenue</div>
+                    </div>
+                </div>
+
+                <p><strong>The insight that changes the conversation:</strong> Rest increases acceptance of advanced treatment. Patients who've used Rest for two weeks understand their condition, trust the process, and are primed for the next step. You're not selling IPL cold — you're recommending it to someone already invested in their eye health.</p>
+            </div>
+        </div>
+
+        <!-- ==================== STAFF QUICK REFERENCE ==================== -->
+        <div class="talk-card">
+            <div class="talk-header">Staff Quick-Reference: Top 5 Patient Questions</div>
+            <div class="talk-body">
+                <div class="talk-item">
+                    <div class="talk-q"><strong>"What does it actually do?"</strong>It uses gentle warming and cooling to help your glands and tear production recover.</div>
+                    <div class="talk-a"><strong>Key phrase:</strong> "It's doctor-recommended therapy you use at home — targeted temperature treatment for your oil glands and tear production."</div>
+                </div>
+                <div class="talk-item">
+                    <div class="talk-q"><strong>"How is this different from a warm compress?"</strong>Warm compresses lose temperature in minutes and most people stop using them.</div>
+                    <div class="talk-a"><strong>Key phrase:</strong> "Rest maintains therapeutic temperature consistently and 84% of patients use it daily. Warm compresses drop below 50%. The difference is compliance."</div>
+                </div>
+                <div class="talk-item">
+                    <div class="talk-q"><strong>"Is it covered by insurance?"</strong>Not directly, but it is HSA and FSA eligible.</div>
+                    <div class="talk-a"><strong>Key phrase:</strong> "It's HSA/FSA eligible, so most patients can use their health spending account."</div>
+                </div>
+                <div class="talk-item">
+                    <div class="talk-q"><strong>"Can I think about it?"</strong>Absolutely — here's a card with more information.</div>
+                    <div class="talk-a"><strong>Key phrase:</strong> Hand them the Offer Card. "Take this home — it has a QR code with details. We'll check in at your follow-up."</div>
+                </div>
+                <div class="talk-item">
+                    <div class="talk-q"><strong>"Does it really work?"</strong>It's Health Canada approved and backed by a government study.</div>
+                    <div class="talk-a"><strong>Key phrase:</strong> "87% of patients in a government-backed study reported improved eye comfort. Dr. [Name] can tell you more at your follow-up."</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== WHY THIS WORKS ==================== -->
+        <div class="results-bar">
+            <div class="results-label">Why The 5D Model Works</div>
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-check">✓</div>
+                    <div class="result-text">Protects optical conversion — exam and frame selection completely untouched</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-check">✓</div>
+                    <div class="result-text">No added exam time — doctor's role is 20 seconds of clinical observation</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-check">✓</div>
+                    <div class="result-text">Staff-driven execution — doctor authorizes, staff fulfills, patient chooses</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-check">✓</div>
+                    <div class="result-text">Expands dry eye funnel earlier — catches dysfunction before symptoms escalate</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-check">✓</div>
+                    <div class="result-text">Increases in-office treatment acceptance — Rest pre-qualifies patients for IPL/iLux</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-check">✓</div>
+                    <div class="result-text">Elevates practice sophistication — managing a condition, not selling a product</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM LINE -->
+        <div class="bottom">
+            <p><strong>Rest doesn't compete with your optical business — it builds a parallel medical pathway alongside it.</strong> Twenty seconds of clinical observation from the doctor. Staff-driven execution with clear scripts and three engagement levels. A 2-week follow-up that turns a product sale into a clinical relationship and a funnel for advanced treatment. Your eyeglass conversion stays untouched, and you gain a dry eye service line that grows with every patient you flag. The $1,000 demo lets you test the entire model risk-free.</p>
+        </div>
+
+    </div>
+</body>
+</html>

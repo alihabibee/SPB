@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works — Umay Rest</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Inter:wght@400;500;600&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --black: #1a1a1a;
+            --charcoal: #333333;
+            --warm-gray: #666666;
+            --mid-gray: #999999;
+            --light-gray: #e8e8e8;
+            --off-white: #f5f5f3;
+            --white: #ffffff;
+            --cream: #faf9f7;
+            --terracotta: #c45d35;
+            --sage: #5a7c6f;
+            --sky: #4a7c9c;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+        
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 48px;
+            background: var(--white);
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 64px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .brand {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--black);
+        }
+        
+        .doc-type {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--mid-gray);
+        }
+        
+        .hero {
+            margin-bottom: 64px;
+        }
+        
+        .hero h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 42px;
+            font-weight: 300;
+            color: var(--black);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero p {
+            font-size: 17px;
+            color: var(--warm-gray);
+            max-width: 560px;
+            line-height: 1.7;
+        }
+        
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--mid-gray);
+            margin-bottom: 24px;
+        }
+        
+        /* Two Tracks */
+        .tracks {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 64px;
+        }
+        
+        .track {
+            padding: 32px;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .track.primary {
+            border-left: 3px solid var(--terracotta);
+        }
+        
+        .track.specialty {
+            border-left: 3px solid var(--sage);
+        }
+        
+        .track h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+        
+        .track.primary h3 { color: var(--terracotta); }
+        .track.specialty h3 { color: var(--sage); }
+        
+        .track-subtitle {
+            font-size: 13px;
+            color: var(--mid-gray);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .track-point {
+            font-size: 14px;
+            margin-bottom: 14px;
+            line-height: 1.6;
+            color: var(--charcoal);
+        }
+        
+        .track-point strong {
+            color: var(--black);
+        }
+        
+        /* Workflow */
+        .workflow {
+            background: var(--off-white);
+            padding: 40px;
+            margin-bottom: 64px;
+            text-align: center;
+        }
+        
+        .workflow h3 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--mid-gray);
+            margin-bottom: 32px;
+        }
+        
+        .workflow-steps {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 48px;
+        }
+        
+        .workflow-step {
+            flex: 1;
+            max-width: 180px;
+        }
+        
+        .step-number {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 48px;
+            font-weight: 300;
+            color: var(--sage);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        
+        .step-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 6px;
+        }
+        
+        .step-detail {
+            font-size: 13px;
+            color: var(--warm-gray);
+            line-height: 1.5;
+        }
+        
+        .step-arrow {
+            font-size: 24px;
+            color: var(--light-gray);
+            padding-top: 20px;
+        }
+        
+        /* Zero Friction */
+        .friction-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 64px;
+        }
+        
+        .friction-item {
+            text-align: center;
+            padding: 24px 16px;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .friction-value {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+        
+        .friction-label {
+            font-size: 12px;
+            color: var(--warm-gray);
+            line-height: 1.4;
+        }
+        
+        /* Stats */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 64px;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 32px 24px;
+            background: var(--off-white);
+        }
+        
+        .stat-number {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 48px;
+            font-weight: 300;
+            color: var(--sage);
+            line-height: 1;
+        }
+        
+        .stat-number span {
+            font-size: 24px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--warm-gray);
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+        
+        .stat-label em {
+            display: block;
+            font-size: 11px;
+            color: var(--mid-gray);
+            margin-top: 2px;
+        }
+        
+        /* Applications */
+        .applications {
+            margin-bottom: 64px;
+        }
+        
+        .app-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        
+        .app-item {
+            display: flex;
+            gap: 16px;
+            padding: 24px;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .app-mode {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 6px 10px;
+            height: fit-content;
+        }
+        
+        .app-mode.cool {
+            background: #f0f7ff;
+            color: var(--sky);
+        }
+        
+        .app-mode.heat {
+            background: #fdf5f0;
+            color: var(--terracotta);
+        }
+        
+        .app-item h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+        
+        .app-item p {
+            font-size: 13px;
+            color: var(--warm-gray);
+        }
+        
+        /* Testimonial */
+        .testimonial {
+            background: var(--off-white);
+            padding: 32px 40px;
+            margin-bottom: 64px;
+            border-left: 3px solid var(--sage);
+        }
+        
+        .testimonial p {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            font-style: italic;
+            color: var(--charcoal);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        .testimonial cite {
+            font-size: 13px;
+            color: var(--warm-gray);
+            font-style: normal;
+        }
+        
+        /* CTA */
+        .cta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px;
+            background: var(--black);
+            color: var(--white);
+        }
+        
+        .cta h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+        
+        .cta p {
+            font-size: 13px;
+            color: var(--mid-gray);
+        }
+        
+        .cta-btn {
+            padding: 14px 28px;
+            background: var(--white);
+            color: var(--black);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <div class="brand">Umay Rest</div>
+            <div class="doc-type">How It Works</div>
+        </header>
+        
+        <section class="hero">
+            <h1>Rest fits where your current protocol breaks down.</h1>
+            <p>Not a replacement. An adjunct that makes your existing treatments work better—with zero chair time and no staff training.</p>
+        </section>
+        
+        <div class="section-label">For Your Practice Type</div>
+        <section class="tracks">
+            <div class="track primary">
+                <h3>Primary Care OD</h3>
+                <p class="track-subtitle">"I diagnose it, but what do I prescribe?"</p>
+                <p class="track-point"><strong>The gap:</strong> 67% still reach for OTC drops as first-line. Patients return unsatisfied.</p>
+                <p class="track-point"><strong>Rest fills it:</strong> A clinical-grade home therapy you can prescribe with confidence.</p>
+                <p class="track-point"><strong>The unlock:</strong> Stop being reactive. Start prescribing prevention.</p>
+            </div>
+            
+            <div class="track specialty">
+                <h3>IPL / Specialty Clinic</h3>
+                <p class="track-subtitle">"My in-office results fade at home."</p>
+                <p class="track-point"><strong>The gap:</strong> Patients invest in IPL/RF but outcomes decay without home maintenance.</p>
+                <p class="track-point"><strong>Rest fills it:</strong> Extends procedural results. Protects your reputation.</p>
+                <p class="track-point"><strong>The unlock:</strong> Pre-treatment prep. Post-expression recovery.</p>
+            </div>
+        </section>
+        
+        <section class="workflow">
+            <h3>The Zero-Friction Workflow</h3>
+            <div class="workflow-steps">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Demo in-office</div>
+                    <div class="step-detail">5 min in waiting room or chair</div>
+                </div>
+                <span class="step-arrow">→</span>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Prescribe at checkout</div>
+                    <div class="step-detail">Staff handoff, no explanation needed</div>
+                </div>
+                <span class="step-arrow">→</span>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Patient maintains</div>
+                    <div class="step-detail">84% daily use, no follow-up required</div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="section-label">What This Means for Your Clinic</div>
+        <section class="friction-grid">
+            <div class="friction-item">
+                <div class="friction-value">0 min</div>
+                <div class="friction-label">chair time required</div>
+            </div>
+            <div class="friction-item">
+                <div class="friction-value">No training</div>
+                <div class="friction-label">beyond "hand it to them"</div>
+            </div>
+            <div class="friction-item">
+                <div class="friction-value">No EHR</div>
+                <div class="friction-label">integration needed</div>
+            </div>
+            <div class="friction-item">
+                <div class="friction-value">No risk</div>
+                <div class="friction-label">order as needed</div>
+            </div>
+        </section>
+        
+        <div class="section-label">Partner Results</div>
+        <section class="stats-row">
+            <div class="stat">
+                <div class="stat-number">84<span>%</span></div>
+                <div class="stat-label">daily adherence<em>vs. &lt;50% for drops</em></div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">60<span>%</span></div>
+                <div class="stat-label">clinic reorder rate<em>within 6 weeks</em></div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">87<span>%</span></div>
+                <div class="stat-label">eye comfort improvement<em>gov't-backed study</em></div>
+            </div>
+        </section>
+        
+        <div class="section-label">In-Office Applications</div>
+        <section class="applications">
+            <div class="app-grid">
+                <div class="app-item">
+                    <div class="app-mode cool">Cool</div>
+                    <div>
+                        <h4>Pre-procedure pain management</h4>
+                        <p>Cold sessions reduce discomfort during IPL/RF treatments</p>
+                    </div>
+                </div>
+                <div class="app-item">
+                    <div class="app-mode heat">Heat</div>
+                    <div>
+                        <h4>Post-expression recovery</h4>
+                        <p>Heat sessions improve outcomes after meibomian gland expression</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="testimonial">
+            <p>"Rest is not just a heating device... it opens the dialogue with patients about the importance of taking breaks."</p>
+            <cite>— Dr. Mila Ioussifova, South Waterfront Eyecare</cite>
+        </section>
+        
+        <section class="cta">
+            <div>
+                <h3>Ready to see pricing and partnership options?</h3>
+                <p>107+ clinic partners · 3,000+ units shipped</p>
+            </div>
+            <a href="#" class="cta-btn">Request Offer →</a>
+        </section>
+    </div>
+</body>
+</html>

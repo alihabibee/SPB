@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>90-Day Execution Cadence</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --sage-light: #eef3f1; --terracotta: #c45d35; --terracotta-light: #fdf5f2; --sky: #4a7c9c; --sky-light: #edf3f7; }
+
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--cream); padding: 40px; font-size: 14px; color: var(--charcoal); line-height: 1.6; }
+
+        .cadence { max-width: 720px; margin: 0 auto; }
+
+        /* Header */
+        .header { margin-bottom: 36px; }
+        .header h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 400; color: var(--black); margin-bottom: 4px; }
+        .header .subtitle { font-size: 14px; color: var(--warm-gray); }
+
+        /* Timeline bar */
+        .timeline-bar { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; margin-bottom: 40px; }
+        .timeline-segment { padding: 14px 16px; text-align: center; border: 1px solid var(--light-gray); border-right: none; }
+        .timeline-segment:last-child { border-right: 1px solid var(--light-gray); }
+        .timeline-segment.active { border-color: var(--sage); border-bottom: 3px solid var(--sage); }
+        .timeline-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; margin-bottom: 2px; }
+        .seg-foundation .timeline-label { color: var(--sky); }
+        .seg-activation .timeline-label { color: var(--sage); }
+        .seg-scale .timeline-label { color: var(--terracotta); }
+        .timeline-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; color: var(--black); }
+        .timeline-days { font-size: 11px; color: var(--mid-gray); margin-top: 2px; }
+
+        /* Phase */
+        .phase { margin-bottom: 40px; }
+        .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--light-gray); }
+        .phase-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--white); flex-shrink: 0; }
+        .phase-foundation .phase-num { background: var(--sky); }
+        .phase-activation .phase-num { background: var(--sage); }
+        .phase-scale .phase-num { background: var(--terracotta); }
+        .phase-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; color: var(--black); }
+        .phase-range { font-size: 12px; color: var(--mid-gray); }
+
+        /* Week */
+        .week { background: var(--white); border: 1px solid var(--light-gray); margin-bottom: 12px; }
+        .week-header { padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--light-gray); }
+        .week-label { font-size: 12px; font-weight: 600; color: var(--black); }
+        .week-goal-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); }
+        .week-body { padding: 16px 20px; }
+        .task { display: flex; gap: 12px; padding: 8px 0; }
+        .task:not(:last-child) { border-bottom: 1px solid var(--off-white); }
+        .task-title { font-size: 13px; font-weight: 500; color: var(--charcoal); }
+        .task-detail { font-size: 12px; color: var(--warm-gray); margin-top: 2px; line-height: 1.5; }
+        .task-owner { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); background: var(--off-white); padding: 2px 8px; border-radius: 2px; align-self: flex-start; flex-shrink: 0; margin-top: 2px; }
+
+        /* Milestone */
+        .milestone { background: var(--off-white); border: 1px solid var(--light-gray); padding: 20px; margin-bottom: 12px; }
+        .milestone-header { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; margin-bottom: 12px; }
+        .phase-foundation .milestone-header { color: var(--sky); }
+        .phase-activation .milestone-header { color: var(--sage); }
+        .phase-scale .milestone-header { color: var(--terracotta); }
+        .milestone-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .metric { }
+        .metric-label { font-size: 11px; color: var(--warm-gray); }
+        .metric-target { font-size: 14px; font-weight: 600; color: var(--black); }
+        .metric-note { font-size: 10px; color: var(--mid-gray); }
+
+        /* Decision Framework */
+        .decision-frame { border: 2px solid var(--terracotta); margin-top: 20px; }
+        .decision-header { background: var(--terracotta); color: var(--white); padding: 14px 20px; }
+        .decision-header h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; }
+        .decision-body { padding: 20px; }
+        .decision-row { display: grid; grid-template-columns: 100px 1fr 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--light-gray); font-size: 13px; }
+        .decision-row:last-child { border-bottom: none; }
+        .decision-outcome { font-weight: 600; }
+        .decision-outcome.scale { color: var(--sage); }
+        .decision-outcome.maintain { color: var(--sky); }
+        .decision-outcome.reassess { color: var(--terracotta); }
+        .decision-criteria { color: var(--warm-gray); font-size: 12px; }
+        .decision-action { color: var(--charcoal); font-size: 12px; }
+
+        /* Callout */
+        .callout { background: var(--sage-light); border-left: 4px solid var(--sage); padding: 14px 20px; margin: 12px 0; }
+        .callout p { font-size: 13px; color: var(--charcoal); margin: 0; line-height: 1.6; }
+        .callout strong { color: var(--black); }
+    </style>
+</head>
+<body>
+    <div class="cadence">
+
+        <div class="header">
+            <h1>90-Day Execution Cadence</h1>
+            <div class="subtitle">From demo placement to scale decision — week by week</div>
+        </div>
+
+        <!-- Timeline Overview -->
+        <div class="timeline-bar">
+            <div class="timeline-segment seg-foundation">
+                <div class="timeline-label">Phase 1</div>
+                <div class="timeline-title">Foundation</div>
+                <div class="timeline-days">Days 1–30</div>
+            </div>
+            <div class="timeline-segment seg-activation">
+                <div class="timeline-label">Phase 2</div>
+                <div class="timeline-title">Activation</div>
+                <div class="timeline-days">Days 31–60</div>
+            </div>
+            <div class="timeline-segment seg-scale">
+                <div class="timeline-label">Phase 3</div>
+                <div class="timeline-title">Scale Decision</div>
+                <div class="timeline-days">Days 61–90</div>
+            </div>
+        </div>
+
+        <!-- ============ PHASE 1: FOUNDATION ============ -->
+        <div class="phase phase-foundation">
+            <div class="phase-header">
+                <div class="phase-num">1</div>
+                <div>
+                    <div class="phase-title">Foundation</div>
+                    <div class="phase-range">Days 1–30 · Setup → Soft Launch → First Sales</div>
+                </div>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <div class="week-label">Week 1 — Setup</div>
+                    <div class="week-goal-label">Goal: Ready to recommend</div>
+                </div>
+                <div class="week-body">
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Complete Quickstart Checklist</div>
+                            <div class="task-detail">Inventory count, physical setup, demo unit charged, counter card positioned.</div>
+                        </div>
+                        <div class="task-owner">Staff</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Staff briefing (15 min)</div>
+                            <div class="task-detail">One-sentence pitch, trigger question, handoff script. Play the 5-min Loom training video.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Doctor uses device personally</div>
+                            <div class="task-detail">Full Rest session. You can't prescribe what you haven't experienced.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Test one end-to-end workflow</div>
+                            <div class="task-detail">Simulated patient: intake flag → doctor recommendation → staff handoff → QR scan. Identify friction.</div>
+                        </div>
+                        <div class="task-owner">Team</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <div class="week-label">Week 2 — Soft Launch</div>
+                    <div class="week-goal-label">Goal: 5 units sold, 80%+ QR setup</div>
+                </div>
+                <div class="week-body">
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Recommend to 5–10 flagged patients</div>
+                            <div class="task-detail">Start with best candidates: symptomatic, engaged, tech-comfortable, HSA/FSA holders.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Track conversion rate</div>
+                            <div class="task-detail">How many recommendations → purchases? Log each outcome.</div>
+                        </div>
+                        <div class="task-owner">Staff</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Note objections</div>
+                            <div class="task-detail">What's stopping patients who say no? Price, skepticism, "I'll think about it"?</div>
+                        </div>
+                        <div class="task-owner">Staff</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Verify QR scan completion</div>
+                            <div class="task-detail">Critical. Patients who skip setup have 3× lower adherence and higher return risk.</div>
+                        </div>
+                        <div class="task-owner">Staff</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <div class="week-label">Week 3 — Review + Adjust</div>
+                    <div class="week-goal-label">Goal: Refined workflow, 10+ total units</div>
+                </div>
+                <div class="week-body">
+                    <div class="task">
+                        <div>
+                            <div class="task-title">15-minute team debrief</div>
+                            <div class="task-detail">What's working? What's not? Adjust scripts if needed. Are staff asking the trigger question consistently?</div>
+                        </div>
+                        <div class="task-owner">Team</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Address top objection</div>
+                            <div class="task-detail">If price → emphasize HSA/FSA. If skepticism → share outcomes or offer in-office demo. If "I'll think about it" → hand them the Offer Card.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Check early patient feedback</div>
+                            <div class="task-detail">Any issues with device or setup? Positive stories to share with the next patient?</div>
+                        </div>
+                        <div class="task-owner">Staff</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Reorder inventory if needed</div>
+                            <div class="task-detail">Reorder at 3 units remaining. Lead time: 5–7 business days. Don't run out during rollout.</div>
+                        </div>
+                        <div class="task-owner">Staff</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <div class="week-label">Week 4 — Full Rollout</div>
+                    <div class="week-goal-label">Goal: Sustainable rhythm, 1–3 units/week</div>
+                </div>
+                <div class="week-body">
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Expand to all eligible patients</div>
+                            <div class="task-detail">Rest is now standard part of dry eye / screen fatigue protocol. Every eligible patient hears about it.</div>
+                        </div>
+                        <div class="task-owner">Team</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Set monthly inventory check</div>
+                            <div class="task-detail">Calendar reminder: count every Monday. Reorder at 3 units.</div>
+                        </div>
+                        <div class="task-owner">Staff</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">30-day review call with Umay</div>
+                            <div class="task-detail">Review metrics, optimize approach, plan next 30 days. Schedule with your Umay contact.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 30 Milestone -->
+            <div class="milestone">
+                <div class="milestone-header">Day 30 Milestone Review</div>
+                <div class="milestone-grid">
+                    <div class="metric">
+                        <div class="metric-label">Units sold</div>
+                        <div class="metric-target">12+</div>
+                        <div class="metric-note">Target: sell through first order</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">QR setup completion</div>
+                        <div class="metric-target">80%+</div>
+                        <div class="metric-note">Of patients who purchased</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Patient returns</div>
+                        <div class="metric-target">0</div>
+                        <div class="metric-note">Network average: &lt;2%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Staff confidence</div>
+                        <div class="metric-target">Comfortable</div>
+                        <div class="metric-note">Trigger question + handoff natural</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ PHASE 2: ACTIVATION ============ -->
+        <div class="phase phase-activation">
+            <div class="phase-header">
+                <div class="phase-num">2</div>
+                <div>
+                    <div class="phase-title">Activation</div>
+                    <div class="phase-range">Days 31–60 · Marketing → Patient Stories → Optimization</div>
+                </div>
+            </div>
+
+            <div class="callout">
+                <p><strong>Phase 2 focus:</strong> You've proven the workflow works. Now expand the funnel — more patients hearing about Rest, more reasons to say yes, and early patient outcomes to fuel the conversation.</p>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <div class="week-label">Weeks 5–6 — Expand the Funnel</div>
+                    <div class="week-goal-label">Goal: Every eligible patient exposed</div>
+                </div>
+                <div class="week-body">
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Deploy patient education materials</div>
+                            <div class="task-detail">Offer Cards in waiting room and checkout. Counter display near reception. Consider adding to intake paperwork or pre-visit email.</div>
+                        </div>
+                        <div class="task-owner">Staff</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Finalize provider scripting</div>
+                            <div class="task-detail">By now you know what language resonates. Lock in the recommendation script that feels natural. Role-play once with staff to align.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Collect 2–3 patient stories</div>
+                            <div class="task-detail">Ask early buyers: "How's it going with Rest?" Capture quotes (with permission) for recommending to the next patient. Peer stories convert better than clinical stats.</div>
+                        </div>
+                        <div class="task-owner">Staff</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Activate in-office demo for undecided patients</div>
+                            <div class="task-detail">For patients who hesitate at checkout, offer a 3-min demo. "Try it right now — if you like it, take one home." Track demo-to-purchase conversion separately.</div>
+                        </div>
+                        <div class="task-owner">Staff</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <div class="week-label">Weeks 7–8 — Optimize + Track</div>
+                    <div class="week-goal-label">Goal: Consistent 2+ units/week, objections resolved</div>
+                </div>
+                <div class="week-body">
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Weekly staff huddle (10 min)</div>
+                            <div class="task-detail">Quick standing meeting: units this week, top objection, one thing to try differently. Keep it short and action-oriented.</div>
+                        </div>
+                        <div class="task-owner">Team</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Financial tracking vs. projection</div>
+                            <div class="task-detail">Compare actual units sold against your base case. Are you at 1/week? 2/week? More? Calculate your actual margin to date.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Follow up with early purchasers</div>
+                            <div class="task-detail">Patients who bought in Weeks 2–3 have now used Rest for 4–6 weeks. Check in at their next visit. Positive experience → ask for referral or family member purchase.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Evaluate pricing</div>
+                            <div class="task-detail">Is your retail price working? If conversion is strong, you may have room to increase. If hesitation is price-driven, emphasize HSA/FSA harder before adjusting down.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 60 Milestone -->
+            <div class="milestone">
+                <div class="milestone-header">Day 60 Milestone Review</div>
+                <div class="milestone-grid">
+                    <div class="metric">
+                        <div class="metric-label">Total units sold</div>
+                        <div class="metric-target">24+</div>
+                        <div class="metric-note">On pace for ~100/year</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Weekly run rate</div>
+                        <div class="metric-target">2+/week</div>
+                        <div class="metric-note">Consistent, not one-off spikes</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Patient feedback</div>
+                        <div class="metric-target">Positive</div>
+                        <div class="metric-note">2–3 patient stories collected</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Staff execution</div>
+                        <div class="metric-target">Autonomous</div>
+                        <div class="metric-note">Trigger question happening without reminders</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ PHASE 3: SCALE DECISION ============ -->
+        <div class="phase phase-scale">
+            <div class="phase-header">
+                <div class="phase-num">3</div>
+                <div>
+                    <div class="phase-title">Scale Decision</div>
+                    <div class="phase-range">Days 61–90 · Performance Review → Volume Decision → Next Tier</div>
+                </div>
+            </div>
+
+            <div class="callout" style="background: var(--terracotta-light); border-color: var(--terracotta);">
+                <p><strong>Phase 3 focus:</strong> You have 60 days of real data. The question is no longer "does this work?" — it's "how much do we want to grow this?" This phase is about making a clear-eyed decision based on actual performance.</p>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <div class="week-label">Weeks 9–10 — Performance Analysis</div>
+                    <div class="week-goal-label">Goal: Clear picture of actual economics</div>
+                </div>
+                <div class="week-body">
+                    <div class="task">
+                        <div>
+                            <div class="task-title">60-day financial reconciliation</div>
+                            <div class="task-detail">Total units sold, total revenue, total wholesale cost, actual margin. Compare to the business case projections. Where are you vs. conservative/base/high performer?</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Patient outcome review</div>
+                            <div class="task-detail">Of patients who purchased in Month 1, how many reported improvement at follow-up? Any returns? Any complaints? This is your clinical confidence check.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Staff workload assessment</div>
+                            <div class="task-detail">Is recommending Rest creating friction or flow? Is anyone feeling burdened? Could workflow be streamlined further?</div>
+                        </div>
+                        <div class="task-owner">Team</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Identify growth levers</div>
+                            <div class="task-detail">What would move you from current volume to the next tier? More eligible patients identified? Higher conversion? Family/gift purchases? Extended recommendations beyond dry eye?</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week">
+                <div class="week-header">
+                    <div class="week-label">Weeks 11–12 — Commit to a Path</div>
+                    <div class="week-goal-label">Goal: Decision made, next order placed</div>
+                </div>
+                <div class="week-body">
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Volume tier evaluation</div>
+                            <div class="task-detail">At current run rate, does a larger order make sense? Moving from 12-unit to 24-unit orders saves $50/unit ($1,200/order). 48-unit saves $100/unit. Model the annual impact.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">90-day review call with Umay</div>
+                            <div class="task-detail">Share your numbers, get benchmarked against the network, discuss volume pricing and growth strategies. This is a partnership conversation, not a sales call.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Set Q2 targets</div>
+                            <div class="task-detail">Based on 90-day actuals, set a realistic weekly target for the next quarter. Lock in order cadence and inventory levels.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                    <div class="task">
+                        <div>
+                            <div class="task-title">Decide: Scale, Maintain, or Reassess</div>
+                            <div class="task-detail">Use the decision framework below. Be honest — the data tells the story.</div>
+                        </div>
+                        <div class="task-owner">Doctor</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 90 Milestone -->
+            <div class="milestone">
+                <div class="milestone-header">Day 90 Milestone Review</div>
+                <div class="milestone-grid">
+                    <div class="metric">
+                        <div class="metric-label">Total units sold (90 days)</div>
+                        <div class="metric-target">36+</div>
+                        <div class="metric-note">Pace for volume tier upgrade</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Actual weekly run rate</div>
+                        <div class="metric-target">Stable trend</div>
+                        <div class="metric-note">Consistent or growing, not declining</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Cumulative margin</div>
+                        <div class="metric-target">Positive</div>
+                        <div class="metric-note">Initial investment fully recovered</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Patient returns (90-day)</div>
+                        <div class="metric-target">&lt;2%</div>
+                        <div class="metric-note">Matching network average</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decision Framework -->
+            <div class="decision-frame">
+                <div class="decision-header">
+                    <h3>Day 90 Decision Framework</h3>
+                </div>
+                <div class="decision-body">
+                    <div style="display: grid; grid-template-columns: 100px 1fr 1fr; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--light-gray); margin-bottom: 4px;">
+                        <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600;">Outcome</div>
+                        <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600;">If You're Seeing</div>
+                        <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600;">Action</div>
+                    </div>
+
+                    <div class="decision-row">
+                        <div class="decision-outcome scale">Scale</div>
+                        <div class="decision-criteria">2+ units/week steady. Payback achieved. Patients reporting positive outcomes. Staff comfortable.</div>
+                        <div class="decision-action">Move to 24- or 48-unit orders. Unlock volume pricing. Expand recommendation to broader patient segments (screen fatigue, sleep, gifting).</div>
+                    </div>
+
+                    <div class="decision-row">
+                        <div class="decision-outcome maintain">Maintain</div>
+                        <div class="decision-criteria">1–2 units/week. Payback achieved or nearly there. Positive but slow growth trajectory.</div>
+                        <div class="decision-action">Continue at current volume. Focus on conversion optimization — better scripting, more demos, patient stories. Revisit volume tier at 6 months.</div>
+                    </div>
+
+                    <div class="decision-row">
+                        <div class="decision-outcome reassess">Reassess</div>
+                        <div class="decision-criteria">&lt;1 unit/week. Staff not consistently recommending. Conversion below expectations.</div>
+                        <div class="decision-action">30-day corrective: identify root cause (awareness? scripting? patient fit?). Umay support call to troubleshoot. If no improvement, activate buyback on remaining sealed inventory.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Metrics Summary -->
+        <div style="background: var(--black); color: var(--white); padding: 24px; margin-top: 32px;">
+            <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mid-gray); font-weight: 600; margin-bottom: 16px;">90-Day Success Benchmarks</div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; text-align: center;">
+                <div>
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--sage);">36+</div>
+                    <div style="font-size: 10px; color: var(--mid-gray); margin-top: 4px;">Units sold</div>
+                </div>
+                <div>
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--sage);">2+</div>
+                    <div style="font-size: 10px; color: var(--mid-gray); margin-top: 4px;">Units/week run rate</div>
+                </div>
+                <div>
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--sage);">&lt;2%</div>
+                    <div style="font-size: 10px; color: var(--mid-gray); margin-top: 4px;">Return rate</div>
+                </div>
+                <div>
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--sage);">$0</div>
+                    <div style="font-size: 10px; color: var(--mid-gray); margin-top: 4px;">Ongoing fixed costs</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

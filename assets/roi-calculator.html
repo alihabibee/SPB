@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROI Calculator — Umay Rest</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --sage-light: #eef3f1; --terracotta: #c45d35; --terracotta-light: #fdf5f2; }
+
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--cream); padding: 40px; font-size: 14px; color: var(--charcoal); line-height: 1.55; }
+
+        .calculator { max-width: 640px; margin: 0 auto; }
+
+        /* Header */
+        .header { margin-bottom: 32px; }
+        .header .brand { font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; color: var(--black); }
+        .header .doc-type { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); margin-top: 2px; }
+
+        /* Sections */
+        .section { background: var(--white); border: 1px solid var(--light-gray); padding: 24px; margin-bottom: 20px; }
+        .section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); font-weight: 600; margin-bottom: 16px; }
+
+        /* Inputs */
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .input-group label { display: block; font-size: 12px; color: var(--warm-gray); margin-bottom: 6px; }
+        .input-row { display: flex; align-items: center; gap: 8px; }
+        .input-row input[type="range"] { flex: 1; accent-color: var(--sage); height: 6px; }
+        .input-value { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 16px; color: var(--black); min-width: 52px; text-align: right; }
+
+        /* Order qty buttons */
+        .qty-group { margin-top: 16px; }
+        .qty-group label { display: block; font-size: 12px; color: var(--warm-gray); margin-bottom: 6px; }
+        .qty-label-detail { color: var(--mid-gray); font-weight: 400; }
+        .qty-buttons { display: flex; gap: 8px; }
+        .qty-btn { flex: 1; padding: 10px 0; border: 1px solid var(--light-gray); background: var(--white); cursor: pointer; font-size: 14px; font-family: inherit; color: var(--warm-gray); transition: all 0.15s; text-align: center; }
+        .qty-btn:hover { border-color: var(--mid-gray); }
+        .qty-btn.active { border-color: var(--sage); background: var(--sage-light); color: var(--sage); font-weight: 600; }
+        .qty-btn-sub { font-size: 10px; color: var(--mid-gray); margin-top: 2px; }
+
+        /* Advanced toggle */
+        .advanced-toggle { margin-top: 12px; background: none; border: none; font-size: 11px; color: var(--mid-gray); cursor: pointer; padding: 4px 0; font-family: inherit; }
+        .advanced-panel { margin-top: 8px; padding: 12px; background: var(--off-white); }
+
+        /* Hero metric */
+        .hero { text-align: center; padding: 28px; }
+        .hero-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mid-gray); font-weight: 600; margin-bottom: 8px; }
+        .hero-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 56px; font-weight: 300; line-height: 1; transition: color 0.3s; }
+        .hero-unit { font-size: 14px; color: var(--warm-gray); margin-top: 4px; }
+        .hero-detail { font-size: 12px; color: var(--mid-gray); margin-top: 8px; }
+
+        /* Key metrics row */
+        .metrics-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-bottom: 20px; border: 1px solid var(--light-gray); }
+        .metric { padding: 20px; text-align: center; background: var(--white); }
+        .metric:not(:last-child) { border-right: 1px solid var(--light-gray); }
+        .metric-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mid-gray); font-weight: 600; margin-bottom: 6px; }
+        .metric-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; font-weight: 300; color: var(--sage); }
+        .metric-sub { font-size: 11px; color: var(--mid-gray); margin-top: 4px; }
+
+        /* Scenario comparison */
+        .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .scenario { padding: 14px; border: 1px solid var(--light-gray); text-align: center; background: var(--white); }
+        .scenario.base { background: var(--sage-light); border-color: var(--sage); }
+        .scenario-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 8px; color: var(--mid-gray); }
+        .scenario.base .scenario-label { color: var(--sage); }
+        .scenario-units { font-size: 12px; color: var(--warm-gray); margin-bottom: 4px; }
+        .scenario-amount { font-size: 18px; font-family: 'Source Serif 4', Georgia, serif; color: var(--black); }
+        .scenario-amount span { font-size: 11px; color: var(--mid-gray); }
+        .scenario-payback { font-size: 11px; color: var(--mid-gray); margin-top: 4px; }
+
+        /* Volume scaling */
+        .tier-row { display: grid; grid-template-columns: 80px 1fr 90px; align-items: center; padding: 8px 0; }
+        .tier-row:not(:last-child) { border-bottom: 1px solid var(--off-white); }
+        .tier-label { font-size: 12px; color: var(--warm-gray); }
+        .tier-label.active { font-weight: 600; color: var(--sage); }
+        .tier-price { font-size: 10px; color: var(--mid-gray); }
+        .tier-bar-wrap { height: 10px; background: var(--off-white); border-radius: 5px; overflow: hidden; }
+        .tier-bar { height: 100%; border-radius: 5px; transition: width 0.3s, background 0.3s; }
+        .tier-bar.active { background: var(--sage); }
+        .tier-bar.inactive { background: #d0d0d0; }
+        .tier-annual { text-align: right; font-size: 14px; font-variant-numeric: tabular-nums; color: var(--charcoal); }
+        .tier-annual.active { font-weight: 600; color: var(--sage); }
+        .tier-annual span { font-size: 10px; color: var(--mid-gray); }
+
+        /* Zero cost block */
+        .zero-cost { background: var(--black); padding: 24px; margin-bottom: 20px; color: var(--white); }
+        .zero-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .zero-item { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 8px; font-size: 12px; }
+        .zero-label { color: var(--mid-gray); }
+        .zero-value { color: var(--sage); font-weight: 600; font-size: 13px; }
+        .zero-note { font-size: 11px; color: var(--warm-gray); margin-top: 14px; line-height: 1.6; }
+
+        /* Fine print */
+        .fine-print { font-size: 10px; color: var(--mid-gray); line-height: 1.7; padding: 0 4px; }
+
+        @media (max-width: 600px) {
+            body { padding: 16px; }
+            .input-grid { grid-template-columns: 1fr; }
+            .metrics-row { grid-template-columns: 1fr; }
+            .metric:not(:last-child) { border-right: none; border-bottom: 1px solid var(--light-gray); }
+            .scenario-grid { grid-template-columns: 1fr; }
+            .zero-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+
+        <div class="header">
+            <div class="brand">Umay Rest</div>
+            <div class="doc-type">Clinic ROI Calculator</div>
+        </div>
+
+        <!-- Inputs -->
+        <div class="section">
+            <div class="section-label">Your Inputs</div>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Patient price per unit</label>
+                    <div class="input-row">
+                        <input type="range" id="retailPrice" min="400" max="700" step="25" value="550">
+                        <span class="input-value" id="retailPriceVal">$550</span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Units sold per week</label>
+                    <div class="input-row">
+                        <input type="range" id="unitsPerWeek" min="0.5" max="8" step="0.5" value="2">
+                        <span class="input-value" id="unitsPerWeekVal">2</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qty-group">
+                <label>First order quantity <span class="qty-label-detail" id="tierDetail">· Wholesale: $350/unit (12+ tier)</span></label>
+                <div class="qty-buttons">
+                    <button class="qty-btn active" data-qty="12">12 units<div class="qty-btn-sub">$350/unit</div></button>
+                    <button class="qty-btn" data-qty="24">24 units<div class="qty-btn-sub">$300/unit</div></button>
+                    <button class="qty-btn" data-qty="48">48 units<div class="qty-btn-sub">$250/unit</div></button>
+                </div>
+            </div>
+
+            <button class="advanced-toggle" id="advToggle">▸ Advanced settings</button>
+            <div class="advanced-panel" id="advPanel" style="display: none;">
+                <div class="input-group">
+                    <label>Demo credit applied</label>
+                    <div class="input-row">
+                        <input type="range" id="demoCredit" min="0" max="1000" step="100" value="1000">
+                        <span class="input-value" id="demoCreditVal">$1,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero: Payback -->
+        <div class="section hero">
+            <div class="hero-label">Payback Period</div>
+            <div class="hero-num" id="heroPayback">7</div>
+            <div class="hero-unit">weeks</div>
+            <div class="hero-detail" id="heroDetail">on $3,200 net investment ($4,200 order − $1,000 demo credit)</div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="metrics-row">
+            <div class="metric">
+                <div class="metric-label">Margin / Unit</div>
+                <div class="metric-num" id="mMarginUnit">$200</div>
+                <div class="metric-sub" id="mMarginPct">36% margin</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Monthly Margin</div>
+                <div class="metric-num" id="mMonthly">$1,733</div>
+                <div class="metric-sub" id="mMonthlySub">2/wk × $200</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Annual Margin</div>
+                <div class="metric-num" id="mAnnual">$20,800</div>
+                <div class="metric-sub" id="mAnnualSub">104 units/year</div>
+            </div>
+        </div>
+
+        <!-- Scenarios -->
+        <div class="section">
+            <div class="section-label">Scenario Comparison</div>
+            <div class="scenario-grid">
+                <div class="scenario" id="scenWorst">
+                    <div class="scenario-label">Conservative</div>
+                    <div class="scenario-units" id="swUnits">1 units/wk</div>
+                    <div class="scenario-amount" id="swAmount">$867<span>/mo</span></div>
+                    <div class="scenario-payback" id="swPayback">Payback: 15 wks</div>
+                </div>
+                <div class="scenario base" id="scenBase">
+                    <div class="scenario-label">Your Estimate</div>
+                    <div class="scenario-units" id="sbUnits">2 units/wk</div>
+                    <div class="scenario-amount" id="sbAmount">$1,733<span>/mo</span></div>
+                    <div class="scenario-payback" id="sbPayback">Payback: 7 wks</div>
+                </div>
+                <div class="scenario" id="scenBest">
+                    <div class="scenario-label">High Performer</div>
+                    <div class="scenario-units" id="shUnits">4 units/wk</div>
+                    <div class="scenario-amount" id="shAmount">$3,467<span>/mo</span></div>
+                    <div class="scenario-payback" id="shPayback">Payback: 4 wks</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Volume Scaling -->
+        <div class="section">
+            <div class="section-label">Volume Scaling — Annual Impact</div>
+            <p style="font-size: 12px; color: var(--warm-gray); margin-bottom: 16px;">As volume grows, wholesale pricing drops. Here's the annual margin at each tier:</p>
+            <div id="tierRows"></div>
+        </div>
+
+        <!-- Zero Cost -->
+        <div class="zero-cost">
+            <div class="section-label" style="color: var(--mid-gray);">Why The Math Is Simple</div>
+            <div class="zero-grid">
+                <div class="zero-item"><span class="zero-label">Consumables per unit</span><span class="zero-value">$0</span></div>
+                <div class="zero-item"><span class="zero-label">Chair time required</span><span class="zero-value">0 min</span></div>
+                <div class="zero-item"><span class="zero-label">Staff training</span><span class="zero-value">5 min video</span></div>
+                <div class="zero-item"><span class="zero-label">EHR integration</span><span class="zero-value">None</span></div>
+                <div class="zero-item"><span class="zero-label">Patient return rate</span><span class="zero-value">&lt;2%</span></div>
+                <div class="zero-item"><span class="zero-label">Break-even fixed costs</span><span class="zero-value">$0/month</span></div>
+            </div>
+            <div class="zero-note">With no ongoing costs, every unit sold above zero is pure margin. There's no break-even volume — the first unit is profitable.</div>
+        </div>
+
+        <!-- Fine Print -->
+        <div class="fine-print">
+            <strong>Assumptions:</strong> Calculations based on steady-state weekly volume. Year 1 ramp-up not modeled — actual initial weeks may be slower. Shipping costs paid by clinic not included. Pricing current as of Spring 2026 and subject to change. 90-day buyback applies to sealed, unsold units only. Results vary by practice size, patient mix, and staff execution.
+        </div>
+
+    </div>
+
+    <script>
+        const TIERS = [
+            { min: 12, max: 23, price: 350, label: "12+" },
+            { min: 24, max: 47, price: 300, label: "24+" },
+            { min: 48, max: 999, price: 250, label: "48+" },
+        ];
+
+        function getTier(qty) {
+            for (let i = TIERS.length - 1; i >= 0; i--) {
+                if (qty >= TIERS[i].min) return TIERS[i];
+            }
+            return TIERS[0];
+        }
+
+        function fmt(n) {
+            return "$" + Math.round(n).toLocaleString("en-US");
+        }
+
+        // State
+        let state = { retailPrice: 550, unitsPerWeek: 2, orderQty: 12, demoCredit: 1000 };
+
+        // DOM refs
+        const els = {
+            retailPrice: document.getElementById("retailPrice"),
+            retailPriceVal: document.getElementById("retailPriceVal"),
+            unitsPerWeek: document.getElementById("unitsPerWeek"),
+            unitsPerWeekVal: document.getElementById("unitsPerWeekVal"),
+            demoCredit: document.getElementById("demoCredit"),
+            demoCreditVal: document.getElementById("demoCreditVal"),
+            tierDetail: document.getElementById("tierDetail"),
+            heroPayback: document.getElementById("heroPayback"),
+            heroDetail: document.getElementById("heroDetail"),
+            mMarginUnit: document.getElementById("mMarginUnit"),
+            mMarginPct: document.getElementById("mMarginPct"),
+            mMonthly: document.getElementById("mMonthly"),
+            mMonthlySub: document.getElementById("mMonthlySub"),
+            mAnnual: document.getElementById("mAnnual"),
+            mAnnualSub: document.getElementById("mAnnualSub"),
+            swUnits: document.getElementById("swUnits"),
+            swAmount: document.getElementById("swAmount"),
+            swPayback: document.getElementById("swPayback"),
+            sbUnits: document.getElementById("sbUnits"),
+            sbAmount: document.getElementById("sbAmount"),
+            sbPayback: document.getElementById("sbPayback"),
+            shUnits: document.getElementById("shUnits"),
+            shAmount: document.getElementById("shAmount"),
+            shPayback: document.getElementById("shPayback"),
+            tierRows: document.getElementById("tierRows"),
+        };
+
+        // Qty buttons
+        document.querySelectorAll(".qty-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                state.orderQty = parseInt(btn.dataset.qty);
+                document.querySelectorAll(".qty-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                update();
+            });
+        });
+
+        // Sliders
+        els.retailPrice.addEventListener("input", e => { state.retailPrice = Number(e.target.value); update(); });
+        els.unitsPerWeek.addEventListener("input", e => { state.unitsPerWeek = Number(e.target.value); update(); });
+        els.demoCredit.addEventListener("input", e => { state.demoCredit = Number(e.target.value); update(); });
+
+        // Advanced toggle
+        const advToggle = document.getElementById("advToggle");
+        const advPanel = document.getElementById("advPanel");
+        let advOpen = false;
+        advToggle.addEventListener("click", () => {
+            advOpen = !advOpen;
+            advPanel.style.display = advOpen ? "block" : "none";
+            advToggle.textContent = (advOpen ? "▾" : "▸") + " Advanced settings";
+        });
+
+        function update() {
+            const { retailPrice, unitsPerWeek, orderQty, demoCredit } = state;
+            const tier = getTier(orderQty);
+            const wholesale = tier.price;
+            const marginPerUnit = retailPrice - wholesale;
+            const marginPct = Math.round((marginPerUnit / retailPrice) * 100);
+            const orderCost = orderQty * wholesale;
+            const netOutlay = Math.max(0, orderCost - demoCredit);
+            const weeklyMargin = unitsPerWeek * marginPerUnit;
+            const monthlyMargin = weeklyMargin * 4.33;
+            const annualMargin = monthlyMargin * 12;
+            const weeksToPayback = netOutlay > 0 && weeklyMargin > 0 ? netOutlay / weeklyMargin : 0;
+            const annualUnits = Math.round(unitsPerWeek * 52);
+
+            // Scenarios
+            const worstUnits = Math.max(0.5, unitsPerWeek * 0.5);
+            const bestUnits = unitsPerWeek * 2;
+            const worstMonthly = worstUnits * marginPerUnit * 4.33;
+            const bestMonthly = bestUnits * marginPerUnit * 4.33;
+            const worstPayback = netOutlay > 0 && worstUnits * marginPerUnit > 0 ? netOutlay / (worstUnits * marginPerUnit) : 0;
+            const bestPayback = netOutlay > 0 && bestUnits * marginPerUnit > 0 ? netOutlay / (bestUnits * marginPerUnit) : 0;
+
+            // Update display values
+            els.retailPriceVal.textContent = fmt(retailPrice);
+            els.unitsPerWeekVal.textContent = unitsPerWeek;
+            els.demoCreditVal.textContent = fmt(demoCredit);
+            els.tierDetail.textContent = "· Wholesale: " + fmt(wholesale) + "/unit (" + tier.label + " tier)";
+
+            // Hero
+            const paybackWeeks = weeksToPayback < 1 ? "<1" : Math.ceil(weeksToPayback);
+            els.heroPayback.textContent = paybackWeeks;
+            const paybackColor = weeksToPayback <= 8 ? "var(--sage)" : weeksToPayback <= 16 ? "#b8860b" : "var(--terracotta)";
+            els.heroPayback.style.color = paybackColor;
+            els.heroDetail.textContent = "on " + fmt(netOutlay) + " net investment (" + fmt(orderCost) + " order − " + fmt(demoCredit) + " demo credit)";
+
+            // Key metrics
+            els.mMarginUnit.textContent = fmt(marginPerUnit);
+            els.mMarginPct.textContent = marginPct + "% margin";
+            els.mMonthly.textContent = fmt(monthlyMargin);
+            els.mMonthlySub.textContent = unitsPerWeek + "/wk × " + fmt(marginPerUnit);
+            els.mAnnual.textContent = fmt(annualMargin);
+            els.mAnnualSub.textContent = annualUnits + " units/year";
+
+            // Scenarios
+            els.swUnits.textContent = worstUnits + " units/wk";
+            els.swAmount.innerHTML = fmt(worstMonthly) + "<span>/mo</span>";
+            els.swPayback.textContent = "Payback: " + Math.ceil(worstPayback) + " wks";
+            els.sbUnits.textContent = unitsPerWeek + " units/wk";
+            els.sbAmount.innerHTML = fmt(monthlyMargin) + "<span>/mo</span>";
+            els.sbPayback.textContent = "Payback: " + Math.ceil(weeksToPayback) + " wks";
+            els.shUnits.textContent = bestUnits + " units/wk";
+            els.shAmount.innerHTML = fmt(bestMonthly) + "<span>/mo</span>";
+            els.shPayback.textContent = "Payback: " + Math.ceil(bestPayback) + " wks";
+
+            // Volume tiers
+            const maxAnnual = (retailPrice - 250) * 8 * 52;
+            let tierHTML = "";
+            TIERS.forEach(t => {
+                const m = retailPrice - t.price;
+                const annual = m * unitsPerWeek * 52;
+                const barWidth = Math.min(100, (annual / maxAnnual) * 100);
+                const isActive = tier.label === t.label;
+                tierHTML += `
+                    <div class="tier-row">
+                        <div class="tier-label ${isActive ? 'active' : ''}">${t.label} units<div class="tier-price">${fmt(t.price)}/unit</div></div>
+                        <div class="tier-bar-wrap"><div class="tier-bar ${isActive ? 'active' : 'inactive'}" style="width: ${barWidth}%"></div></div>
+                        <div class="tier-annual ${isActive ? 'active' : ''}">${fmt(annual)}<span>/yr</span></div>
+                    </div>
+                `;
+            });
+            els.tierRows.innerHTML = tierHTML;
+        }
+
+        // Initial render
+        update();
+    </script>
+</body>
+</html>
