@@ -5,22 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Founder Story Script</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Inter:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=DM+Sans:wght@400;500;600&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --terracotta: #c45d35; }
-        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.6; }
+        :root {
+          /* Core Neutrals */
+          --near-black: #151619;
+          --deep-forest: #1F3A36;
+          --warm-gray: #5a5651;
+          --mid-gray: #8a8580;
+          --light-border: #d8d3cc;
+          --warm-sand: #E6DED3;
+          --warm-cream: #F6F3EF;
+          --white: #FFFFFF;
+          /* Signature */
+          --teal: #50717E;
+          --teal-light: rgba(80,113,126,0.08);
+          /* Accent */
+          --accent: #CD756B;
+          --accent-light: rgba(205,117,107,0.06);
+          /* Functional */
+          --amber: #c9873a;
+          --amber-light: rgba(201,135,58,0.08);
+        }
+        body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--deep-forest); line-height: 1.6; }
         .page { max-width: 800px; margin: 0 auto; padding: 60px 48px; background: var(--white); }
-        .header { margin-bottom: 48px; padding-bottom: 24px; border-bottom: 1px solid var(--light-gray); }
-        .header h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 400; color: var(--black); margin-bottom: 8px; }
+        .header { margin-bottom: 48px; padding-bottom: 24px; border-bottom: 1px solid var(--light-border); }
+        .header h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 400; color: var(--near-black); margin-bottom: 8px; }
         .header p { font-size: 14px; color: var(--mid-gray); }
         .section { margin-bottom: 40px; }
-        .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sage); margin-bottom: 12px; }
-        .script-quote { background: var(--off-white); border-left: 3px solid var(--sage); padding: 24px 28px; font-size: 15px; line-height: 1.8; }
-        .script-quote strong { color: var(--black); }
-        .sound-bites { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--light-gray); }
+        .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--teal); margin-bottom: 12px; }
+        .script-quote { background: var(--warm-sand); border-left: 3px solid var(--teal); padding: 24px 28px; font-size: 15px; line-height: 1.8; }
+        .script-quote strong { color: var(--near-black); }
+        .sound-bites { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--light-border); }
         .sound-bites h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); margin-bottom: 20px; }
         .bites-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .bite { padding: 16px 20px; border: 1px solid var(--light-gray); font-size: 14px; font-style: italic; color: var(--sage); }
+        .bite { padding: 16px 20px; border: 1px solid var(--light-border); font-size: 14px; font-style: italic; color: var(--teal); }
     </style>
 </head>
 <body>
@@ -62,6 +81,7 @@
                 <div class="bite">"84% daily adherence — because it feels like relief, not homework"</div>
                 <div class="bite">"We treat the fatigue layer that everyone else ignores"</div>
                 <div class="bite">"The first non-pharmaceutical TRPM8 agonist"</div>
+                <div class="bite">"Doctors are prescribing Precision Downtime — and patients are actually taking it"</div>
             </div>
         </section>
     </div>

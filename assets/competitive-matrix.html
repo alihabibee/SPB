@@ -5,64 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How Umay Compares</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=DM+Sans:wght@400;500;600&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --sage-light: #eef3f1; --terracotta: #c45d35; --terracotta-light: #fdf5f2; }
-
-        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--cream); padding: 40px; font-size: 14px; color: var(--charcoal); line-height: 1.55; }
+        :root {
+          /* Core Neutrals */
+          --near-black: #151619;
+          --deep-forest: #1F3A36;
+          --warm-gray: #5a5651;
+          --mid-gray: #8a8580;
+          --light-border: #d8d3cc;
+          --warm-sand: #E6DED3;
+          --warm-cream: #F6F3EF;
+          --white: #FFFFFF;
+          /* Signature */
+          --teal: #50717E;
+          --teal-light: rgba(80,113,126,0.08);
+          /* Accent */
+          --accent: #CD756B;
+          --accent-light: rgba(205,117,107,0.06);
+          /* Functional */
+          --amber: #c9873a;
+          --amber-light: rgba(201,135,58,0.08);
+        }
+        body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--warm-cream); padding: 40px; font-size: 14px; color: var(--deep-forest); line-height: 1.55; }
 
         .compare-page { max-width: 780px; margin: 0 auto; }
 
         /* Header */
         .header { margin-bottom: 12px; }
-        .header .brand { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; color: var(--black); }
+        .header .brand { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; color: var(--near-black); }
         .header .doc-type { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); margin-top: 2px; }
 
-        h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; font-weight: 400; color: var(--black); margin-bottom: 8px; }
+        h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; font-weight: 400; color: var(--near-black); margin-bottom: 8px; }
         .lead { font-size: 15px; color: var(--warm-gray); line-height: 1.7; margin-bottom: 28px; max-width: 600px; }
 
         /* Positioning statement */
-        .positioning { background: var(--sage-light); border-left: 4px solid var(--sage); padding: 16px 20px; margin-bottom: 28px; }
-        .positioning p { font-size: 13px; color: var(--charcoal); line-height: 1.65; margin: 0; }
-        .positioning strong { color: var(--black); }
+        .positioning { background: var(--teal-light); border-left: 4px solid var(--teal); padding: 16px 20px; margin-bottom: 28px; }
+        .positioning p { font-size: 13px; color: var(--deep-forest); line-height: 1.65; margin: 0; }
+        .positioning strong { color: var(--near-black); }
 
         /* Main comparison table */
-        .matrix { width: 100%; border-collapse: collapse; margin-bottom: 28px; background: var(--white); border: 1px solid var(--light-gray); font-size: 12px; }
-        .matrix th { padding: 12px 14px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600; border-bottom: 2px solid var(--light-gray); background: var(--white); vertical-align: bottom; }
-        .matrix th.umay-col { background: var(--sage-light); color: var(--sage); border-bottom-color: var(--sage); }
-        .matrix td { padding: 10px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: top; color: var(--charcoal); }
+        .matrix { width: 100%; border-collapse: collapse; margin-bottom: 28px; background: var(--white); border: 1px solid var(--light-border); font-size: 12px; }
+        .matrix th { padding: 12px 14px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600; border-bottom: 2px solid var(--light-border); background: var(--white); vertical-align: bottom; }
+        .matrix th.umay-col { background: var(--teal-light); color: var(--teal); border-bottom-color: var(--teal); }
+        .matrix td { padding: 10px 14px; border-bottom: 1px solid var(--light-border); vertical-align: top; color: var(--deep-forest); }
         .matrix tr:last-child td { border-bottom: none; }
-        .matrix td.umay-col { background: var(--sage-light); font-weight: 500; }
-        .matrix .row-label { font-weight: 600; color: var(--black); white-space: nowrap; }
-        .matrix .win { color: var(--sage); font-weight: 600; }
-        .matrix .neutral { color: var(--charcoal); }
+        .matrix td.umay-col { background: var(--teal-light); font-weight: 500; }
+        .matrix .row-label { font-weight: 600; color: var(--near-black); white-space: nowrap; }
+        .matrix .win { color: var(--teal); font-weight: 600; }
+        .matrix .neutral { color: var(--deep-forest); }
         .matrix .weak { color: var(--mid-gray); }
         .dim { color: var(--mid-gray); font-size: 11px; }
 
         /* Sections */
-        h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 500; color: var(--black); margin-bottom: 12px; margin-top: 32px; }
+        h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 500; color: var(--near-black); margin-bottom: 12px; margin-top: 32px; }
         h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); font-weight: 600; margin-bottom: 10px; margin-top: 20px; }
 
         /* Practice type cards */
         .practice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
-        .practice-card { background: var(--white); border: 1px solid var(--light-gray); padding: 20px; }
-        .practice-card-title { font-size: 13px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
-        .practice-card-sub { font-size: 11px; color: var(--terracotta); font-weight: 500; margin-bottom: 10px; }
+        .practice-card { background: var(--white); border: 1px solid var(--light-border); padding: 20px; }
+        .practice-card-title { font-size: 13px; font-weight: 600; color: var(--near-black); margin-bottom: 4px; }
+        .practice-card-sub { font-size: 11px; color: var(--accent); font-weight: 500; margin-bottom: 10px; }
         .practice-card p { font-size: 12px; color: var(--warm-gray); line-height: 1.6; margin-bottom: 8px; }
-        .practice-card .combo { font-size: 11px; color: var(--sage); font-weight: 500; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--light-gray); }
+        .practice-card .combo { font-size: 11px; color: var(--teal); font-weight: 500; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--light-border); }
 
         /* Honest tradeoffs */
-        .tradeoffs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--light-gray); margin-bottom: 28px; }
+        .tradeoffs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--light-border); margin-bottom: 28px; }
         .tradeoff-col { padding: 20px; background: var(--white); }
-        .tradeoff-col:first-child { border-right: 1px solid var(--light-gray); }
+        .tradeoff-col:first-child { border-right: 1px solid var(--light-border); }
         .tradeoff-header { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 12px; }
-        .tradeoff-col:first-child .tradeoff-header { color: var(--sage); }
+        .tradeoff-col:first-child .tradeoff-header { color: var(--teal); }
         .tradeoff-col:last-child .tradeoff-header { color: var(--mid-gray); }
-        .tradeoff-item { font-size: 12px; color: var(--charcoal); line-height: 1.6; padding: 6px 0; border-bottom: 1px solid var(--off-white); }
+        .tradeoff-item { font-size: 12px; color: var(--deep-forest); line-height: 1.6; padding: 6px 0; border-bottom: 1px solid var(--warm-sand); }
         .tradeoff-item:last-child { border-bottom: none; }
 
         /* Bottom line */
-        .bottom-line { background: var(--black); color: var(--white); padding: 24px; }
+        .bottom-line { background: var(--near-black); color: var(--white); padding: 24px; }
         .bottom-line h3 { color: var(--mid-gray); margin-top: 0; margin-bottom: 10px; }
         .bottom-line p { font-size: 14px; color: #ccc; line-height: 1.7; margin: 0; }
         .bottom-line strong { color: var(--white); }
@@ -165,7 +183,7 @@
                 </tr>
                 <tr>
                     <td class="row-label">Revenue Model</td>
-                    <td class="umay-col">Product sale + 60% reorder<br><span class="dim">family, gifting, replacement</span></td>
+                    <td class="umay-col">Product sale + 70% reorder<br><span class="dim">family, gifting, replacement</span></td>
                     <td>Per-procedure recurring<br><span class="dim">every 12–18 months</span></td>
                     <td>Series + maintenance<br><span class="dim">every 6–12 months</span></td>
                     <td>Low-margin consumable<br><span class="dim">easily substituted</span></td>

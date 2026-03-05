@@ -5,83 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>90-Day Execution Cadence</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=DM+Sans:wght@400;500;600&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --sage-light: #eef3f1; --terracotta: #c45d35; --terracotta-light: #fdf5f2; --sky: #4a7c9c; --sky-light: #edf3f7; }
-
-        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--cream); padding: 40px; font-size: 14px; color: var(--charcoal); line-height: 1.6; }
+        :root {
+          /* Core Neutrals */
+          --near-black: #151619;
+          --deep-forest: #1F3A36;
+          --warm-gray: #5a5651;
+          --mid-gray: #8a8580;
+          --light-border: #d8d3cc;
+          --warm-sand: #E6DED3;
+          --warm-cream: #F6F3EF;
+          --white: #FFFFFF;
+          /* Signature */
+          --teal: #50717E;
+          --teal-light: rgba(80,113,126,0.08);
+          /* Accent */
+          --accent: #CD756B;
+          --accent-light: rgba(205,117,107,0.06);
+          /* Functional */
+          --amber: #c9873a;
+          --amber-light: rgba(201,135,58,0.08);
+        }
+        body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--warm-cream); padding: 40px; font-size: 14px; color: var(--deep-forest); line-height: 1.6; }
 
         .cadence { max-width: 720px; margin: 0 auto; }
 
         /* Header */
         .header { margin-bottom: 36px; }
-        .header h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 400; color: var(--black); margin-bottom: 4px; }
+        .header h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 400; color: var(--near-black); margin-bottom: 4px; }
         .header .subtitle { font-size: 14px; color: var(--warm-gray); }
 
         /* Timeline bar */
         .timeline-bar { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; margin-bottom: 40px; }
-        .timeline-segment { padding: 14px 16px; text-align: center; border: 1px solid var(--light-gray); border-right: none; }
-        .timeline-segment:last-child { border-right: 1px solid var(--light-gray); }
-        .timeline-segment.active { border-color: var(--sage); border-bottom: 3px solid var(--sage); }
+        .timeline-segment { padding: 14px 16px; text-align: center; border: 1px solid var(--light-border); border-right: none; }
+        .timeline-segment:last-child { border-right: 1px solid var(--light-border); }
+        .timeline-segment.active { border-color: var(--teal); border-bottom: 3px solid var(--teal); }
         .timeline-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; margin-bottom: 2px; }
-        .seg-foundation .timeline-label { color: var(--sky); }
-        .seg-activation .timeline-label { color: var(--sage); }
-        .seg-scale .timeline-label { color: var(--terracotta); }
-        .timeline-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; color: var(--black); }
+        .seg-foundation .timeline-label { color: var(--teal); }
+        .seg-activation .timeline-label { color: var(--teal); }
+        .seg-scale .timeline-label { color: var(--accent); }
+        .timeline-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; color: var(--near-black); }
         .timeline-days { font-size: 11px; color: var(--mid-gray); margin-top: 2px; }
 
         /* Phase */
         .phase { margin-bottom: 40px; }
-        .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--light-gray); }
+        .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--light-border); }
         .phase-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--white); flex-shrink: 0; }
-        .phase-foundation .phase-num { background: var(--sky); }
-        .phase-activation .phase-num { background: var(--sage); }
-        .phase-scale .phase-num { background: var(--terracotta); }
-        .phase-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; color: var(--black); }
+        .phase-foundation .phase-num { background: var(--teal); }
+        .phase-activation .phase-num { background: var(--teal); }
+        .phase-scale .phase-num { background: var(--accent); }
+        .phase-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; color: var(--near-black); }
         .phase-range { font-size: 12px; color: var(--mid-gray); }
 
         /* Week */
-        .week { background: var(--white); border: 1px solid var(--light-gray); margin-bottom: 12px; }
-        .week-header { padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--light-gray); }
-        .week-label { font-size: 12px; font-weight: 600; color: var(--black); }
+        .week { background: var(--white); border: 1px solid var(--light-border); margin-bottom: 12px; }
+        .week-header { padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--light-border); }
+        .week-label { font-size: 12px; font-weight: 600; color: var(--near-black); }
         .week-goal-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); }
         .week-body { padding: 16px 20px; }
         .task { display: flex; gap: 12px; padding: 8px 0; }
-        .task:not(:last-child) { border-bottom: 1px solid var(--off-white); }
-        .task-title { font-size: 13px; font-weight: 500; color: var(--charcoal); }
+        .task:not(:last-child) { border-bottom: 1px solid var(--warm-sand); }
+        .task-title { font-size: 13px; font-weight: 500; color: var(--deep-forest); }
         .task-detail { font-size: 12px; color: var(--warm-gray); margin-top: 2px; line-height: 1.5; }
-        .task-owner { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); background: var(--off-white); padding: 2px 8px; border-radius: 2px; align-self: flex-start; flex-shrink: 0; margin-top: 2px; }
+        .task-owner { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); background: var(--warm-sand); padding: 2px 8px; border-radius: 2px; align-self: flex-start; flex-shrink: 0; margin-top: 2px; }
 
         /* Milestone */
-        .milestone { background: var(--off-white); border: 1px solid var(--light-gray); padding: 20px; margin-bottom: 12px; }
+        .milestone { background: var(--warm-sand); border: 1px solid var(--light-border); padding: 20px; margin-bottom: 12px; }
         .milestone-header { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; margin-bottom: 12px; }
-        .phase-foundation .milestone-header { color: var(--sky); }
-        .phase-activation .milestone-header { color: var(--sage); }
-        .phase-scale .milestone-header { color: var(--terracotta); }
+        .phase-foundation .milestone-header { color: var(--teal); }
+        .phase-activation .milestone-header { color: var(--teal); }
+        .phase-scale .milestone-header { color: var(--accent); }
         .milestone-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         .metric { }
         .metric-label { font-size: 11px; color: var(--warm-gray); }
-        .metric-target { font-size: 14px; font-weight: 600; color: var(--black); }
+        .metric-target { font-size: 14px; font-weight: 600; color: var(--near-black); }
         .metric-note { font-size: 10px; color: var(--mid-gray); }
 
         /* Decision Framework */
-        .decision-frame { border: 2px solid var(--terracotta); margin-top: 20px; }
-        .decision-header { background: var(--terracotta); color: var(--white); padding: 14px 20px; }
+        .decision-frame { border: 2px solid var(--accent); margin-top: 20px; }
+        .decision-header { background: var(--accent); color: var(--white); padding: 14px 20px; }
         .decision-header h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; }
         .decision-body { padding: 20px; }
-        .decision-row { display: grid; grid-template-columns: 100px 1fr 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--light-gray); font-size: 13px; }
+        .decision-row { display: grid; grid-template-columns: 100px 1fr 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--light-border); font-size: 13px; }
         .decision-row:last-child { border-bottom: none; }
         .decision-outcome { font-weight: 600; }
-        .decision-outcome.scale { color: var(--sage); }
-        .decision-outcome.maintain { color: var(--sky); }
-        .decision-outcome.reassess { color: var(--terracotta); }
+        .decision-outcome.scale { color: var(--teal); }
+        .decision-outcome.maintain { color: var(--teal); }
+        .decision-outcome.reassess { color: var(--accent); }
         .decision-criteria { color: var(--warm-gray); font-size: 12px; }
-        .decision-action { color: var(--charcoal); font-size: 12px; }
+        .decision-action { color: var(--deep-forest); font-size: 12px; }
 
         /* Callout */
-        .callout { background: var(--sage-light); border-left: 4px solid var(--sage); padding: 14px 20px; margin: 12px 0; }
-        .callout p { font-size: 13px; color: var(--charcoal); margin: 0; line-height: 1.6; }
-        .callout strong { color: var(--black); }
+        .callout { background: var(--teal-light); border-left: 4px solid var(--teal); padding: 14px 20px; margin: 12px 0; }
+        .callout p { font-size: 13px; color: var(--deep-forest); margin: 0; line-height: 1.6; }
+        .callout strong { color: var(--near-black); }
     </style>
 </head>
 <body>
@@ -416,7 +434,7 @@
                 </div>
             </div>
 
-            <div class="callout" style="background: var(--terracotta-light); border-color: var(--terracotta);">
+            <div class="callout" style="background: var(--accent-light); border-color: var(--accent);">
                 <p><strong>Phase 3 focus:</strong> You have 60 days of real data. The question is no longer "does this work?" — it's "how much do we want to grow this?" This phase is about making a clear-eyed decision based on actual performance.</p>
             </div>
 
@@ -527,7 +545,7 @@
                     <h3>Day 90 Decision Framework</h3>
                 </div>
                 <div class="decision-body">
-                    <div style="display: grid; grid-template-columns: 100px 1fr 1fr; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--light-gray); margin-bottom: 4px;">
+                    <div style="display: grid; grid-template-columns: 100px 1fr 1fr; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--light-border); margin-bottom: 4px;">
                         <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600;">Outcome</div>
                         <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600;">If You're Seeing</div>
                         <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600;">Action</div>
@@ -555,23 +573,23 @@
         </div>
 
         <!-- Success Metrics Summary -->
-        <div style="background: var(--black); color: var(--white); padding: 24px; margin-top: 32px;">
+        <div style="background: var(--near-black); color: var(--white); padding: 24px; margin-top: 32px;">
             <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mid-gray); font-weight: 600; margin-bottom: 16px;">90-Day Success Benchmarks</div>
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; text-align: center;">
                 <div>
-                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--sage);">36+</div>
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--teal);">36+</div>
                     <div style="font-size: 10px; color: var(--mid-gray); margin-top: 4px;">Units sold</div>
                 </div>
                 <div>
-                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--sage);">2+</div>
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--teal);">2+</div>
                     <div style="font-size: 10px; color: var(--mid-gray); margin-top: 4px;">Units/week run rate</div>
                 </div>
                 <div>
-                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--sage);">&lt;2%</div>
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--teal);">&lt;2%</div>
                     <div style="font-size: 10px; color: var(--mid-gray); margin-top: 4px;">Return rate</div>
                 </div>
                 <div>
-                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--sage);">$0</div>
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--teal);">$0</div>
                     <div style="font-size: 10px; color: var(--mid-gray); margin-top: 4px;">Ongoing fixed costs</div>
                 </div>
             </div>

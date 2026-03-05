@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why This Works — Umay Rest</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=DM+Sans:wght@400;500;600&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+          /* Core Neutrals */
+          --near-black: #151619;
+          --deep-forest: #1F3A36;
+          --warm-gray: #5a5651;
+          --mid-gray: #8a8580;
+          --light-border: #d8d3cc;
+          --warm-sand: #E6DED3;
+          --warm-cream: #F6F3EF;
+          --white: #FFFFFF;
+          /* Signature */
+          --teal: #50717E;
+          --teal-light: rgba(80,113,126,0.08);
+          /* Accent */
+          --accent: #CD756B;
+          --accent-light: rgba(205,117,107,0.06);
+          /* Functional */
+          --amber: #c9873a;
+          --amber-light: rgba(201,135,58,0.08);
+        }
+        body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--deep-forest); line-height: 1.7; }
+        .page { max-width: 800px; margin: 0 auto; padding: 60px 48px; background: var(--white); min-height: 100vh; }
+
+        .header { margin-bottom: 48px; padding-bottom: 24px; border-bottom: 1px solid var(--light-border); }
+        .read-first { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--white); background: var(--teal); display: inline-block; padding: 3px 10px; margin-bottom: 12px; }
+        .header h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 400; color: var(--near-black); line-height: 1.2; margin-bottom: 8px; }
+        .header p { font-size: 15px; color: var(--warm-gray); max-width: 520px; }
+
+        .section { margin-bottom: 44px; }
+        .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--teal); margin-bottom: 12px; font-weight: 600; }
+        .section h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--near-black); margin-bottom: 12px; }
+        .section p { font-size: 15px; color: var(--deep-forest); margin-bottom: 14px; }
+        .section p strong { color: var(--near-black); }
+
+        .insight-box { background: var(--warm-sand); border-left: 3px solid var(--teal); padding: 20px 24px; margin: 20px 0; }
+        .insight-box p { font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; color: var(--near-black); line-height: 1.6; margin-bottom: 0; }
+
+        .loop { display: flex; align-items: center; justify-content: center; gap: 0; margin: 32px 0; flex-wrap: wrap; }
+        .loop-step { background: var(--warm-sand); border: 1px solid var(--light-border); padding: 14px 18px; text-align: center; min-width: 120px; }
+        .loop-step .step-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin-bottom: 2px; }
+        .loop-step .step-text { font-size: 14px; font-weight: 500; color: var(--near-black); }
+        .loop-arrow { font-size: 18px; color: var(--teal); padding: 0 8px; font-weight: 300; }
+
+        .contrast { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 24px 0; }
+        .contrast-card { padding: 20px; border: 1px solid var(--light-border); }
+        .contrast-card.wrong { border-left: 3px solid var(--accent); }
+        .contrast-card.right { border-left: 3px solid var(--teal); }
+        .contrast-card h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; font-weight: 600; }
+        .contrast-card.wrong h4 { color: var(--accent); }
+        .contrast-card.right h4 { color: var(--teal); }
+        .contrast-card p { font-size: 14px; color: var(--warm-gray); margin-bottom: 0; }
+
+        .vocab { margin: 32px 0; padding: 28px 32px; background: var(--near-black); color: var(--warm-cream); }
+        .vocab h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); margin-bottom: 16px; }
+        .vocab-item { padding: 10px 0; border-bottom: 1px solid #1F3A36; display: flex; gap: 16px; font-size: 14px; }
+        .vocab-item:last-child { border-bottom: none; }
+        .vocab-term { color: var(--teal); font-weight: 600; min-width: 160px; }
+        .vocab-use { color: var(--warm-cream); }
+
+        .bottom-line { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--near-black); }
+        .bottom-line p { font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; color: var(--near-black); line-height: 1.6; }
+
+        @media (max-width: 700px) {
+            .page { padding: 40px 24px; }
+            .contrast { grid-template-columns: 1fr; }
+            .loop { flex-direction: column; gap: 8px; }
+            .loop-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <div class="read-first">Read First</div>
+            <h1>Why This Works</h1>
+            <p>The mechanism behind the playbook. Read this before your first call — it's the difference between executing scripts and understanding why they convert.</p>
+        </header>
+
+        <section class="section">
+            <div class="section-label">The Core Insight</div>
+            <h2>Patients don't know they need help.</h2>
+            <p>Ocular fatigue builds invisibly. People spend 7+ hours a day on screens and adapt to the strain. They normalize tired eyes, poor sleep, reduced focus. They don't connect the symptom to the cause — because the damage shows up sideways, not directly.</p>
+            <p>This is why consumer products fail in this category. You can't sell a solution to a problem people don't know they have. Drop-ship ads don't work. Amazon listings don't convert. Self-diagnosis doesn't happen.</p>
+
+            <div class="insight-box">
+                <p>The doctor is the one who names the problem. That naming moment — "I'm seeing early gland dysfunction" — transforms an invisible condition into something the patient takes seriously. It turns a product into a prescription.</p>
+            </div>
+
+            <p>Every script, every workflow, every asset in this playbook is engineered around that single insight. The doctor names it. The staff fulfill it. The patient follows through — not because of willpower, but because a medical authority told them to.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">The Adherence Loop</div>
+            <h2>Why patients stick with this when they quit everything else.</h2>
+            <p>Rx eye drops: 10% adherence. Warm compresses: below 50% within weeks. Umay Rest: <strong>84% daily usage</strong> in a government-backed pilot of 500 patients. That's not a small difference. It's an order of magnitude.</p>
+            <p>The reason is behavioral, not technical. The product delivers immediate sensory relief — patients feel it the first time. It fits into a bedtime ritual — 10 minutes before sleep. It requires zero willpower — no drops to remember, no compresses to reheat. And it serves dual motivation — eye comfort <em>and</em> better sleep.</p>
+            <p>That behavioral design creates a self-reinforcing loop:</p>
+
+            <div class="loop">
+                <div class="loop-step"><div class="step-label">Visit</div><div class="step-text">Doctor prescribes</div></div>
+                <div class="loop-arrow">→</div>
+                <div class="loop-step"><div class="step-label">Home</div><div class="step-text">Patient uses daily</div></div>
+                <div class="loop-arrow">→</div>
+                <div class="loop-step"><div class="step-label">Result</div><div class="step-text">Feels better</div></div>
+                <div class="loop-arrow">→</div>
+                <div class="loop-step"><div class="step-label">Return</div><div class="step-text">Clinic reorders</div></div>
+            </div>
+
+            <p>70% of clinics reorder within 4 months. That reorder captures everything — patient usage, clinic economics, and trust — in one observable action. It's the most honest metric in this business.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">What This Means For You</div>
+            <h2>You are not selling a device. You are fulfilling a medical recommendation.</h2>
+            <p>This distinction drives every interaction in the playbook. The doctor creates the clinical authority. You deliver the operational follow-through. Patients don't push back on "the doctor noted gland blockage" the way they push back on "would you like to add this?"</p>
+
+            <div class="contrast">
+                <div class="contrast-card wrong">
+                    <h4>How other products sell</h4>
+                    <p>Features, benefits, pricing. The rep pitches. The clinic evaluates. The patient decides based on marketing. It feels like retail.</p>
+                </div>
+                <div class="contrast-card right">
+                    <h4>How Umay works</h4>
+                    <p>Doctor names a clinical finding. Staff hand the patient a solution. The patient follows medical advice. It feels like care.</p>
+                </div>
+            </div>
+
+            <p>This is why the 5D model in the Practice Fit Guide exists — it gives the doctor a 20-second role (diagnose and hand off) and puts everything else on staff. The doctor's time is protected. The clinical authority is established. You inherit both.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-label">The Term</div>
+            <h2>Precision Downtime.</h2>
+            <p>This is what we call it. When a patient asks "what is this?" — the answer is <strong>"It's Precision Downtime — a break your doctor prescribed."</strong></p>
+            <p>Not a heating mask. Not a wellness gadget. Not a spa treatment. Precision Downtime. Doctor-prescribed. Clinically validated. Something the patient does for 10 minutes before bed because their optometrist told them to.</p>
+            <p>Use the phrase. In every conversation, every handoff, every follow-up. Patients will start repeating it. That's the point — when a patient tells their spouse "I'm doing my Precision Downtime," the brand is working.</p>
+        </section>
+
+        <div class="vocab">
+            <h3>Vocabulary Quick Reference</h3>
+            <div class="vocab-item">
+                <span class="vocab-term">Always say</span>
+                <span class="vocab-use">Precision Downtime · doctor-prescribed · clinically validated · prescribed break</span>
+            </div>
+            <div class="vocab-item">
+                <span class="vocab-term">Never say</span>
+                <span class="vocab-use">massager · gadget · eye spa · smart mask · wellness device · as-seen-on-TV</span>
+            </div>
+            <div class="vocab-item">
+                <span class="vocab-term">When they ask "what is it?"</span>
+                <span class="vocab-use">"It's Precision Downtime — a break your doctor prescribed."</span>
+            </div>
+            <div class="vocab-item">
+                <span class="vocab-term">When they ask "does it work?"</span>
+                <span class="vocab-use">"84% of patients use it daily. Less than 1% return it."</span>
+            </div>
+        </div>
+
+        <div class="bottom-line">
+            <p>When a silent problem gets a name and a ritual, adherence follows. That's the entire thesis. The doctor names it. You deliver it. The patient keeps using it — because it feels like relief, not homework. Everything in this playbook flows from that.</p>
+        </div>
+    </div>
+</body>
+</html>

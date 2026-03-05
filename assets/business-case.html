@@ -5,97 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Case — Umay Rest</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=DM+Sans:wght@400;500;600&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --sage-light: #eef3f1; --terracotta: #c45d35; --terracotta-light: #fdf5f2; }
+        :root {
+          /* Core Neutrals */
+          --near-black: #151619;
+          --deep-forest: #1F3A36;
+          --warm-gray: #5a5651;
+          --mid-gray: #8a8580;
+          --light-border: #d8d3cc;
+          --warm-sand: #E6DED3;
+          --warm-cream: #F6F3EF;
+          --white: #FFFFFF;
+          /* Signature */
+          --teal: #50717E;
+          --teal-light: rgba(80,113,126,0.08);
+          /* Accent */
+          --accent: #CD756B;
+          --accent-light: rgba(205,117,107,0.06);
+          /* Functional */
+          --amber: #c9873a;
+          --amber-light: rgba(201,135,58,0.08);
+        }
+        body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--warm-cream); padding: 40px; font-size: 14px; color: var(--deep-forest); line-height: 1.55; }
 
-        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--cream); padding: 40px; font-size: 14px; color: var(--charcoal); line-height: 1.55; }
-
-        .memo { max-width: 780px; margin: 0 auto; background: var(--white); border: 1px solid var(--light-gray); }
+        .memo { max-width: 780px; margin: 0 auto; background: var(--white); border: 1px solid var(--light-border); }
 
         /* === HEADER === */
-        .memo-header { padding: 28px 40px 20px; border-bottom: 1px solid var(--light-gray); display: flex; justify-content: space-between; align-items: flex-start; }
-        .header-left .brand { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; color: var(--black); }
+        .memo-header { padding: 28px 40px 20px; border-bottom: 1px solid var(--light-border); display: flex; justify-content: space-between; align-items: flex-start; }
+        .header-left .brand { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; color: var(--near-black); }
         .header-left .doc-type { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); margin-top: 2px; }
         .header-right { text-align: right; font-size: 11px; color: var(--mid-gray); line-height: 1.6; }
 
         /* === RECOMMENDATION BAR === */
-        .recommendation { background: var(--sage-light); border-left: 4px solid var(--sage); padding: 14px 20px; margin: 0; }
-        .rec-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sage); font-weight: 600; margin-bottom: 4px; }
-        .rec-text { font-size: 14px; color: var(--black); font-weight: 500; line-height: 1.5; }
+        .recommendation { background: var(--teal-light); border-left: 4px solid var(--teal); padding: 14px 20px; margin: 0; }
+        .rec-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--teal); font-weight: 600; margin-bottom: 4px; }
+        .rec-text { font-size: 14px; color: var(--near-black); font-weight: 500; line-height: 1.5; }
 
         /* === CONTENT === */
         .page { padding: 28px 40px; }
-        .page + .page { border-top: 2px dashed var(--light-gray); }
+        .page + .page { border-top: 2px dashed var(--light-border); }
 
-        h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 500; color: var(--black); margin-bottom: 12px; }
+        h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 500; color: var(--near-black); margin-bottom: 12px; }
         h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); font-weight: 600; margin-bottom: 10px; margin-top: 20px; }
         h3:first-child { margin-top: 0; }
 
         p { margin-bottom: 10px; color: var(--warm-gray); font-size: 13px; line-height: 1.65; }
-        p strong { color: var(--charcoal); }
+        p strong { color: var(--deep-forest); }
 
         /* === TABLES === */
         table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 13px; }
-        th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600; padding: 8px 12px; border-bottom: 2px solid var(--light-gray); }
-        td { padding: 9px 12px; border-bottom: 1px solid var(--light-gray); color: var(--charcoal); vertical-align: top; }
+        th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid-gray); font-weight: 600; padding: 8px 12px; border-bottom: 2px solid var(--light-border); }
+        td { padding: 9px 12px; border-bottom: 1px solid var(--light-border); color: var(--deep-forest); vertical-align: top; }
         tr:last-child td { border-bottom: none; }
         .num { text-align: right; font-variant-numeric: tabular-nums; }
         .num-head { text-align: right; }
-        .highlight-row td { background: var(--sage-light); font-weight: 600; color: var(--black); }
+        .highlight-row td { background: var(--teal-light); font-weight: 600; color: var(--near-black); }
         .dim { color: var(--mid-gray); font-size: 12px; }
 
         /* === SCENARIO BLOCK === */
-        .scenarios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 12px 0 16px; border: 1px solid var(--light-gray); }
+        .scenarios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 12px 0 16px; border: 1px solid var(--light-border); }
         .scenario { padding: 16px; text-align: center; }
-        .scenario:not(:last-child) { border-right: 1px solid var(--light-gray); }
+        .scenario:not(:last-child) { border-right: 1px solid var(--light-border); }
         .scenario-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mid-gray); font-weight: 600; margin-bottom: 6px; }
-        .scenario-big { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--black); }
+        .scenario-big { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--near-black); }
         .scenario-unit { font-size: 11px; color: var(--warm-gray); margin-top: 2px; }
         .scenario-detail { font-size: 11px; color: var(--mid-gray); margin-top: 6px; line-height: 1.5; }
-        .scenario.base { background: var(--sage-light); }
-        .scenario.base .scenario-big { color: var(--sage); }
+        .scenario.base { background: var(--teal-light); }
+        .scenario.base .scenario-big { color: var(--teal); }
 
         /* === DEMO PATH === */
         .path-flow { display: flex; align-items: center; gap: 0; margin: 12px 0 16px; }
-        .path-step { flex: 1; padding: 14px; text-align: center; background: var(--off-white); position: relative; }
+        .path-step { flex: 1; padding: 14px; text-align: center; background: var(--warm-sand); position: relative; }
         .path-step:not(:last-child)::after { content: '→'; position: absolute; right: -10px; top: 50%; transform: translateY(-50%); color: var(--mid-gray); font-size: 16px; z-index: 1; }
-        .path-step-num { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--sage); font-weight: 600; }
-        .path-step-title { font-size: 13px; font-weight: 600; color: var(--black); margin: 4px 0 2px; }
+        .path-step-num { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--teal); font-weight: 600; }
+        .path-step-title { font-size: 13px; font-weight: 600; color: var(--near-black); margin: 4px 0 2px; }
         .path-step-detail { font-size: 11px; color: var(--warm-gray); }
 
         /* === RISK GRID === */
         .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0 16px; }
-        .risk-card { padding: 14px; border: 1px solid var(--light-gray); }
-        .risk-title { font-size: 12px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+        .risk-card { padding: 14px; border: 1px solid var(--light-border); }
+        .risk-title { font-size: 12px; font-weight: 600; color: var(--near-black); margin-bottom: 4px; }
         .risk-body { font-size: 12px; color: var(--warm-gray); line-height: 1.5; }
-        .risk-mitigation { font-size: 11px; color: var(--sage); margin-top: 6px; font-weight: 500; }
+        .risk-mitigation { font-size: 11px; color: var(--teal); margin-top: 6px; font-weight: 500; }
 
         /* === PROOF LIST === */
         .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
-        .proof-item { display: flex; gap: 8px; font-size: 12px; color: var(--charcoal); line-height: 1.5; }
-        .proof-check { color: var(--sage); font-weight: 700; flex-shrink: 0; }
+        .proof-item { display: flex; gap: 8px; font-size: 12px; color: var(--deep-forest); line-height: 1.5; }
+        .proof-check { color: var(--teal); font-weight: 700; flex-shrink: 0; }
 
         /* === ASSUMPTIONS === */
-        .assumptions { background: var(--off-white); padding: 16px; margin: 12px 0 0; }
+        .assumptions { background: var(--warm-sand); padding: 16px; margin: 12px 0 0; }
         .assumptions h3 { margin-top: 0; margin-bottom: 8px; }
         .assumption-list { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
         .assumption-item { font-size: 11px; color: var(--warm-gray); line-height: 1.6; }
-        .assumption-item strong { color: var(--charcoal); font-weight: 500; }
+        .assumption-item strong { color: var(--deep-forest); font-weight: 500; }
 
         /* === COMPARE BAR === */
         .compare { margin: 16px 0; }
-        .compare-row { display: grid; grid-template-columns: 140px 1fr 80px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 12px; }
+        .compare-row { display: grid; grid-template-columns: 140px 1fr 80px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--light-border); font-size: 12px; }
         .compare-row:last-child { border-bottom: none; }
-        .compare-label { color: var(--charcoal); font-weight: 500; }
-        .compare-bar-wrap { height: 8px; background: var(--off-white); border-radius: 4px; overflow: hidden; position: relative; }
+        .compare-label { color: var(--deep-forest); font-weight: 500; }
+        .compare-bar-wrap { height: 8px; background: var(--warm-sand); border-radius: 4px; overflow: hidden; position: relative; }
         .compare-bar { height: 100%; border-radius: 4px; }
-        .compare-bar.umay { background: var(--sage); }
-        .compare-bar.competitor { background: var(--light-gray); }
+        .compare-bar.umay { background: var(--teal); }
+        .compare-bar.competitor { background: var(--light-border); }
         .compare-value { text-align: right; color: var(--mid-gray); font-variant-numeric: tabular-nums; }
 
         /* === FOOTER === */
-        .memo-footer { padding: 16px 40px; border-top: 1px solid var(--light-gray); display: flex; justify-content: space-between; font-size: 10px; color: var(--mid-gray); }
+        .memo-footer { padding: 16px 40px; border-top: 1px solid var(--light-border); display: flex; justify-content: space-between; font-size: 10px; color: var(--mid-gray); }
 
         /* === PRINT === */
         @media print {
@@ -109,37 +127,37 @@
         /* === CALCULATOR === */
         .calc-label { display: block; font-size: 12px; color: var(--warm-gray); margin-bottom: 6px; }
         .calc-slider-row { display: flex; align-items: center; gap: 8px; }
-        .calc-slider-row input[type="range"] { flex: 1; accent-color: var(--sage); height: 6px; }
-        .calc-val { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 16px; color: var(--black); min-width: 52px; text-align: right; }
-        .calc-qty { flex: 1; padding: 10px 0; border: 1px solid var(--light-gray); background: var(--white); cursor: pointer; font-size: 13px; font-family: inherit; color: var(--warm-gray); transition: all 0.15s; text-align: center; }
+        .calc-slider-row input[type="range"] { flex: 1; accent-color: var(--teal); height: 6px; }
+        .calc-val { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 16px; color: var(--near-black); min-width: 52px; text-align: right; }
+        .calc-qty { flex: 1; padding: 10px 0; border: 1px solid var(--light-border); background: var(--white); cursor: pointer; font-size: 13px; font-family: inherit; color: var(--warm-gray); transition: all 0.15s; text-align: center; }
         .calc-qty:hover { border-color: var(--mid-gray); }
-        .calc-qty.active { border-color: var(--sage); background: var(--sage-light); color: var(--sage); font-weight: 600; }
+        .calc-qty.active { border-color: var(--teal); background: var(--teal-light); color: var(--teal); font-weight: 600; }
         .calc-metric { padding: 16px; text-align: center; background: var(--white); }
         .calc-metric-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); font-weight: 600; margin-bottom: 4px; }
-        .calc-metric-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; font-weight: 300; color: var(--sage); }
+        .calc-metric-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; font-weight: 300; color: var(--teal); }
         .calc-metric-sub { font-size: 10px; color: var(--mid-gray); margin-top: 2px; }
-        .calc-scenario { padding: 12px; border: 1px solid var(--light-gray); text-align: center; background: var(--white); }
-        .calc-scenario.base { background: var(--sage-light); border-color: var(--sage); }
+        .calc-scenario { padding: 12px; border: 1px solid var(--light-border); text-align: center; background: var(--white); }
+        .calc-scenario.base { background: var(--teal-light); border-color: var(--teal); }
         .calc-scenario-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; color: var(--mid-gray); margin-bottom: 6px; }
-        .calc-scenario.base .calc-scenario-label { color: var(--sage); }
+        .calc-scenario.base .calc-scenario-label { color: var(--teal); }
         .calc-scenario-units { font-size: 11px; color: var(--warm-gray); margin-bottom: 3px; }
-        .calc-scenario-num { font-size: 17px; font-family: 'Source Serif 4', Georgia, serif; color: var(--black); }
+        .calc-scenario-num { font-size: 17px; font-family: 'Source Serif 4', Georgia, serif; color: var(--near-black); }
         .calc-scenario-num span { font-size: 11px; color: var(--mid-gray); }
         .calc-scenario-pb { font-size: 10px; color: var(--mid-gray); margin-top: 3px; }
         .calc-tier { display: grid; grid-template-columns: 80px 1fr 90px; align-items: center; padding: 7px 0; }
-        .calc-tier:not(:last-child) { border-bottom: 1px solid var(--off-white); }
+        .calc-tier:not(:last-child) { border-bottom: 1px solid var(--warm-sand); }
         .calc-tier-label { font-size: 12px; color: var(--warm-gray); }
-        .calc-tier-label.active { font-weight: 600; color: var(--sage); }
+        .calc-tier-label.active { font-weight: 600; color: var(--teal); }
         .calc-tier-price { font-size: 10px; color: var(--mid-gray); }
-        .calc-tier-bar { height: 8px; background: var(--off-white); border-radius: 4px; overflow: hidden; }
+        .calc-tier-bar { height: 8px; background: var(--warm-sand); border-radius: 4px; overflow: hidden; }
         .calc-tier-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
-        .calc-tier-fill.active { background: var(--sage); }
+        .calc-tier-fill.active { background: var(--teal); }
         .calc-tier-fill.inactive { background: #d0d0d0; }
-        .calc-tier-annual { text-align: right; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--charcoal); }
-        .calc-tier-annual.active { font-weight: 600; color: var(--sage); }
+        .calc-tier-annual { text-align: right; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--deep-forest); }
+        .calc-tier-annual.active { font-weight: 600; color: var(--teal); }
         .calc-tier-annual span { font-size: 10px; color: var(--mid-gray); }
-        .zero-row { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 7px; font-size: 12px; color: var(--mid-gray); }
-        .zero-val { color: var(--sage); font-weight: 600; font-size: 13px; }
+        .zero-row { display: flex; justify-content: space-between; border-bottom: 1px solid #1F3A36; padding-bottom: 7px; font-size: 12px; color: var(--mid-gray); }
+        .zero-val { color: var(--teal); font-weight: 600; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -294,42 +312,42 @@
                 </tr>
                 <tr>
                     <td>Upfront investment</td>
-                    <td class="num" style="color: var(--sage); font-weight: 600;">$1,000</td>
+                    <td class="num" style="color: var(--teal); font-weight: 600;">$1,000</td>
                     <td class="num">$80K–$150K</td>
                     <td class="num">$40K–$120K</td>
                     <td class="num">$0</td>
                 </tr>
                 <tr>
                     <td>Per-treatment consumable</td>
-                    <td class="num" style="color: var(--sage); font-weight: 600;">$0</td>
+                    <td class="num" style="color: var(--teal); font-weight: 600;">$0</td>
                     <td class="num">$340–$700</td>
                     <td class="num">$8–$50</td>
                     <td class="num">$0</td>
                 </tr>
                 <tr>
                     <td>Chair time</td>
-                    <td class="num" style="color: var(--sage); font-weight: 600;">0 min</td>
+                    <td class="num" style="color: var(--teal); font-weight: 600;">0 min</td>
                     <td class="num">12–30 min</td>
                     <td class="num">15–30 min</td>
                     <td class="num">0 min</td>
                 </tr>
                 <tr>
                     <td>Payback period</td>
-                    <td class="num" style="color: var(--sage); font-weight: 600;">4–12 weeks</td>
+                    <td class="num" style="color: var(--teal); font-weight: 600;">4–12 weeks</td>
                     <td class="num">12–18 months</td>
                     <td class="num">6–12 months</td>
                     <td class="num">Immediate</td>
                 </tr>
                 <tr>
                     <td>Patient compliance</td>
-                    <td class="num" style="color: var(--sage); font-weight: 600;">84% daily</td>
+                    <td class="num" style="color: var(--teal); font-weight: 600;">84% daily</td>
                     <td class="num">N/A (in-office)</td>
                     <td class="num">N/A (in-office)</td>
                     <td class="num">&lt;50%</td>
                 </tr>
                 <tr>
                     <td>Recurring revenue</td>
-                    <td class="num">60% reorder</td>
+                    <td class="num">70% reorder</td>
                     <td class="num">Per procedure</td>
                     <td class="num">Per procedure</td>
                     <td class="num">Low margin</td>
@@ -343,7 +361,7 @@
             <h2>Model Your Own Numbers</h2>
             <p>Adjust the inputs below to see how Umay performs for your practice specifically.</p>
 
-            <div class="calc-inputs" style="background: var(--off-white); padding: 20px; margin: 16px 0;">
+            <div class="calc-inputs" style="background: var(--warm-sand); padding: 20px; margin: 16px 0;">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div>
                         <label class="calc-label">Patient price per unit</label>
@@ -373,19 +391,19 @@
             <!-- Hero payback -->
             <div style="text-align: center; padding: 24px 0 20px;">
                 <div style="font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mid-gray); font-weight: 600; margin-bottom: 6px;">Payback Period</div>
-                <div id="calcHero" style="font-family: 'Source Serif 4', Georgia, serif; font-size: 52px; font-weight: 300; color: var(--sage); line-height: 1;">7</div>
+                <div id="calcHero" style="font-family: 'Source Serif 4', Georgia, serif; font-size: 52px; font-weight: 300; color: var(--teal); line-height: 1;">7</div>
                 <div style="font-size: 13px; color: var(--warm-gray); margin-top: 4px;">weeks</div>
                 <div id="calcHeroSub" style="font-size: 11px; color: var(--mid-gray); margin-top: 8px;">on $3,200 net investment ($4,200 order − $1,000 demo credit)</div>
             </div>
 
             <!-- Key metrics -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--light-gray); margin-bottom: 16px;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--light-border); margin-bottom: 16px;">
                 <div class="calc-metric">
                     <div class="calc-metric-label">Margin / Unit</div>
                     <div class="calc-metric-num" id="cmMargin">$200</div>
                     <div class="calc-metric-sub" id="cmMarginPct">36% margin</div>
                 </div>
-                <div class="calc-metric" style="border-left: 1px solid var(--light-gray); border-right: 1px solid var(--light-gray);">
+                <div class="calc-metric" style="border-left: 1px solid var(--light-border); border-right: 1px solid var(--light-border);">
                     <div class="calc-metric-label">Monthly</div>
                     <div class="calc-metric-num" id="cmMonthly">$1,733</div>
                     <div class="calc-metric-sub" id="cmMonthlySub">2/wk × $200</div>
@@ -424,7 +442,7 @@
             <div id="calcTiers" style="margin: 12px 0;"></div>
 
             <!-- Zero cost callout -->
-            <div style="background: var(--black); color: var(--white); padding: 20px; margin-top: 16px;">
+            <div style="background: var(--near-black); color: var(--white); padding: 20px; margin-top: 16px;">
                 <div style="font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid-gray); font-weight: 600; margin-bottom: 12px;">Why The Math Is Simple</div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                     <div class="zero-row"><span>Consumables per unit</span><span class="zero-val">$0</span></div>
@@ -434,7 +452,7 @@
                     <div class="zero-row"><span>Patient return rate</span><span class="zero-val">&lt;2%</span></div>
                     <div class="zero-row"><span>Break-even fixed costs</span><span class="zero-val">$0/month</span></div>
                 </div>
-                <div style="font-size: 11px; color: #666; margin-top: 12px; line-height: 1.6;">With no ongoing costs, every unit sold above zero is pure margin. The first unit is profitable.</div>
+                <div style="font-size: 11px; color: #5a5651; margin-top: 12px; line-height: 1.6;">With no ongoing costs, every unit sold above zero is pure margin. The first unit is profitable.</div>
             </div>
         </div>
 
@@ -468,10 +486,10 @@
             <h3>Clinical Evidence</h3>
             <div class="proof-grid">
                 <div class="proof-item"><span class="proof-check">✓</span><span><strong>Government of Canada pilot (n=500):</strong> 87% eye comfort improvement, 70% sleep outcomes, 84% daily adherence</span></div>
-                <div class="proof-item"><span class="proof-check">✓</span><span><strong>Telemetry verified (n=2,864):</strong> 0.64 DAU/MAU ratio — patients use it without being reminded</span></div>
+                <div class="proof-item"><span class="proof-check">✓</span><span><strong>Telemetry verified (n=2,847):</strong> 0.64 DAU/MAU ratio — patients use it without being reminded</span></div>
                 <div class="proof-item"><span class="proof-check">✓</span><span><strong>TFOS DEWS II alignment:</strong> Non-moist eyelid warming improves tear film and meibomian gland function</span></div>
                 <div class="proof-item"><span class="proof-check">✓</span><span><strong>Dual mechanism:</strong> TRPM8 cold therapy (tear production) + controlled thermal therapy (gland expression, sleep onset)</span></div>
-                <div class="proof-item"><span class="proof-check">✓</span><span><strong>Health Canada approved.</strong> 510(k) exempt (US). HSA/FSA eligible for patient purchase.</span></div>
+                <div class="proof-item"><span class="proof-check">✓</span><span><strong>Health Canada approved.</strong> Wellness device (US). HSA/FSA eligible for patient purchase.</span></div>
                 <div class="proof-item"><span class="proof-check">✓</span><span><strong>107+ clinic partners.</strong> 3,000+ units shipped. 42 active clinics reordering.</span></div>
             </div>
 
@@ -489,7 +507,7 @@
                 </tr>
                 <tr>
                     <td>Reorder rate</td>
-                    <td class="num" colspan="2" style="text-align: center;">~60% within first reorder cycle</td>
+                    <td class="num" colspan="2" style="text-align: center;">~70% within first reorder cycle</td>
                 </tr>
                 <tr>
                     <td>Patient return rate</td>
@@ -615,7 +633,7 @@
         // Hero
         const pbW = pb < 1 ? "<1" : Math.ceil(pb);
         el("calcHero").textContent = pbW;
-        el("calcHero").style.color = pb <= 8 ? "var(--sage)" : pb <= 16 ? "#b8860b" : "var(--terracotta)";
+        el("calcHero").style.color = pb <= 8 ? "var(--teal)" : pb <= 16 ? "#b8860b" : "var(--accent)";
         el("calcHeroSub").textContent = "on " + fmt(net) + " net investment (" + fmt(cost) + " order − " + fmt(demo) + " demo credit)";
 
         // Key metrics

@@ -5,39 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Executive Overview — Umay Rest</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Inter:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=DM+Sans:wght@400;500;600&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --terracotta: #c45d35; }
-        body { font-family: 'Inter', sans-serif; background: var(--cream); padding: 40px; }
-        .email { max-width: 600px; margin: 0 auto; background: var(--white); border: 1px solid var(--light-gray); }
-        .email-header { padding: 40px; text-align: center; border-bottom: 1px solid var(--light-gray); }
-        .brand { font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; color: var(--black); margin-bottom: 4px; }
+        :root {
+          /* Core Neutrals */
+          --near-black: #151619;
+          --deep-forest: #1F3A36;
+          --warm-gray: #5a5651;
+          --mid-gray: #8a8580;
+          --light-border: #d8d3cc;
+          --warm-sand: #E6DED3;
+          --warm-cream: #F6F3EF;
+          --white: #FFFFFF;
+          /* Signature */
+          --teal: #50717E;
+          --teal-light: rgba(80,113,126,0.08);
+          /* Accent */
+          --accent: #CD756B;
+          --accent-light: rgba(205,117,107,0.06);
+          /* Functional */
+          --amber: #c9873a;
+          --amber-light: rgba(201,135,58,0.08);
+        }
+        body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); padding: 40px; }
+        .email { max-width: 600px; margin: 0 auto; background: var(--white); border: 1px solid var(--light-border); }
+        .email-header { padding: 40px; text-align: center; border-bottom: 1px solid var(--light-border); }
+        .brand { font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; color: var(--near-black); margin-bottom: 4px; }
         .tagline { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); }
         .content { padding: 40px; }
-        .content h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; font-weight: 400; color: var(--black); margin-bottom: 16px; }
+        .content h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; font-weight: 400; color: var(--near-black); margin-bottom: 16px; }
         .content p { font-size: 15px; color: var(--warm-gray); line-height: 1.7; margin-bottom: 20px; }
         .problem-list { margin: 20px 0; }
-        .problem-item { font-size: 14px; color: var(--charcoal); padding: 8px 0; padding-left: 20px; position: relative; }
-        .problem-item::before { content: '—'; position: absolute; left: 0; color: var(--terracotta); }
+        .problem-item { font-size: 14px; color: var(--deep-forest); padding: 8px 0; padding-left: 20px; position: relative; }
+        .problem-item::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
         .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
-        .stat { text-align: center; padding: 20px; background: var(--off-white); }
-        .stat-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 300; color: var(--sage); }
+        .stat { text-align: center; padding: 20px; background: var(--warm-sand); }
+        .stat-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 300; color: var(--teal); }
         .stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--warm-gray); margin-top: 4px; }
-        .testimonial { background: var(--off-white); padding: 24px; margin: 24px 0; border-left: 3px solid var(--sage); }
-        .testimonial p { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-style: italic; color: var(--charcoal); margin-bottom: 8px; }
+        .testimonial { background: var(--warm-sand); padding: 24px; margin: 24px 0; border-left: 3px solid var(--teal); }
+        .testimonial p { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-style: italic; color: var(--deep-forest); margin-bottom: 8px; }
         .testimonial cite { font-size: 12px; color: var(--mid-gray); font-style: normal; }
-        .business-case { background: var(--black); color: var(--white); padding: 24px; margin: 24px 0; }
+        .business-case { background: var(--near-black); color: var(--white); padding: 24px; margin: 24px 0; }
         .business-case h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); margin-bottom: 16px; }
-        .business-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #333; font-size: 14px; }
+        .business-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #1F3A36; font-size: 14px; }
         .business-row:last-child { border-bottom: none; }
-        .business-row span:last-child { color: var(--sage); font-weight: 500; }
+        .business-row span:last-child { color: var(--teal); font-weight: 500; }
         .terms { margin: 24px 0; }
         .term { display: flex; gap: 12px; margin-bottom: 14px; font-size: 14px; }
-        .term-check { color: var(--sage); }
-        .term strong { display: block; color: var(--black); margin-bottom: 2px; }
+        .term-check { color: var(--teal); }
+        .term strong { display: block; color: var(--near-black); margin-bottom: 2px; }
         .term span { color: var(--warm-gray); font-size: 13px; }
         .cta { text-align: center; padding-top: 20px; }
-        .cta-btn { display: inline-block; padding: 14px 28px; background: var(--black); color: var(--white); font-size: 14px; font-weight: 500; text-decoration: none; }
+        .cta-btn { display: inline-block; padding: 14px 28px; background: var(--near-black); color: var(--white); font-size: 14px; font-weight: 500; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -61,7 +80,7 @@
             <div class="stats-row">
                 <div class="stat"><div class="stat-num">84%</div><div class="stat-label">Daily Retention</div></div>
                 <div class="stat"><div class="stat-num">87%</div><div class="stat-label">Eye Comfort</div></div>
-                <div class="stat"><div class="stat-num">60%</div><div class="stat-label">Reorder Rate</div></div>
+                <div class="stat"><div class="stat-num">70%</div><div class="stat-label">Reorder Rate</div></div>
             </div>
             
             <div class="testimonial">

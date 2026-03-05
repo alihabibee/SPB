@@ -5,24 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Killshot Options</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Inter:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=DM+Sans:wght@400;500;600&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --terracotta: #c45d35; }
-        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.6; }
+        :root {
+          /* Core Neutrals */
+          --near-black: #151619;
+          --deep-forest: #1F3A36;
+          --warm-gray: #5a5651;
+          --mid-gray: #8a8580;
+          --light-border: #d8d3cc;
+          --warm-sand: #E6DED3;
+          --warm-cream: #F6F3EF;
+          --white: #FFFFFF;
+          /* Signature */
+          --teal: #50717E;
+          --teal-light: rgba(80,113,126,0.08);
+          /* Accent */
+          --accent: #CD756B;
+          --accent-light: rgba(205,117,107,0.06);
+          /* Functional */
+          --amber: #c9873a;
+          --amber-light: rgba(201,135,58,0.08);
+        }
+        body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); color: var(--deep-forest); line-height: 1.6; }
         .page { max-width: 800px; margin: 0 auto; padding: 60px 48px; background: var(--white); }
-        .header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--light-gray); }
-        .header h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 400; color: var(--black); margin-bottom: 8px; }
+        .header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--light-border); }
+        .header h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 400; color: var(--near-black); margin-bottom: 8px; }
         .header p { font-size: 14px; color: var(--mid-gray); max-width: 520px; }
-        .warning { background: #fdf5f0; border-left: 3px solid var(--terracotta); padding: 16px 20px; margin-bottom: 40px; font-size: 13px; color: var(--charcoal); }
-        .warning strong { color: var(--terracotta); }
-        .option { border: 1px solid var(--light-gray); padding: 28px; margin-bottom: 20px; }
+        .warning { background: #fdf5f0; border-left: 3px solid var(--accent); padding: 16px 20px; margin-bottom: 40px; font-size: 13px; color: var(--deep-forest); }
+        .warning strong { color: var(--accent); }
+        .option { border: 1px solid var(--light-border); padding: 28px; margin-bottom: 20px; }
         .option-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-        .option-letter { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 300; color: var(--sage); }
-        .option-title h2 { font-size: 16px; font-weight: 600; color: var(--black); }
+        .option-letter { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 300; color: var(--teal); }
+        .option-title h2 { font-size: 16px; font-weight: 600; color: var(--near-black); }
         .option-title span { font-size: 12px; color: var(--mid-gray); }
-        .script-quote { background: var(--off-white); border-left: 3px solid var(--sage); padding: 16px 20px; font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
-        .when-works { font-size: 12px; color: var(--sage); font-style: italic; }
-        .rules { background: var(--off-white); padding: 24px; margin-top: 40px; }
+        .script-quote { background: var(--warm-sand); border-left: 3px solid var(--teal); padding: 16px 20px; font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+        .when-works { font-size: 12px; color: var(--teal); font-style: italic; }
+        .rules { background: var(--warm-sand); padding: 24px; margin-top: 40px; }
         .rules h3 { font-size: 13px; font-weight: 600; margin-bottom: 16px; }
         .rules li { font-size: 13px; color: var(--warm-gray); margin-bottom: 8px; margin-left: 20px; }
     </style>

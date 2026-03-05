@@ -5,44 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clinic Offer Card</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=Inter:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=DM+Sans:wght@400;500;600&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --black: #1a1a1a; --charcoal: #333; --warm-gray: #666; --mid-gray: #999; --light-gray: #e8e8e8; --off-white: #f5f5f3; --white: #fff; --cream: #faf9f7; --sage: #5a7c6f; --terracotta: #c45d35; }
-        body { font-family: 'Inter', sans-serif; background: var(--cream); padding: 48px; }
+        :root {
+          /* Core Neutrals */
+          --near-black: #151619;
+          --deep-forest: #1F3A36;
+          --warm-gray: #5a5651;
+          --mid-gray: #8a8580;
+          --light-border: #d8d3cc;
+          --warm-sand: #E6DED3;
+          --warm-cream: #F6F3EF;
+          --white: #FFFFFF;
+          /* Signature */
+          --teal: #50717E;
+          --teal-light: rgba(80,113,126,0.08);
+          /* Accent */
+          --accent: #CD756B;
+          --accent-light: rgba(205,117,107,0.06);
+          /* Functional */
+          --amber: #c9873a;
+          --amber-light: rgba(201,135,58,0.08);
+        }
+        body { font-family: 'DM Sans', sans-serif; background: var(--warm-cream); padding: 48px; }
         .preview-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--mid-gray); margin-bottom: 16px; text-align: center; }
         .cards { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; }
-        .card { width: 360px; background: var(--white); border: 1px solid var(--light-gray); overflow: hidden; }
+        .card { width: 360px; background: var(--white); border: 1px solid var(--light-border); overflow: hidden; }
         
         /* Front */
         .card-front { padding: 40px 32px; text-align: center; }
-        .challenge-badge { display: inline-block; background: var(--sage); color: var(--white); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 16px; margin-bottom: 24px; }
-        .card-front h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 400; color: var(--black); margin-bottom: 8px; line-height: 1.2; }
+        .challenge-badge { display: inline-block; background: var(--teal); color: var(--white); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 16px; margin-bottom: 24px; }
+        .card-front h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 400; color: var(--near-black); margin-bottom: 8px; line-height: 1.2; }
         .card-front .subtitle { font-size: 14px; color: var(--warm-gray); margin-bottom: 32px; }
-        .offer-box { background: var(--off-white); padding: 24px; margin-bottom: 24px; }
-        .offer-amount { font-family: 'Source Serif 4', Georgia, serif; font-size: 48px; font-weight: 300; color: var(--sage); }
+        .offer-box { background: var(--warm-sand); padding: 24px; margin-bottom: 24px; }
+        .offer-amount { font-family: 'Source Serif 4', Georgia, serif; font-size: 48px; font-weight: 300; color: var(--teal); }
         .offer-amount span { font-size: 24px; }
         .offer-label { font-size: 12px; color: var(--warm-gray); margin-top: 4px; }
         .benefits { text-align: left; margin-bottom: 24px; }
         .benefit { display: flex; gap: 10px; font-size: 13px; margin-bottom: 10px; }
-        .benefit::before { content: '✓'; color: var(--sage); font-weight: 600; }
+        .benefit::before { content: '✓'; color: var(--teal); font-weight: 600; }
         .qr-section { margin-bottom: 16px; }
-        .qr-placeholder { width: 100px; height: 100px; background: var(--off-white); border: 1px solid var(--light-gray); margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--mid-gray); }
+        .qr-placeholder { width: 100px; height: 100px; background: var(--warm-sand); border: 1px solid var(--light-border); margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--mid-gray); }
         .qr-section p { font-size: 11px; color: var(--mid-gray); }
-        .expiry { font-size: 11px; color: var(--terracotta); }
+        .expiry { font-size: 11px; color: var(--accent); }
         
         /* Back */
         .card-back { padding: 32px; }
-        .card-back h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 400; color: var(--black); margin-bottom: 20px; text-align: center; }
+        .card-back h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 400; color: var(--near-black); margin-bottom: 20px; text-align: center; }
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-        .stat { text-align: center; padding: 16px; background: var(--off-white); }
-        .stat-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--sage); }
+        .stat { text-align: center; padding: 16px; background: var(--warm-sand); }
+        .stat-num { font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 300; color: var(--teal); }
         .stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--warm-gray); margin-top: 4px; }
-        .testimonial { background: var(--off-white); border-left: 3px solid var(--sage); padding: 16px; margin-bottom: 24px; }
-        .testimonial p { font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; font-style: italic; color: var(--charcoal); margin-bottom: 6px; }
+        .testimonial { background: var(--warm-sand); border-left: 3px solid var(--teal); padding: 16px; margin-bottom: 24px; }
+        .testimonial p { font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; font-style: italic; color: var(--deep-forest); margin-bottom: 6px; }
         .testimonial cite { font-size: 11px; color: var(--mid-gray); font-style: normal; }
-        .clinic-info { text-align: center; padding: 16px; border: 1px dashed var(--light-gray); }
+        .clinic-info { text-align: center; padding: 16px; border: 1px dashed var(--light-border); }
         .clinic-info p { font-size: 11px; color: var(--mid-gray); margin-bottom: 8px; }
-        .clinic-name { font-size: 13px; font-weight: 500; color: var(--black); }
+        .clinic-name { font-size: 13px; font-weight: 500; color: var(--near-black); }
     </style>
 </head>
 <body>
@@ -51,7 +70,7 @@
         <div class="card">
             <div class="card-front">
                 <div class="challenge-badge">14-Day Rest Challenge</div>
-                <h1>Your eyes called.<br>They want a break.</h1>
+                <h1>Your doctor prescribed<br>Precision Downtime.</h1>
                 <p class="subtitle">You tried it in-office. Now try it at home.</p>
                 <div class="offer-box">
                     <div class="offer-amount"><span>$</span>50 <span>off</span></div>
